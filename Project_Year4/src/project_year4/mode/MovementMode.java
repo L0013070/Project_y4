@@ -16,16 +16,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package project_year4.algorithm;
-
-import project_year4.algorithm.heuristic.Heuristic;
+package project_year4.mode;
 
 /**
  *
  * @author L00131070
  */
-public class AlgorithmA extends Dijkstra {
-    
-    private Heuristic heuristic = null;
+public class MovementMode {
     
 }

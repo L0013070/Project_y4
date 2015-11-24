@@ -32,7 +32,7 @@ public class DisplayMaze extends javax.swing.JPanel {
         for (int i = 0; i < 31; i++) {
             for (int j = 0; j < 31; j++) {
                 if ((i % 2) == 0 && (j % 2) == 0) {
-                    add(new DisplayGridCell(i / 2 + "/" + j / 2));
+                    add(new DisplayGridCell(j / 2 + "/" + (31-i) / 2));
                 } else if ((i % 2) == 1 && (j % 2) == 1) {
                     add(new DisplayWallCell(""));
                 } else {
@@ -52,7 +52,8 @@ public class DisplayMaze extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setLayout(new java.awt.GridLayout(31, 31));
+        setBackground(new java.awt.Color(204, 102, 0));
+        setLayout(new java.awt.GridLayout(31, 31, 2, 2));
     }// </editor-fold>//GEN-END:initComponents
 
 
