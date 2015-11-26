@@ -18,10 +18,18 @@
  */
 package project_year4.algorithm;
 
+import project_year4.maze.Maze;
+
 /**
  *
  * @author L00131070
  */
 public class Dijkstra extends Algorithm{
+
+	@Override
+	public void run(Maze maze) {
+		// TODO Auto-generated method stub
+		
+	}
     
 }

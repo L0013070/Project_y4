@@ -18,10 +18,19 @@
  */
 package project_year4.maze;
 
+import project_year4.algorithm.Algorithm;
+
 /**
  *
  * @author L00131070
  */
 public class Maze {
+	
+	Node[] nodes = null;
+	Algorithm algorithm = null;
+	
+	public void solve() {
+		algorithm.run(this);
+	}
     
 }

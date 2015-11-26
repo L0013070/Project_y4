@@ -18,11 +18,16 @@
  */
 package project_year4.gui;
 
+import project_year4.maze.Maze;
+import project_year4.maze.MazeListener;
+
 /**
  *
  * @author L00131070
  */
-public class DisplayMaze extends javax.swing.JPanel {
+public class DisplayMaze extends javax.swing.JPanel implements MazeListener {
+	
+	DisplayMazeElement[] nodes = null;
 
     /**
      * Creates new form DisplayMaze
@@ -55,6 +60,12 @@ public class DisplayMaze extends javax.swing.JPanel {
         setBackground(new java.awt.Color(204, 102, 0));
         setLayout(new java.awt.GridLayout(31, 31, 2, 2));
     }// </editor-fold>//GEN-END:initComponents
+
+	@Override
+	public void changedMaze(Maze maze) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -18,13 +18,22 @@
  */
 package project_year4.gui;
 
+import project_year4.maze.Node;
+import project_year4.maze.NodeListener;
+
 /**
  *
  * @author L00131070
  */
-public class DisplayNode extends DisplayMazeElement{
+public class DisplayNode extends DisplayMazeElement implements NodeListener{
 
     public DisplayNode(String text) {
         super(text);
     }
+
+	@Override
+	public void changedNode(Node node) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -18,10 +18,13 @@
  */
 package project_year4.algorithm;
 
+import project_year4.maze.Maze;
+
 /**
  *
  * @author L00131070
  */
-public class Algorithm {
+public abstract class Algorithm {
+	public abstract void run(Maze maze);
     
 }

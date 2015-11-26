@@ -18,11 +18,15 @@
  */
 package project_year4.gui;
 
+import project_year4.maze.Maze;
+
 /**
  *
  * @author L00131070
  */
 public class Simulator extends javax.swing.JFrame {
+    
+    private Maze maze = new Maze();
 
     /**
      * Creates new form Simulator
@@ -43,92 +47,92 @@ public class Simulator extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        panelConfiguration = new javax.swing.JPanel();
+        buttonDoSimulation = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox();
+        labelAlgorithm = new javax.swing.JLabel();
+        cbAlgorithm = new javax.swing.JComboBox();
+        labelHeuristic = new javax.swing.JLabel();
+        cbHeuristic = new javax.swing.JComboBox();
+        labelSimulationMode = new javax.swing.JLabel();
+        cbSimulationType = new javax.swing.JComboBox();
+        labelMovementMode = new javax.swing.JLabel();
+        cbMovementMode = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        logOutput = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        fileMenu = new javax.swing.JMenu();
+        menuLoad = new javax.swing.JMenuItem();
+        menuExit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Year 4 Algorithm Simulator");
         setResizable(false);
 
-        jButton2.setText("doSimulation");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonDoSimulation.setText("doSimulation");
+        buttonDoSimulation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buttonDoSimulationActionPerformed(evt);
             }
         });
 
         jPanel2.setLayout(new java.awt.GridLayout(8, 1));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Algorithm");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel2.add(jLabel1);
+        labelAlgorithm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelAlgorithm.setText("Algorithm");
+        labelAlgorithm.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel2.add(labelAlgorithm);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox1);
+        cbAlgorithm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(cbAlgorithm);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Heuristic");
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel2.add(jLabel2);
+        labelHeuristic.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelHeuristic.setText("Heuristic");
+        labelHeuristic.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel2.add(labelHeuristic);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox3);
+        cbHeuristic.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(cbHeuristic);
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Simulation Type");
-        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel2.add(jLabel3);
+        labelSimulationMode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelSimulationMode.setText("Simulation Type");
+        labelSimulationMode.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel2.add(labelSimulationMode);
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox4);
+        cbSimulationType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(cbSimulationType);
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Movement Mode");
-        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel2.add(jLabel4);
+        labelMovementMode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelMovementMode.setText("Movement Mode");
+        labelMovementMode.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel2.add(labelMovementMode);
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox5);
+        cbMovementMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(cbMovementMode);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelConfigurationLayout = new javax.swing.GroupLayout(panelConfiguration);
+        panelConfiguration.setLayout(panelConfigurationLayout);
+        panelConfigurationLayout.setHorizontalGroup(
+            panelConfigurationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(buttonDoSimulation, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        panelConfigurationLayout.setVerticalGroup(
+            panelConfigurationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConfigurationLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(buttonDoSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_END);
+        getContentPane().add(panelConfiguration, java.awt.BorderLayout.LINE_END);
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        logOutput.setEditable(false);
+        logOutput.setColumns(20);
+        logOutput.setLineWrap(true);
+        logOutput.setRows(5);
+        jScrollPane2.setViewportView(logOutput);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -143,45 +147,45 @@ public class Simulator extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
-        jMenu1.setText("File");
+        fileMenu.setText("File");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItem1.setText("Load");
-        jMenuItem1.setActionCommand("load");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuLoad.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
+        menuLoad.setText("Load");
+        menuLoad.setActionCommand("load");
+        menuLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuLoadActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        fileMenu.add(menuLoad);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItem2.setText("Exit");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menuExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        menuExit.setText("Exit");
+        menuExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menuExitActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        fileMenu.add(menuExit);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(fileMenu);
 
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuLoadActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void menuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExitActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_menuExitActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void buttonDoSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDoSimulationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_buttonDoSimulationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,23 +223,23 @@ public class Simulator extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
-    private javax.swing.JComboBox jComboBox5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JButton buttonDoSimulation;
+    private javax.swing.JComboBox cbAlgorithm;
+    private javax.swing.JComboBox cbHeuristic;
+    private javax.swing.JComboBox cbMovementMode;
+    private javax.swing.JComboBox cbSimulationType;
+    private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel labelAlgorithm;
+    private javax.swing.JLabel labelHeuristic;
+    private javax.swing.JLabel labelMovementMode;
+    private javax.swing.JLabel labelSimulationMode;
+    private javax.swing.JTextArea logOutput;
+    private javax.swing.JMenuItem menuExit;
+    private javax.swing.JMenuItem menuLoad;
+    private javax.swing.JPanel panelConfiguration;
     // End of variables declaration//GEN-END:variables
 }

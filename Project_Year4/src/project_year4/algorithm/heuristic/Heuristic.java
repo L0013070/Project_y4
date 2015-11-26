@@ -22,6 +22,8 @@ package project_year4.algorithm.heuristic;
  *
  * @author L00131070
  */
-public class Heuristic {
+public abstract class Heuristic {
+	
+	public abstract double calculate();
     
 }
