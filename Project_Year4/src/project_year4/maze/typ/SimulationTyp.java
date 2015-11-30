@@ -18,10 +18,14 @@
  */
 package project_year4.maze.typ;
 
+import java.util.Properties;
+
 /**
  *
  * @author L00131070
  */
 public class SimulationTyp {
+    
+    Properties properties = null;
     
 }

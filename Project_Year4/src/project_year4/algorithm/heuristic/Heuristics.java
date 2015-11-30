@@ -16,32 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package project_year4.maze;
-
-import java.io.File;
-import java.util.ArrayList;
-import project_year4.algorithm.Algorithm;
-import project_year4.maze.mode.MovementMode;
-import project_year4.maze.typ.SimulationTyp;
+package project_year4.algorithm.heuristic;
 
 /**
  *
  * @author L00131070
  */
-public class Maze {
-	
-	Node[] nodes = null;
-	Algorithm algorithm = null;
-        MovementMode movementMode = null;
-        SimulationTyp simulationTyp = null;
-        ArrayList<MazeListener> listeners = new ArrayList<>(10);
-	
-	public void solve() {
-		algorithm.run(this);
-	}
-        
-        public boolean load(File file) {
-            return false;
-        }
+public enum Heuristics {
+    
+    NONE;
     
 }

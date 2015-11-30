@@ -18,10 +18,14 @@
  */
 package project_year4.maze;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author L00131070
  */
 public class Node {
+    
+    ArrayList<NodeListener> listeners = new ArrayList<>(10);
     
 }

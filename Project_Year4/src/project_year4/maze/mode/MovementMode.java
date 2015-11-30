@@ -18,10 +18,14 @@
  */
 package project_year4.maze.mode;
 
+import java.util.Properties;
+
 /**
  *
  * @author L00131070
  */
 public class MovementMode {
+    
+    Properties properties = null;
     
 }

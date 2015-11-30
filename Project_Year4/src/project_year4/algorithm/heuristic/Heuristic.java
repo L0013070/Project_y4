@@ -18,12 +18,17 @@
  */
 package project_year4.algorithm.heuristic;
 
+import static project_year4.algorithm.heuristic.Heuristics.NONE;
+
 /**
  *
  * @author L00131070
  */
 public abstract class Heuristic {
+    
+        Heuristics heuristic = NONE;
 	
 	public abstract double calculate();
-    
+        
+   
 }
