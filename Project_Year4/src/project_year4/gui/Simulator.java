@@ -27,13 +27,14 @@ import project_year4.maze.Maze;
 public class Simulator extends javax.swing.JFrame {
     
     private Maze maze = new Maze();
+    private DisplayMaze panelDisplayMaze = new DisplayMaze();
 
     /**
      * Creates new form Simulator
      */
     public Simulator() {
         initComponents();
-        getContentPane().add(new DisplayMaze(), java.awt.BorderLayout.CENTER);
+        getContentPane().add(panelDisplayMaze, java.awt.BorderLayout.CENTER);
         pack();
         
     }

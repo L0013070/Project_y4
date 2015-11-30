@@ -19,6 +19,8 @@
 package project_year4.maze;
 
 import project_year4.algorithm.Algorithm;
+import project_year4.maze.mode.MovementMode;
+import project_year4.maze.typ.SimulationTyp;
 
 /**
  *
@@ -28,6 +30,8 @@ public class Maze {
 	
 	Node[] nodes = null;
 	Algorithm algorithm = null;
+        MovementMode movementMode = null;
+        SimulationTyp simulationTyp = null;
 	
 	public void solve() {
 		algorithm.run(this);
