@@ -86,6 +86,11 @@ public class Simulator extends javax.swing.JFrame {
         jPanel2.add(labelAlgorithm);
 
         cbAlgorithm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAlgorithm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAlgorithmActionPerformed(evt);
+            }
+        });
         jPanel2.add(cbAlgorithm);
 
         labelHeuristic.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -94,6 +99,11 @@ public class Simulator extends javax.swing.JFrame {
         jPanel2.add(labelHeuristic);
 
         cbHeuristic.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbHeuristic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbHeuristicActionPerformed(evt);
+            }
+        });
         jPanel2.add(cbHeuristic);
 
         labelSimulationMode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -102,6 +112,11 @@ public class Simulator extends javax.swing.JFrame {
         jPanel2.add(labelSimulationMode);
 
         cbSimulationType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbSimulationType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSimulationTypeActionPerformed(evt);
+            }
+        });
         jPanel2.add(cbSimulationType);
 
         labelMovementMode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -110,6 +125,11 @@ public class Simulator extends javax.swing.JFrame {
         jPanel2.add(labelMovementMode);
 
         cbMovementMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbMovementMode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMovementModeActionPerformed(evt);
+            }
+        });
         jPanel2.add(cbMovementMode);
 
         javax.swing.GroupLayout panelConfigurationLayout = new javax.swing.GroupLayout(panelConfiguration);
@@ -187,6 +207,22 @@ public class Simulator extends javax.swing.JFrame {
     private void buttonDoSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDoSimulationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonDoSimulationActionPerformed
+
+    private void cbAlgorithmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlgorithmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAlgorithmActionPerformed
+
+    private void cbHeuristicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHeuristicActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbHeuristicActionPerformed
+
+    private void cbSimulationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSimulationTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbSimulationTypeActionPerformed
+
+    private void cbMovementModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMovementModeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbMovementModeActionPerformed
 
     /**
      * @param args the command line arguments

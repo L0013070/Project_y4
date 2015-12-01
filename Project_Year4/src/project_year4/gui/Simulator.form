@@ -120,6 +120,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAlgorithmActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="labelHeuristic">
               <Properties>
@@ -139,6 +142,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbHeuristicActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="labelSimulationMode">
               <Properties>
@@ -158,6 +164,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbSimulationTypeActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="labelMovementMode">
               <Properties>
@@ -177,6 +186,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbMovementModeActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

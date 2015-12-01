@@ -21,6 +21,7 @@ package project_year4.maze;
 import java.io.File;
 import java.util.ArrayList;
 import project_year4.algorithm.Algorithm;
+import project_year4.algorithm.heuristic.Heuristic;
 import project_year4.maze.mode.MovementMode;
 import project_year4.maze.typ.SimulationTyp;
 
@@ -36,7 +37,23 @@ public class Maze {
         SimulationTyp simulationTyp = null;
         ArrayList<MazeListener> listeners = new ArrayList<>(10);
 	
-	public void solve() {
+	public void setAlgorithm(Algorithm algorithm) {
+            this.algorithm = algorithm;
+        }
+        
+	public void setHeuristic(Heuristic heuristic) {
+            
+        }
+        
+	public void setMovementMode(MovementMode mode) {
+            movementMode = mode;
+        }
+        
+	public void setSimulationTyp(SimulationTyp typ) {
+            simulationTyp = typ;
+        }
+        
+        public void solve() {
 		algorithm.run(this);
 	}
         

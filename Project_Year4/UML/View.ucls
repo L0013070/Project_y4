@@ -3,7 +3,7 @@
   realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="project_year4.gui.DisplayWallCell" project="UML" 
     file="/UML/src1/project_year4/gui/DisplayWallCell.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="771" y="505"/>    
+    <position height="-1" width="-1" x="764" y="531"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="project_year4.gui.DisplayMaze" project="UML" 
     file="/UML/src1/project_year4/gui/DisplayMaze.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="626" y="88"/>    
+    <position height="-1" width="-1" x="646" y="94"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="project_year4.gui.DisplayGridCell" project="UML" 
     file="/UML/src1/project_year4/gui/DisplayGridCell.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="771" y="366"/>    
+    <position height="-1" width="-1" x="762" y="408"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="project_year4.gui.DisplayMazeElement" project="UML" 
     file="/UML/src1/project_year4/gui/DisplayMazeElement.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="758" y="236"/>    
+    <position height="-1" width="-1" x="652" y="259"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="project_year4.gui.Simulator" project="UML" 
     file="/UML/src1/project_year4/gui/Simulator.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="513" width="287" x="105" y="37"/>    
+    <position height="495" width="287" x="139" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,67 +48,70 @@
   </class>  
   <class id="6" language="java" name="project_year4.gui.DisplayNode" project="UML" 
     file="/UML/src1/project_year4/gui/DisplayNode.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="589" y="375"/>    
+    <position height="-1" width="-1" x="586" y="419"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="project_year4.maze.NodeListener" project="UML" 
-    file="/UML/src1/project_year4/maze/NodeListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="589" y="505"/>    
+  <class id="7" language="java" name="project_year4.maze.Maze" project="UML" 
+    file="/UML/src1/project_year4/maze/Maze.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-30" y="277"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </interface>  
-  <interface id="8" language="java" name="project_year4.maze.MazeListener" project="UML" 
-    file="/UML/src1/project_year4/maze/MazeListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="562" y="227"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
+  </class>  
+  <generalization id="8">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
   <association id="9">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="10" name="panelDisplayMaze"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
+      <attribute id="10" name="panelDisplayMaze">        
+        <position height="0" width="0" x="296" y="-536"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="1">        
+        <position height="0" width="0" x="296" y="-536"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="12">    
+  <generalization id="12">    
     <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <realization id="13">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <generalization id="14">    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="13">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="4"/>  
   </generalization>  
-  <generalization id="15">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <association id="16">    
+  <association id="14">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="15" name="maze">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="16" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="17">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="17" name="nodes"/>      
-      <multiplicity id="18" minimum="0" maximum="2147483647"/>    
+      <attribute id="18" name="nodes">        
+        <position height="0" width="0" x="306" y="-609"/>      
+      </attribute>      
+      <multiplicity id="19" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="306" y="-609"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="19">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
