@@ -30,7 +30,7 @@ import javax.swing.SwingConstants;
  */
 public class DisplayMazeElement extends JLabel{
     
-    private final static byte size = 28;
+    private final static byte size = 25;
     
    
     public DisplayMazeElement(String text) {
