@@ -19,7 +19,10 @@
 package project_year4.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import project_year4.maze.Node;
 import project_year4.maze.NodeListener;
 
@@ -34,11 +37,12 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
         X,
         Y;
     }
-    
-    public final NodeTyp typ = NodeTyp.X;
+
+    public NodeTyp typ = NodeTyp.X;
 
     public DisplayNode(String text, NodeTyp typ) {
         super(text);
+        this.typ = typ;
         this.setOpaque(false);
         this.setForeground(Color.red);
         setFont(new Font("Courier New", Font.BOLD, 12));
@@ -48,4 +52,20 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
     public void changedNode(Node node) {
         // TODO Auto-generated method stub
     }
+/*
+    @Override
+    public void paint(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        Dimension size = getSize();
+        System.out.print("size: "+size);
+        System.out.println(" typ: "+typ);
+            g2d.setColor(Color.LIGHT_GRAY);
+        if (typ == NodeTyp.X) {
+            g2d.fillRect(size.width / 2 - 2, 2, 8, size.height-2);
+        } else {
+            g2d.fillRect(2, size.height / 2 - 2, size.width-2, 8);
+        }
+        super.paint(g);
+    }
+    */
 }

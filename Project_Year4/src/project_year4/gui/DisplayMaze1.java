@@ -81,21 +81,22 @@ public class DisplayMaze1 extends javax.swing.JPanel {
         jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(400, 400));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 800));
         jPanel1.setLayout(new java.awt.GridLayout(16, 16, 2, 2));
         jLayeredPane1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 0));
         jPanel2.setOpaque(false);
-        jPanel2.setPreferredSize(new java.awt.Dimension(375, 400));
+        jPanel2.setPreferredSize(new java.awt.Dimension(725, 800));
         jPanel2.setLayout(new java.awt.GridLayout(16, 15, 2, 2));
         jLayeredPane1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 0, -1, -1));
         jLayeredPane1.setLayer(jPanel2, javax.swing.JLayeredPane.MODAL_LAYER);
 
         jPanel3.setOpaque(false);
+        jPanel3.setPreferredSize(new java.awt.Dimension(800, 775));
         jPanel3.setLayout(new java.awt.GridLayout(15, 16, 0, 13));
         jLayeredPane1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 25, -1, -1));
-        jLayeredPane1.setLayer(jPanel3, javax.swing.JLayeredPane.MODAL_LAYER);
+        jLayeredPane1.setLayer(jPanel3, javax.swing.JLayeredPane.POPUP_LAYER);
 
         add(jLayeredPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
