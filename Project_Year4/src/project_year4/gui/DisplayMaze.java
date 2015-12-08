@@ -41,7 +41,7 @@ public class DisplayMaze extends javax.swing.JPanel implements MazeListener {
                 } else if ((i % 2) == 1 && (j % 2) == 1) {
                     add(new DisplayWallCell(""));
                 } else {
-                    add(new DisplayNode("-1"));
+                    add(new DisplayNode("-1", DisplayNode.NodeTyp.X));
                 }
             }
 
@@ -58,6 +58,7 @@ public class DisplayMaze extends javax.swing.JPanel implements MazeListener {
     private void initComponents() {
 
         setBackground(new java.awt.Color(204, 102, 0));
+        setPreferredSize(new java.awt.Dimension(60, 60));
         setLayout(new java.awt.GridLayout(31, 31, 2, 2));
     }// </editor-fold>//GEN-END:initComponents
 

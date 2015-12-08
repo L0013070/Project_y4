@@ -30,18 +30,19 @@ import javax.swing.SwingConstants;
  */
 public class DisplayMazeElement extends JLabel{
     
-    private final static byte size = 25;
+    public final static byte CELLSIZE = 50;
     
    
     public DisplayMazeElement(String text) {
         super();
-        this.setPreferredSize(new Dimension(size,size));
-        setSize(size,size);
+        this.setPreferredSize(new Dimension(CELLSIZE,CELLSIZE));
+        setSize(CELLSIZE,CELLSIZE);
         setOpaque(true);
         setHorizontalAlignment(SwingConstants.CENTER);
-        setFont(new Font("Courier New",Font.PLAIN,9));
+        setFont(new Font("Courier New",Font.BOLD,9));
         setText(text);
         setBackground(Color.WHITE);
+//        this.setOpaque(false);
     }
     
 }

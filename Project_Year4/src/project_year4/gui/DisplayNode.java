@@ -18,6 +18,8 @@
  */
 package project_year4.gui;
 
+import java.awt.Color;
+import java.awt.Font;
 import project_year4.maze.Node;
 import project_year4.maze.NodeListener;
 
@@ -25,15 +27,25 @@ import project_year4.maze.NodeListener;
  *
  * @author L00131070
  */
-public class DisplayNode extends DisplayMazeElement implements NodeListener{
+public class DisplayNode extends DisplayMazeElement implements NodeListener {
 
-    public DisplayNode(String text) {
+    public enum NodeTyp {
+
+        X,
+        Y;
+    }
+    
+    public final NodeTyp typ = NodeTyp.X;
+
+    public DisplayNode(String text, NodeTyp typ) {
         super(text);
+        this.setOpaque(false);
+        this.setForeground(Color.red);
+        setFont(new Font("Courier New", Font.BOLD, 12));
     }
 
-	@Override
-	public void changedNode(Node node) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void changedNode(Node node) {
+        // TODO Auto-generated method stub
+    }
 }
