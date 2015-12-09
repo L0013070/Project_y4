@@ -34,7 +34,7 @@ import project_year4.maze.NodeTyp;
  */
 public class DisplayNode extends DisplayMazeElement implements NodeListener {
 
-    public NodeTyp typ = NodeTyp.X;
+    private NodeTyp typ = NodeTyp.X;
 
     public DisplayNode(String text, NodeTyp typ) {
         super(text);
@@ -42,7 +42,7 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
         this.setOpaque(false);
         this.setForeground(Color.red);
         setFont(new Font("Courier New", Font.BOLD, 10));
-        this.setComponentPopupMenu(new DisplayNodePopUpMenu());
+        this.setComponentPopupMenu(DisplayNodePopUpMenu.getMenu());
     }
 
     @Override
@@ -54,16 +54,30 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         Dimension size = getSize();
-        System.out.print("size: "+size);
-        System.out.println(" typ: "+typ);
-        if (typ == NodeTyp.X) {
+//        System.out.print("size: "+size);
+//        System.out.println(" typ: "+typ);
+        if (getTyp() == NodeTyp.X) {
             g2d.setColor(Color.GREEN);
             g2d.fillRect(size.width / 2 - 1, 1,2, size.height-2);
-        } else if (typ == NodeTyp.Y){
+        } else if (getTyp() == NodeTyp.Y){
             g2d.setColor(Color.YELLOW);
             g2d.fillRect(1, size.height / 2 - 1, size.width-2, 2);
         }
         super.paint(g);
+    }
+
+    /**
+     * @return the typ
+     */
+    public NodeTyp getTyp() {
+        return typ;
+    }
+
+    /**
+     * @param typ the typ to set
+     */
+    public void setTyp(NodeTyp typ) {
+        this.typ = typ;
     }
     
 }

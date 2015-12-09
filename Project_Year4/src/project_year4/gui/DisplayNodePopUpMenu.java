@@ -18,21 +18,60 @@
  */
 package project_year4.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import project_year4.maze.NodeTyp;
 
 /**
  *
  * @author L00131070
  */
-public class DisplayNodePopUpMenu extends JPopupMenu {
-    JMenuItem anItem;
-    public DisplayNodePopUpMenu(){
-        anItem = new JMenuItem("Make Wall");
-        add(anItem);
-        anItem = new JMenuItem("Make X");
-        add(anItem);
-        anItem = new JMenuItem("Make Y");
-        add(anItem);
+public class DisplayNodePopUpMenu extends JPopupMenu implements ActionListener{
+
+    private static DisplayNodePopUpMenu menu = new DisplayNodePopUpMenu();
+    
+    public DisplayNodePopUpMenu(String label) {
+        super(label);
     }
+
+    public DisplayNodePopUpMenu() {
+        JMenuItem item = new JMenuItem("Make Wall");
+        item.addActionListener(this);
+        add(item);
+        item = new JMenuItem("Make X");
+        item.addActionListener(this);
+        add(item);
+        item = new JMenuItem("Make Y");
+        item.addActionListener(this);
+        add(item);
+    }
+    
+    public static DisplayNodePopUpMenu getMenu() {
+        return menu;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        DisplayNode node = (DisplayNode) getInvoker();
+        if (e.getActionCommand().equals("Make Wall")) {
+            ((DisplayNode) getInvoker()).setTyp(NodeTyp.WALL);
+            ((DisplayNode) getInvoker()).setText("");
+            getInvoker().repaint();
+        }
+        if (e.getActionCommand().equals("Make X")) {
+            ((DisplayNode) getInvoker()).setTyp(NodeTyp.X);
+            ((DisplayNode) getInvoker()).setText("-1.00");
+            getInvoker().repaint();
+        }
+        if (e.getActionCommand().equals("Make Y")) {
+            ((DisplayNode) getInvoker()).setTyp(NodeTyp.Y);
+            ((DisplayNode) getInvoker()).setText("-1.00");
+            getInvoker().repaint();
+        }
+    }
+
 }
