@@ -20,6 +20,7 @@ package project_year4.gui;
 
 import project_year4.maze.Maze;
 import project_year4.maze.MazeListener;
+import project_year4.maze.NodeTyp;
 
 /**
  *
@@ -41,7 +42,7 @@ public class DisplayMaze extends javax.swing.JPanel implements MazeListener {
                 } else if ((i % 2) == 1 && (j % 2) == 1) {
                     add(new DisplayWallCell(""));
                 } else {
-                    add(new DisplayNode("-1", DisplayNode.NodeTyp.X));
+                    add(new DisplayNode("-1", NodeTyp.X));
                 }
             }
 

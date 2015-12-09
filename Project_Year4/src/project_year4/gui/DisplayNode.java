@@ -23,20 +23,16 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseListener;
 import project_year4.maze.Node;
 import project_year4.maze.NodeListener;
+import project_year4.maze.NodeTyp;
 
 /**
  *
  * @author L00131070
  */
 public class DisplayNode extends DisplayMazeElement implements NodeListener {
-
-    public enum NodeTyp {
-
-        X,
-        Y;
-    }
 
     public NodeTyp typ = NodeTyp.X;
 
@@ -45,27 +41,29 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
         this.typ = typ;
         this.setOpaque(false);
         this.setForeground(Color.red);
-        setFont(new Font("Courier New", Font.BOLD, 12));
+        setFont(new Font("Courier New", Font.BOLD, 10));
+        this.setComponentPopupMenu(new DisplayNodePopUpMenu());
     }
 
     @Override
     public void changedNode(Node node) {
         // TODO Auto-generated method stub
     }
-/*
+
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         Dimension size = getSize();
         System.out.print("size: "+size);
         System.out.println(" typ: "+typ);
-            g2d.setColor(Color.LIGHT_GRAY);
         if (typ == NodeTyp.X) {
-            g2d.fillRect(size.width / 2 - 2, 2, 8, size.height-2);
-        } else {
-            g2d.fillRect(2, size.height / 2 - 2, size.width-2, 8);
+            g2d.setColor(Color.GREEN);
+            g2d.fillRect(size.width / 2 - 1, 1,2, size.height-2);
+        } else if (typ == NodeTyp.Y){
+            g2d.setColor(Color.YELLOW);
+            g2d.fillRect(1, size.height / 2 - 1, size.width-2, 2);
         }
         super.paint(g);
     }
-    */
+    
 }

@@ -16,33 +16,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package project_year4.gui;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+package project_year4.maze;
 
 /**
  *
  * @author L00131070
  */
-public class DisplayMazeElement extends JLabel{
-    
-    public final static byte CELLSIZE = 50;
-    
-   
-    public DisplayMazeElement(String text) {
-        super();
-        this.setPreferredSize(new Dimension(CELLSIZE,CELLSIZE));
-        setSize(CELLSIZE,CELLSIZE);
-        setOpaque(true);
-        setHorizontalAlignment(SwingConstants.CENTER);
-        setFont(new Font("Courier New",Font.BOLD,8));
-        setText(text);
-        setBackground(Color.WHITE);
-//        this.setOpaque(false);
-    }
-    
+public enum NodeTyp {
+
+    X,
+    Y,
+    WALL;
 }
