@@ -54,11 +54,30 @@ public class Maze {
         }
         
         public void solve() {
+            if (algorithm != null) {
 		algorithm.run(this);
+            }
 	}
         
         public boolean load(File file) {
             return false;
+        }
+        
+        public boolean addListener(MazeListener listener) {
+            if (!listeners.contains(listener)) {
+                return listeners.add(listener);
+            }
+            return false;
+        }
+        
+        public boolean removeListeners(MazeListener listener) {
+            return listeners.remove(listener);
+        }
+        
+        protected void changedMaze() {
+            for(MazeListener listener : listeners) {
+                listener.changedMaze(this);
+            }
         }
     
 }
