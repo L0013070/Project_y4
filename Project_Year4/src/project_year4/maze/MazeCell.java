@@ -26,85 +26,85 @@ import java.util.ArrayList;
  */
 public class MazeCell {
 
-    private Node xNodePlus;
-    private Node xNodeNeg;
-    private Node yNodePlus;
-    private Node yNodeNeg;
+    private Node east;
+    private Node west;
+    private Node north;
+    private Node south;
 
-    public MazeCell(Node xPlus, Node xNeg, Node yPlus, Node yNeg) {
-        setNodes(xPlus, xNeg, yPlus, yNeg);
+    public MazeCell(Node east, Node west, Node north, Node south) {
+        setNodes(east, west, north, south);
     }
 
     /**
-     * @return the xNodePlus
+     * @return the east
      */
-    public Node getxNodePlus() {
-        return xNodePlus;
+    public Node getEast() {
+        return east;
     }
 
     /**
-     * @param xNodePlus the xNodePlus to set
+     * @param north the east to set
      */
-    public void setxNodePlus(Node xNodePlus) {
-        this.xNodePlus = xNodePlus;
+    public void setEast(Node east) {
+        this.east = east;
     }
 
     /**
-     * @return the xNodeNeg
+     * @return the west
      */
-    public Node getxNodeNeg() {
-        return xNodeNeg;
+    public Node getWest() {
+        return west;
     }
 
     /**
-     * @param xNodeNeg the xNodeNeg to set
+     * @param west the west to set
      */
-    public void setxNodeNeg(Node xNodeNeg) {
-        this.xNodeNeg = xNodeNeg;
+    public void setWest(Node west) {
+        this.west = west;
     }
 
     /**
-     * @return the yNodePlus
+     * @return the north
      */
-    public Node getyNodePlus() {
-        return yNodePlus;
+    public Node getNorth() {
+        return north;
     }
 
     /**
-     * @param yNodePlus the yNodePlus to set
+     * @param north the north to set
      */
-    public void setyNodePlus(Node yNodePlus) {
-        this.yNodePlus = yNodePlus;
+    public void setNorth(Node north) {
+        this.north = north;
     }
 
     /**
-     * @return the yNodeNeg
+     * @return the south
      */
-    public Node getyNodeNeg() {
-        return yNodeNeg;
+    public Node getSouth() {
+        return south;
     }
 
     /**
-     * @param yNodeNeg the yNodeNeg to set
+     * @param south the south to set
      */
-    public void setyNodeNeg(Node yNodeNeg) {
-        this.yNodeNeg = yNodeNeg;
+    public void setSouth(Node south) {
+        this.south = south;
     }
 
     
-    public void setNodes(Node xPlus, Node xNeg, Node yPlus, Node yNeg) {
-        this.setxNodePlus(xPlus);
-        this.setxNodeNeg(xNeg);
-        this.setyNodePlus(yPlus);
-        this.setyNodeNeg(yNeg);
+    public void setNodes(Node east, Node west, Node north, Node south) {
+        this.setEast(east);
+        this.setWest(west);
+        this.setNorth(north);
+        this.setSouth(south);
     }
 
     public ArrayList<Node> getNodes() {
         ArrayList<Node> nodes = new ArrayList<>(4);
-        nodes.add(getxNodePlus());
-        nodes.add(getxNodeNeg());
-        nodes.add(getyNodePlus());
-        nodes.add(getyNodeNeg());
+        nodes.add(getEast());
+        nodes.add(getWest());
+        nodes.add(getNorth());
+        nodes.add(getSouth());
         return nodes;
     }
 }

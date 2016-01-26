@@ -46,20 +46,20 @@ public class MazeCellTest extends TestCase {
      */
     public void testSetNodes() {
         System.out.println("setNodes");
-        Node xPlus = new Node();
-        Node xNeg = new Node();
-        Node yPlus = new Node();
-        Node yNeg = new Node();
+        Node east = new Node();
+        Node west = new Node();
+        Node north = new Node();
+        Node south = new Node();
         MazeCell instance = new MazeCell(null, null, null, null);
-        assertSame(instance.getxNodePlus(), null);
-        assertSame(instance.getyNodePlus(), null);
-        assertSame(instance.getxNodeNeg(), null);
-        assertSame(instance.getxNodeNeg(), null);
-        instance.setNodes(xPlus, xNeg, yPlus, yNeg);
-        assertSame(instance.getxNodePlus(), xPlus);
-        assertSame(instance.getyNodePlus(), yPlus);
-        assertSame(instance.getxNodeNeg(), xNeg);
-        assertSame(instance.getyNodeNeg(), yNeg);
+        assertSame(instance.getEast(), null);
+        assertSame(instance.getWest(), null);
+        assertSame(instance.getNorth(), null);
+        assertSame(instance.getSouth(), null);
+        instance.setNodes(east, west, north, south);
+        assertSame(instance.getEast(), east);
+        assertSame(instance.getNorth(), north);
+        assertSame(instance.getWest(), west);
+        assertSame(instance.getSouth(), south);
     }
 
     /**
@@ -67,122 +67,123 @@ public class MazeCellTest extends TestCase {
      */
     public void testGetNodes() {
         System.out.println("getNodes");
-        Node xPlus = new Node();
-        Node xNeg = new Node();
-        Node yPlus = new Node();
-        Node yNeg = new Node();
-        MazeCell instance = new MazeCell(xPlus, xNeg, yPlus, yNeg);
+        Node east = new Node();
+        Node west = new Node();
+        Node north = new Node();
+        Node south = new Node();
+        MazeCell instance = new MazeCell(east, west, north, south);
         ArrayList<Node> expResult = new ArrayList<>(4);
-        expResult.add(xPlus);
-        expResult.add(xNeg);
-        expResult.add(yPlus);
-        expResult.add(yNeg);
+        expResult.add(east);
+        expResult.add(west);
+        expResult.add(north);
+        expResult.add(south);
         ArrayList<Node> result = instance.getNodes();
-        assertEquals(expResult, result);
+        for (int i=0; i < result.size(); i++)
+            assertEquals(expResult.get(i), result.get(i));
     }
 
     /**
      * Test of getxNodePlus method, of class MazeCell.
      */
-    public void testGetxNodePlus() {
+    public void testGetEast() {
         System.out.println("getxNodePlus");
-        Node xPlus = new Node();
-        Node xNeg = new Node();
-        Node yPlus = new Node();
-        Node yNeg = new Node();
-        MazeCell instance = new MazeCell(xPlus, xNeg, yPlus, yNeg);
-        Node expResult = xPlus;
-        Node result = instance.getxNodePlus();
+        Node east = new Node();
+        Node west = new Node();
+        Node north = new Node();
+        Node south = new Node();
+        MazeCell instance = new MazeCell(east, west, north, south);
+        Node expResult = east;
+        Node result = instance.getEast();
         assertEquals(expResult, result);
     }
 
     /**
      * Test of setxNodePlus method, of class MazeCell.
      */
-    public void testSetxNodePlus() {
+    public void testEast() {
         System.out.println("setxNodePlus");
-        Node xNodePlus = new Node();
-        MazeCell instance = new MazeCell(xNodePlus, null, null, null);
-        instance.setxNodePlus(xNodePlus);
-        assertSame(instance.getxNodePlus(), xNodePlus);
+        Node east = new Node();
+        MazeCell instance = new MazeCell(null, null, null, null);
+        instance.setNorth(east);
+        assertSame(instance.getNorth(), east);
     }
 
     /**
      * Test of getxNodeNeg method, of class MazeCell.
      */
-    public void testGetxNodeNeg() {
+    public void testGetWest() {
         System.out.println("getxNodeNeg");
-        Node xPlus = new Node();
-        Node xNeg = new Node();
-        Node yPlus = new Node();
-        Node yNeg = new Node();
-        MazeCell instance = new MazeCell(xPlus, xNeg, yPlus, yNeg);
-        Node expResult = xNeg;
-        Node result = instance.getxNodeNeg();
+        Node east = new Node();
+        Node west = new Node();
+        Node north = new Node();
+        Node south = new Node();
+        MazeCell instance = new MazeCell(east, west, north, south);
+        Node expResult = west;
+        Node result = instance.getWest();
         assertEquals(expResult, result);
     }
 
     /**
      * Test of setxNodeNeg method, of class MazeCell.
      */
-    public void testSetxNodeNeg() {
+    public void testSetWest() {
         System.out.println("setxNodeNeg");
         Node node = new Node();
-        MazeCell instance = new MazeCell(null, node, null, null);
-        instance.setxNodePlus(node);
-        assertSame(instance.getxNodeNeg(), node);
+        MazeCell instance = new MazeCell(null, null, null, null);
+        instance.setWest(node);
+        assertSame(instance.getWest(), node);
     }
 
     /**
      * Test of getyNodePlus method, of class MazeCell.
      */
-    public void testGetyNodePlus() {
+    public void testGetNorth() {
         System.out.println("getyNodePlus");
-        Node xPlus = new Node();
-        Node xNeg = new Node();
-        Node yPlus = new Node();
-        Node yNeg = new Node();
-        MazeCell instance = new MazeCell(xPlus, xNeg, yPlus, yNeg);
-        Node expResult = yPlus;
-        Node result = instance.getyNodePlus();
+        Node east = new Node();
+        Node west = new Node();
+        Node north = new Node();
+        Node south = new Node();
+        MazeCell instance = new MazeCell(east, west, north, south);
+        Node expResult = north;
+        Node result = instance.getNorth();
         assertEquals(expResult, result);
     }
 
     /**
      * Test of setyNodePlus method, of class MazeCell.
      */
-    public void testSetyNodePlus() {
-        System.out.println("setyNodePlus");
+    public void testSetNorth() {
+        System.out.println("setNorth");
         Node node = new Node();
         MazeCell instance = new MazeCell(null, null, node, null);
-        instance.setyNodePlus(node);
-        assertSame(instance.getyNodePlus(), node);
+        instance.setNorth(node);
+        assertSame(instance.getNorth(), node);
     }
 
     /**
      * Test of getyNodeNeg method, of class MazeCell.
      */
-    public void testGetyNodeNeg() {
-        System.out.println("getyNodeNeg");
-        Node xPlus = new Node();
-        Node xNeg = new Node();
-        Node yPlus = new Node();
-        Node yNeg = new Node();
-        MazeCell instance = new MazeCell(xPlus, xNeg, yPlus, yNeg);
-        Node expResult = yNeg;
-        Node result = instance.getyNodeNeg();
+    public void testGetSouthg() {
+        System.out.println("getSouth");
+        Node east = new Node();
+        Node west = new Node();
+        Node north = new Node();
+        Node south = new Node();
+        MazeCell instance = new MazeCell(east, west, north, south);
+        Node expResult = south;
+        Node result = instance.getSouth();
         assertEquals(expResult, result);
     }
 
     /**
      * Test of setyNodeNeg method, of class MazeCell.
      */
-    public void testSetyNodeNeg() {
-        System.out.println("setyNodeNeg");
+    public void testSetSouth() {
+        System.out.println("setSouth");
         Node node = new Node();
         MazeCell instance = new MazeCell(null, null, null, node);
-        instance.setyNodeNeg(node);
-        assertSame(instance.getyNodeNeg(), node);
+        instance.setSouth(node);
+        assertSame(instance.getSouth(), node);
     }
 
 }

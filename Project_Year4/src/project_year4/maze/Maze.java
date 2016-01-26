@@ -31,11 +31,22 @@ import project_year4.maze.typ.SimulationTyp;
  */
 public class Maze {
 	
-	Node[] nodes = null;
 	Algorithm algorithm = null;
         MovementMode movementMode = null;
         SimulationTyp simulationTyp = null;
         ArrayList<MazeListener> listeners = new ArrayList<>(10);
+        
+        MazeCell[][] mazeCells = new MazeCell[16][16];
+        Node[][] xNodes = new Node[15][16];
+        Node[][] yNodes = new Node[16][15];
+        
+        public Maze() {
+            for (int x=0; x < 16; x++) {
+                for (int y = 0; y < 16; y++) {
+                    mazeCells[x][y] = new MazeCell(null,null,null,null);
+                }
+            }
+        }
 	
 	public void setAlgorithm(Algorithm algorithm) {
             this.algorithm = algorithm;
