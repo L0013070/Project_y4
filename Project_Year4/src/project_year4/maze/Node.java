@@ -25,7 +25,24 @@ import java.util.ArrayList;
  * @author L00131070
  */
 public class Node {
-    
+
     ArrayList<NodeListener> listeners = new ArrayList<>(10);
-    
+
+    public boolean addListener(NodeListener listener) {
+        if (!listeners.contains(listener)) {
+            return listeners.add(listener);
+        }
+        return false;
+    }
+
+    public boolean removeListeners(NodeListener listener) {
+        return listeners.remove(listener);
+    }
+
+    protected void changedNode() {
+        for (NodeListener listener : listeners) {
+            listener.changedNode(this);
+        }
+    }
+
 }

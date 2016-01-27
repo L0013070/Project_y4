@@ -19,6 +19,7 @@
 package project_year4.maze;
 
 import java.util.ArrayList;
+import project_year4.gui.DisplayMaze1;
 
 /**
  *
@@ -26,85 +27,56 @@ import java.util.ArrayList;
  */
 public class MazeCell {
 
-    private Node east;
-    private Node west;
-    private Node north;
-    private Node south;
+    private ArrayList<MazeCellListener> listeners = new ArrayList<>(10);
+    private int xPos = -1;
+    private int yPos = -1;
 
-    public MazeCell(Node east, Node west, Node north, Node south) {
-        setNodes(east, west, north, south);
+    public MazeCell(int xPos, int yPos) {
+        this.xPos = xPos;    
+        this.yPos = yPos;    
     }
 
     /**
-     * @return the east
+     * @return the xPos
      */
-    public Node getEast() {
-        return east;
+    public int getxPos() {
+        return xPos;
     }
 
     /**
-     * @param north the east to set
+     * @param xPos the xPos to set
      */
-    public void setEast(Node east) {
-        this.east = east;
+    public void setxPos(int xPos) {
+        this.xPos = xPos;
     }
 
     /**
-     * @return the west
+     * @return the yPos
      */
-    public Node getWest() {
-        return west;
+    public int getyPos() {
+        return yPos;
     }
 
     /**
-     * @param west the west to set
+     * @param yPos the yPos to set
      */
-    public void setWest(Node west) {
-        this.west = west;
+    public void setyPos(int yPos) {
+        this.yPos = yPos;
+    }
+    
+    public boolean addListener(MazeCellListener listener) {
+        if (!listeners.contains(listener)) {
+            return listeners.add(listener);
+        }
+        return false;
     }
 
-    /**
-     * @return the north
-     */
-    public Node getNorth() {
-        return north;
+    public boolean removeListeners(MazeCellListener listener) {
+        return listeners.remove(listener);
     }
 
-    /**
-     * @param north the north to set
-     */
-    public void setNorth(Node north) {
-        this.north = north;
-    }
-
-    /**
-     * @return the south
-     */
-    public Node getSouth() {
-        return south;
-    }
-
-    /**
-     * @param south the south to set
-     */
-    public void setSouth(Node south) {
-        this.south = south;
-    }
 
     
-    public void setNodes(Node east, Node west, Node north, Node south) {
-        this.setEast(east);
-        this.setWest(west);
-        this.setNorth(north);
-        this.setSouth(south);
-    }
 
-    public ArrayList<Node> getNodes() {
-        ArrayList<Node> nodes = new ArrayList<>(4);
-        nodes.add(getEast());
-        nodes.add(getWest());
-        nodes.add(getNorth());
-        nodes.add(getSouth());
-        return nodes;
-    }
+
 }

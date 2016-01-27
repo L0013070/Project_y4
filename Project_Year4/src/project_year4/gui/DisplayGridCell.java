@@ -19,17 +19,24 @@
 package project_year4.gui;
 
 import java.awt.Color;
+import project_year4.maze.MazeCell;
+import project_year4.maze.MazeCellListener;
 
 
 /**
  *
  * @author L00131070
  */
-public class DisplayGridCell extends DisplayMazeElement{
+public class DisplayGridCell extends DisplayMazeElement  implements MazeCellListener{
 
     public DisplayGridCell(String text) {
         super(text);
         setBackground(Color.LIGHT_GRAY);
+    }
+
+    @Override
+    public void changedMazeCell(MazeCell maze) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

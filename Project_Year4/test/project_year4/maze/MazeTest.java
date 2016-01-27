@@ -159,5 +159,6 @@ public class MazeTest extends TestCase {
         assertTrue(instance.removeListeners(listener));
         assertFalse(instance.removeListeners(listener));
     }
-    
+
+
 }

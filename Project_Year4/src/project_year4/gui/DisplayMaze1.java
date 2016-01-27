@@ -22,6 +22,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import project_year4.maze.Maze;
+import project_year4.maze.MazeCell;
+import project_year4.maze.Node;
 import project_year4.maze.NodeTyp;
 
 /**
@@ -33,17 +36,25 @@ public class DisplayMaze1 extends javax.swing.JPanel {
     /**
      * Creates new form DisplayMaze1
      */
-    public DisplayMaze1() {
-        int mazesize = 16;
+    public DisplayMaze1(MazeCell[][] cells, Node[][] xNodes, Node[][] yNodes) {
+        int mazesize = Maze.mazeSize;
         initComponents();
+        DisplayGridCell cell = null;
+        DisplayNode node = null;
         for (int i = 0; i < mazesize; i++) {
             for (int j = 0; j < mazesize; j++) {
-                gridPanel.add(new DisplayGridCell(j + "/" + (mazesize - 1 - i)));
+                cell = new DisplayGridCell(j + "/" + (mazesize - 1 - i));
+                cells[j][i].addListener(cell);
+                gridPanel.add(cell);
                 if (j < (mazesize - 1)) {
-                    xNodePanel.add(new DisplayNode("-1.00", NodeTyp.X));
+                    node = new DisplayNode(j+"/"+i, NodeTyp.X);
+                    xNodes[j][i].addListener(node);
+                    xNodePanel.add(node);
                 }
                 if (i < (mazesize - 1)) {
-                    yNodePanel.add(new DisplayNode("-1.00", NodeTyp.Y));
+                    node = new DisplayNode(j+"/"+(mazesize - 2 - i), NodeTyp.Y);
+                    yNodes[j][mazesize - 2 - i].addListener(node);
+                    yNodePanel.add(node);
                 }
             }
         }
