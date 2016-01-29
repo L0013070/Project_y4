@@ -19,7 +19,7 @@
 package project_year4.maze;
 
 import java.util.ArrayList;
-import project_year4.gui.DisplayMaze1;
+import project_year4.gui.DisplayMaze;
 
 /**
  *

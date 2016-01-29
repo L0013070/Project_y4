@@ -22,7 +22,7 @@ import java.io.File;
 import java.util.ArrayList;
 import project_year4.algorithm.Algorithm;
 import project_year4.algorithm.heuristic.Heuristic;
-import project_year4.gui.DisplayMaze1;
+import project_year4.gui.DisplayMaze;
 import project_year4.maze.mode.MovementMode;
 import project_year4.maze.typ.SimulationTyp;
 
@@ -104,8 +104,8 @@ public class Maze {
         }
     }
 
-    public DisplayMaze1 createDisplayPanel() {
-        DisplayMaze1 panel = new DisplayMaze1(mazeCells, xNodes, yNodes);
+    public DisplayMaze createDisplayPanel() {
+        DisplayMaze panel = new DisplayMaze(mazeCells, xNodes, yNodes);
         return panel;
     }
 }

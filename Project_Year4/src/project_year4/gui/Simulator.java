@@ -27,7 +27,7 @@ import project_year4.maze.Maze;
 public class Simulator extends javax.swing.JFrame {
     
     private Maze maze = new Maze();
-    private DisplayMaze1 panelDisplayMaze = null;
+    private DisplayMaze panelDisplayMaze = null;
 
     /**
      * Creates new form Simulator

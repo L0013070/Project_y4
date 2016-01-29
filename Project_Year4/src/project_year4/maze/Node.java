@@ -25,6 +25,8 @@ import java.util.ArrayList;
  * @author L00131070
  */
 public class Node {
+    
+    private double value = -1.00;
 
     ArrayList<NodeListener> listeners = new ArrayList<>(10);
 
@@ -43,6 +45,18 @@ public class Node {
         for (NodeListener listener : listeners) {
             listener.changedNode(this);
         }
+    }
+    
+    protected void changedValue() {
+        for (NodeListener listener : listeners) {
+            listener.updateValue(String.format("%.2f", value));
+        }
+    }
+    
+    public void setValue(double value){
+        this.value = value;
+        changedValue();
+        
     }
 
 }
