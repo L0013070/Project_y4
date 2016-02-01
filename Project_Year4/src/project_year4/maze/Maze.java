@@ -19,7 +19,12 @@
 package project_year4.maze;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import project_year4.algorithm.Algorithm;
 import project_year4.algorithm.heuristic.Heuristic;
 import project_year4.gui.DisplayMaze;
@@ -31,7 +36,7 @@ import project_year4.maze.typ.SimulationTyp;
  * @author L00131070
  */
 public class Maze {
-    
+
     public static final int mazeSize = 16;
 
     Algorithm algorithm = null;
@@ -40,7 +45,7 @@ public class Maze {
     ArrayList<MazeListener> listeners = new ArrayList<>(10);
 
     private MazeCell[][] mazeCells = new MazeCell[mazeSize][mazeSize];
-    private Node[][] xNodes = new Node[mazeSize -1 ][mazeSize];
+    private Node[][] xNodes = new Node[mazeSize - 1][mazeSize];
     private Node[][] yNodes = new Node[mazeSize][mazeSize - 1];
 
     public Maze() {
@@ -56,7 +61,7 @@ public class Maze {
             }
         }
     }
-    
+
     public MazeCell getMazeCell(int x, int y) {
         return mazeCells[x][y];
     }
@@ -107,5 +112,46 @@ public class Maze {
     public DisplayMaze createDisplayPanel() {
         DisplayMaze panel = new DisplayMaze(mazeCells, xNodes, yNodes);
         return panel;
+    }
+
+    public void readMazFile(String filename) {
+        FileInputStream file;
+        try {
+            file = new FileInputStream(filename);
+            int i = 0;
+            while (file.available() > 0) {
+                int read = file.read();
+                int x = 15 - ((255-i) % 16);
+                int y = (255-i) / 16;
+                System.out.print("x: "+x+" y: "+y);
+                if ((read & 1) > 0) {
+                    System.out.print(" top: true ");
+                } else {
+                    System.out.print(" top: false ");
+                }
+                if ((read & 2) > 0) {
+                    System.out.print(" right: true ");
+                } else {
+                    System.out.print(" right: false ");
+                }
+                if ((read & 4) > 0) {
+                    System.out.print(" down: true ");
+                } else {
+                    System.out.print(" down: false ");
+                }
+                if ((read & 8) > 0) {
+                    System.out.print(" left: true ");
+                } else {
+                    System.out.print(" left: false ");
+                }
+                System.out.println();
+                i++;
+            }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Maze.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Maze.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

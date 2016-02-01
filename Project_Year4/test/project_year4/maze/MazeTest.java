@@ -22,6 +22,7 @@ import java.io.File;
 import junit.framework.TestCase;
 import project_year4.algorithm.Algorithm;
 import project_year4.algorithm.heuristic.Heuristic;
+import project_year4.gui.DisplayMaze;
 import project_year4.maze.mode.MovementMode;
 import project_year4.maze.typ.SimulationTyp;
 
@@ -158,6 +159,45 @@ public class MazeTest extends TestCase {
         assertEquals(listener.getCalls(), 2);
         assertTrue(instance.removeListeners(listener));
         assertFalse(instance.removeListeners(listener));
+    }
+
+    /**
+     * Test of getMazeCell method, of class Maze.
+     */
+    public void testGetMazeCell() {
+        System.out.println("getMazeCell");
+        int x = 0;
+        int y = 0;
+        Maze instance = new Maze();
+        MazeCell expResult = null;
+        MazeCell result = instance.getMazeCell(x, y);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of createDisplayPanel method, of class Maze.
+     */
+    public void testCreateDisplayPanel() {
+        System.out.println("createDisplayPanel");
+        Maze instance = new Maze();
+        DisplayMaze expResult = null;
+        DisplayMaze result = instance.createDisplayPanel();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of readMazFile method, of class Maze.
+     */
+    public void testReadMazFile() {
+        System.out.println("readMazFile");
+        String filename = "X:\\Project\\Project_y4\\Project_Year4\\mazefiles\\Mazes\\00japan.bin";
+        Maze instance = new Maze();
+        instance.readMazFile(filename);
+        fail("The test case is a prototype.");
     }
 
 
