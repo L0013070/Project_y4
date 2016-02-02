@@ -37,16 +37,16 @@ import project_year4.maze.typ.SimulationTyp;
  */
 public class Maze {
 
-    public static final int mazeSize = 16;
+    public static final int MAZESIZE = 16;
 
     Algorithm algorithm = null;
     MovementMode movementMode = null;
     SimulationTyp simulationTyp = null;
     ArrayList<MazeListener> listeners = new ArrayList<>(10);
 
-    private MazeCell[][] mazeCells = new MazeCell[mazeSize][mazeSize];
-    private Node[][] xNodes = new Node[mazeSize - 1][mazeSize];
-    private Node[][] yNodes = new Node[mazeSize][mazeSize - 1];
+    private MazeCell[][] mazeCells = new MazeCell[MAZESIZE][MAZESIZE];
+    private Node[][] xNodes = new Node[MAZESIZE - 1][MAZESIZE];
+    private Node[][] yNodes = new Node[MAZESIZE][MAZESIZE - 1];
 
     public Maze() {
         for (int x = 0; x < 16; x++) {

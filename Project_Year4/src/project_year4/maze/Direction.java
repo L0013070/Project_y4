@@ -23,16 +23,38 @@ package project_year4.maze;
  * @author L00131070
  */
 public enum Direction {
-    NORTH(0,0),
-    EAST(0,0),
-    SOUTH(0,-1),
-    WEST(-1,0);
+    NORTH(0,0, NodeTyp.Y),
+    EAST(0,0, NodeTyp.X),
+    SOUTH(0,-1, NodeTyp.Y),
+    WEST(-1,0, NodeTyp.X);
     
     private int xCellOffset = 0;
     private int yCellOffset = 0;
+    private NodeTyp typ;
     
-    Direction(int xCellOffset, int yCellOffset) {
+    Direction(int xCellOffset, int yCellOffset, NodeTyp typ) {
         this.xCellOffset = xCellOffset;
         this.yCellOffset = yCellOffset;
+        this.typ = typ;
+    }
+    
+    public Node getNodeForCell(int xPos, int yPos, Node[][] xNodes, Node[][] yNodes) {
+        Node ret = null;
+        xPos += xCellOffset;
+        yPos += yCellOffset;
+        if (getTyp() == NodeTyp.X && xPos < Maze.MAZESIZE-1 && yPos < Maze.MAZESIZE && xPos > -1 && yPos > -1) {
+            ret = xNodes[xPos][yPos];
+        }
+        if (getTyp() == NodeTyp.Y && yPos < Maze.MAZESIZE-1 && xPos < Maze.MAZESIZE && xPos > -1 && yPos > -1) {
+            ret = yNodes[xPos][yPos];
+        }
+        return ret;
+    }
+
+    /**
+     * @return the typ
+     */
+    public NodeTyp getTyp() {
+        return typ;
     }
 }

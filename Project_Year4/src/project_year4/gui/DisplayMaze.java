@@ -22,6 +22,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import project_year4.maze.Direction;
 import project_year4.maze.Maze;
 import project_year4.maze.MazeCell;
 import project_year4.maze.Node;
@@ -37,39 +38,41 @@ public class DisplayMaze extends javax.swing.JPanel {
      * Creates new form DisplayMaze1
      */
     public DisplayMaze(MazeCell[][] cells, Node[][] xNodes, Node[][] yNodes) {
-        int mazesize = Maze.mazeSize;
+        int mazeSize = Maze.MAZESIZE;
         initComponents();
         DisplayGridCell cell = null;
         DisplayNode node = null;
-        for (int y = (mazesize - 1); y >= 0; y--) {
-            for (int x = 0; x < mazesize; x++) {
+        for (int y = (mazeSize - 1); y >= 0; y--) {
+            for (int x = 0; x < mazeSize; x++) {
                 cell = new DisplayGridCell(x + "/" + (y));
                 cells[x][y].addListener(cell);
                 gridPanel.add(cell);
                 double value = x + (y) / 100.0;
-                if (x < (mazesize - 1)) {
+                if (x < (mazeSize - 1)) {
                     node = new DisplayNode("-1", NodeTyp.X);
-                    xNodes[x][y].addListener(node);
+                    Node xNode = Direction.EAST.getNodeForCell(x, y, xNodes, yNodes);
                     xNodePanel.add(node);
-                    xNodes[x][y].setValue(value);
+                    xNode.addListener(node);
+                    xNode.setValue(value);
                 }
-                if (y < (mazesize - 1)) {
+                if (y < (mazeSize - 1)) {
                     node = new DisplayNode("-1", NodeTyp.Y);
-                    yNodes[x][y].addListener(node);
+                    Node yNode = Direction.NORTH.getNodeForCell(x, y, xNodes, yNodes);
+                    yNode.addListener(node);
                     yNodePanel.add(node);
-                    yNodes[x][y].setValue(value);
+                    yNode.setValue(value);
                 }
             }
         }
-        ((GridLayout) gridPanel.getLayout()).setColumns(mazesize);
-        ((GridLayout) gridPanel.getLayout()).setRows(mazesize);
-        Dimension dim = new Dimension(mazesize * DisplayGridCell.CELLSIZE, mazesize * DisplayGridCell.CELLSIZE);
+        ((GridLayout) gridPanel.getLayout()).setColumns(mazeSize);
+        ((GridLayout) gridPanel.getLayout()).setRows(mazeSize);
+        Dimension dim = new Dimension(mazeSize * DisplayGridCell.CELLSIZE, mazeSize * DisplayGridCell.CELLSIZE);
         System.out.println("size: " + dim + " size: " + DisplayGridCell.CELLSIZE);
         mazeLayeredPane.setSize(dim);
         mazeLayeredPane.setPreferredSize(dim);
         gridPanel.setPreferredSize(dim);
-        xNodePanel.setPreferredSize(new Dimension((mazesize - 1) * DisplayGridCell.CELLSIZE, mazesize * DisplayGridCell.CELLSIZE));
-        yNodePanel.setPreferredSize(new Dimension((mazesize) * DisplayGridCell.CELLSIZE, (mazesize - 1) * DisplayGridCell.CELLSIZE));
+        xNodePanel.setPreferredSize(new Dimension((mazeSize - 1) * DisplayGridCell.CELLSIZE, mazeSize * DisplayGridCell.CELLSIZE));
+        yNodePanel.setPreferredSize(new Dimension((mazeSize) * DisplayGridCell.CELLSIZE, (mazeSize - 1) * DisplayGridCell.CELLSIZE));
         System.out.println("gridnode pref. size: " + mazeLayeredPane.getPreferredSize());
         System.out.println("gridnode size: " + mazeLayeredPane.getSize());
         System.out.println("P1: " + gridPanel.getPreferredSize() + " " + gridPanel.getLocation());
