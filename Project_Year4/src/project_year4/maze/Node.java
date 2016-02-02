@@ -27,9 +27,15 @@ import java.util.ArrayList;
 public class Node {
     
     private double value = -1.00;
+    private NodeDirection direction = NodeDirection.WALL;
 
     ArrayList<NodeListener> listeners = new ArrayList<>(10);
 
+    /**
+     *
+     * @param listener
+     * @return
+     */
     public boolean addListener(NodeListener listener) {
         if (!listeners.contains(listener)) {
             return listeners.add(listener);
@@ -37,26 +43,62 @@ public class Node {
         return false;
     }
 
+    /**
+     *
+     * @param listener
+     * @return
+     */
     public boolean removeListeners(NodeListener listener) {
         return listeners.remove(listener);
     }
 
+    /**
+     *
+     */
     protected void changedNode() {
         for (NodeListener listener : listeners) {
             listener.changedNode(this);
         }
     }
     
+    /**
+     *
+     */
     protected void changedValue() {
         for (NodeListener listener : listeners) {
-            listener.updateValue(String.format("%.2f", value));
+            listener.updateValue(String.format("%.2f", getValue()));
         }
     }
     
+    /**
+     *
+     * @param value the value to set
+     */
     public void setValue(double value){
         this.value = value;
         changedValue();
         
+    }
+
+    /**
+     * @return the value
+     */
+    public double getValue() {
+        return value;
+    }
+
+    /**
+     * @return the direction
+     */
+    public NodeDirection getDirection() {
+        return direction;
+    }
+
+    /**
+     * @param direction the direction to set
+     */
+    public void setDirection(NodeDirection direction) {
+        this.direction = direction;
     }
 
 }

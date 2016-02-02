@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 L00131070.
+ * Copyright (C) 2016 L00131070.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,8 +22,8 @@ package project_year4.maze;
  *
  * @author L00131070
  */
-public enum NodeTyp {
-
-    X,
-    Y;
+public enum NodeDirection {
+    FORWARD,
+    REVERSE,
+    WALL;
 }

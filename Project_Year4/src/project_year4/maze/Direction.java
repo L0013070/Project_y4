@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 L00131070.
+ * Copyright (C) 2016 L00131070.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,8 +22,17 @@ package project_year4.maze;
  *
  * @author L00131070
  */
-public enum NodeTyp {
-
-    X,
-    Y;
+public enum Direction {
+    NORTH(0,0),
+    EAST(0,0),
+    SOUTH(0,-1),
+    WEST(-1,0);
+    
+    private int xCellOffset = 0;
+    private int yCellOffset = 0;
+    
+    Direction(int xCellOffset, int yCellOffset) {
+        this.xCellOffset = xCellOffset;
+        this.yCellOffset = yCellOffset;
+    }
 }
