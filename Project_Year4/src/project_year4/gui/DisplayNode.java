@@ -25,6 +25,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseListener;
 import project_year4.maze.Node;
+import project_year4.maze.NodeDirection;
 import project_year4.maze.NodeListener;
 import project_year4.maze.NodeTyp;
 
@@ -35,6 +36,7 @@ import project_year4.maze.NodeTyp;
 public class DisplayNode extends DisplayMazeElement implements NodeListener {
 
     private NodeTyp typ = NodeTyp.X;
+    private NodeDirection direction = NodeDirection.FORWARD;
 
     public DisplayNode(String text, NodeTyp typ) {
         super(text);
@@ -83,6 +85,20 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
      */
     public void setTyp(NodeTyp typ) {
         this.typ = typ;
+    }
+
+    /**
+     * @return the direction
+     */
+    public NodeDirection getDirection() {
+        return direction;
+    }
+
+    /**
+     * @param direction the direction to set
+     */
+    public void setDirection(NodeDirection direction) {
+        this.direction = direction;
     }
 
 }

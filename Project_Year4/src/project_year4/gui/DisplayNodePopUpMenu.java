@@ -24,6 +24,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import project_year4.maze.NodeDirection;
 import project_year4.maze.NodeTyp;
 
 /**
@@ -58,7 +59,7 @@ public class DisplayNodePopUpMenu extends JPopupMenu implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         DisplayNode node = (DisplayNode) getInvoker();
         if (e.getActionCommand().equals("Make Wall")) {
-            ((DisplayNode) getInvoker()).setTyp(NodeTyp.WALL);
+            ((DisplayNode) getInvoker()).setDirection(NodeDirection.WALL);
             ((DisplayNode) getInvoker()).setText("");
             getInvoker().repaint();
         }
