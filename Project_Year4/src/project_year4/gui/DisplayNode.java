@@ -101,4 +101,9 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
         this.direction = direction;
     }
 
+    @Override
+    public void updateDirection(NodeDirection direction) {
+        setDirection(direction);
+    }
+
 }

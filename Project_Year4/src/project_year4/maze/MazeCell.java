@@ -30,10 +30,12 @@ public class MazeCell {
     private ArrayList<MazeCellListener> listeners = new ArrayList<>(10);
     private int xPos = -1;
     private int yPos = -1;
+    private Maze maze = null;
 
-    public MazeCell(int xPos, int yPos) {
+    public MazeCell(Maze maze, int xPos, int yPos) {
         this.xPos = xPos;    
-        this.yPos = yPos;    
+        this.yPos = yPos; 
+        this.maze = maze;
     }
 
     /**
@@ -73,6 +75,16 @@ public class MazeCell {
 
     public boolean removeListeners(MazeCellListener listener) {
         return listeners.remove(listener);
+    }
+    
+    public Node[] getNodes() {
+        return Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
+    }
+    
+    public void setWalls(int walls) {
+        if ((walls & 0x01) > 0) {
+            Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
+        }
     }
 
 

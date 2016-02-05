@@ -6,4 +6,6 @@ public interface NodeListener {
         
         public void updateValue(String value);
 
+    public void updateDirection(NodeDirection direction);
+
 }

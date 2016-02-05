@@ -25,7 +25,7 @@ import java.util.ArrayList;
  * @author L00131070
  */
 public class Node {
-    
+
     private double value = -1.00;
     private NodeDirection direction = NodeDirection.WALL;
 
@@ -60,7 +60,7 @@ public class Node {
             listener.changedNode(this);
         }
     }
-    
+
     /**
      *
      */
@@ -69,15 +69,15 @@ public class Node {
             listener.updateValue(String.format("%.2f", getValue()));
         }
     }
-    
+
     /**
      *
      * @param value the value to set
      */
-    public void setValue(double value){
+    public void setValue(double value) {
         this.value = value;
         changedValue();
-        
+
     }
 
     /**
@@ -99,6 +99,13 @@ public class Node {
      */
     public void setDirection(NodeDirection direction) {
         this.direction = direction;
+        changedDirection();
+    }
+
+    private void changedDirection() {
+        for (NodeListener listener : listeners) {
+            listener.updateDirection(direction);
+        }
     }
 
 }

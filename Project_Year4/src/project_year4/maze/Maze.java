@@ -51,7 +51,7 @@ public class Maze {
     public Maze() {
         for (int x = 0; x < 16; x++) {
             for (int y = 0; y < 16; y++) {
-                mazeCells[x][y] = new MazeCell(x, y);
+                mazeCells[x][y] = new MazeCell(this, x, y);
                 if (x < 15) {
                     xNodes[x][y] = new Node();
                 }
@@ -63,7 +63,7 @@ public class Maze {
     }
 
     public MazeCell getMazeCell(int x, int y) {
-        return mazeCells[x][y];
+        return getMazeCells()[x][y];
     }
 
     public void setAlgorithm(Algorithm algorithm) {
@@ -110,7 +110,7 @@ public class Maze {
     }
 
     public DisplayMaze createDisplayPanel() {
-        DisplayMaze panel = new DisplayMaze(mazeCells, xNodes, yNodes);
+        DisplayMaze panel = new DisplayMaze(getMazeCells(), getxNodes(), getyNodes());
         return panel;
     }
 
@@ -121,9 +121,10 @@ public class Maze {
             int i = 0;
             while (file.available() > 0) {
                 int read = file.read();
-                int x = 15 - ((255-i) % 16);
-                int y = (255-i) / 16;
-                System.out.print("x: "+x+" y: "+y);
+                int x = 15 - ((255 - i) % 16);
+                int y = (255 - i) / 16;
+                System.out.print("x: " + x + " y: " + y);
+                getMazeCell(x, y).setWalls(read);
                 if ((read & 1) > 0) {
                     System.out.print(" top: true ");
                 } else {
@@ -153,5 +154,26 @@ public class Maze {
         } catch (IOException ex) {
             Logger.getLogger(Maze.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * @return the mazeCells
+     */
+    protected MazeCell[][] getMazeCells() {
+        return mazeCells;
+    }
+
+    /**
+     * @return the xNodes
+     */
+    protected Node[][] getxNodes() {
+        return xNodes;
+    }
+
+    /**
+     * @return the yNodes
+     */
+    protected Node[][] getyNodes() {
+        return yNodes;
     }
 }

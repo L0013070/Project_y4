@@ -158,4 +158,119 @@ public class DirectionTest extends TestCase {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test of isValidXNodePos method, of class Direction.
+     */
+    public void testIsValidXNodePos() {
+        System.out.println("isValidXNodePos");
+        int xPos = 0;
+        int yPos = 0;
+        boolean expResult = true;
+        boolean result = Direction.isValidXNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        xPos = -1;
+        yPos = 0;
+        expResult = false;
+        result = Direction.isValidXNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        xPos = 0;
+        yPos = -1;
+        expResult = false;
+        result = Direction.isValidXNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        xPos = 15;
+        yPos = 0;
+        expResult = false;
+        result = Direction.isValidXNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        xPos = 14;
+        yPos = 0;
+        expResult = true;
+        result = Direction.isValidXNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        result = Direction.isValidXNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        xPos = 14;
+        yPos = 15;
+        expResult = true;
+        result = Direction.isValidXNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        result = Direction.isValidXNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        xPos = 14;
+        yPos = 16;
+        expResult = false;
+        result = Direction.isValidXNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of isValidYNodePos method, of class Direction.
+     */
+    public void testIsValidYNodePos() {
+        System.out.println("isValidYNodePos");
+        int xPos = 0;
+        int yPos = 0;
+        boolean expResult = true;
+        boolean result = Direction.isValidYNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        xPos = -1;
+        yPos = 0;
+        expResult = false;
+        result = Direction.isValidYNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        xPos = 0;
+        yPos = -1;
+        expResult = false;
+        result = Direction.isValidYNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        xPos = 15;
+        yPos = 14;
+        expResult = true;
+        result = Direction.isValidYNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        xPos = 0;
+        yPos = 14;
+        expResult = true;
+        result = Direction.isValidYNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        xPos = 15;
+        yPos = 14;
+        expResult = true;
+        result = Direction.isValidYNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+        xPos = 16;
+        yPos = 14;
+        expResult = false;
+        result = Direction.isValidYNodePos(xPos, yPos);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getNodesForCell method, of class Direction.
+     */
+    public void testGetNodesForCell() {
+        System.out.println("getNodesForCell");
+        Node[][] xNodes = new Node[Maze.MAZESIZE - 1][Maze.MAZESIZE];
+        Node[][] yNodes = new Node[Maze.MAZESIZE][Maze.MAZESIZE - 1];
+        for (int x = 0; x < Maze.MAZESIZE; x++) {
+            for (int y = 0; y < Maze.MAZESIZE; y++) {
+                if (x < Maze.MAZESIZE - 1) {
+                    xNodes[x][y] = new Node();
+                }
+                if (y < Maze.MAZESIZE - 1) {
+                    yNodes[x][y] = new Node();
+                }
+            }
+        }
+        int xPos = 0;
+        int yPos = 0;
+        Node[] expResult = {yNodes[xPos][yPos], xNodes[xPos][yPos], null, null};
+        Node[] result = Direction.getNodesForCell(xPos, yPos, xNodes, yNodes);
+        for (int i = 0; i < expResult.length; i++) {
+            System.out.println("N: "+expResult[i]+" N: "+result[i]);
+            assertEquals(expResult[i], result[i]);
+        }
+    }
+
 }

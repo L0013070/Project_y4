@@ -18,6 +18,7 @@
  */
 package project_year4.maze;
 
+
 /**
  *
  * @author L00131070
@@ -42,13 +43,29 @@ public enum Direction {
         Node ret = null;
         xPos += xCellOffset;
         yPos += yCellOffset;
-        if (getTyp() == NodeTyp.X && xPos < Maze.MAZESIZE-1 && yPos < Maze.MAZESIZE && xPos > -1 && yPos > -1) {
+        if (getTyp() == NodeTyp.X && isValidXNodePos(xPos, yPos)) {
             ret = xNodes[xPos][yPos];
         }
-        if (getTyp() == NodeTyp.Y && yPos < Maze.MAZESIZE-1 && xPos < Maze.MAZESIZE && xPos > -1 && yPos > -1) {
+        if (getTyp() == NodeTyp.Y && isValidYNodePos(xPos, yPos)) {
             ret = yNodes[xPos][yPos];
         }
         return ret;
+    }
+    
+    public static Node[] getNodesForCell(int xPos, int yPos, Node[][] xNodes, Node[][] yNodes) {
+        Node[] ret = new Node[4]; 
+        for (int i = 0; i < Direction.values().length; i++) {
+            ret[i] = Direction.values()[i].getNodeForCell(xPos, yPos, xNodes, yNodes);
+        }
+        return ret;
+    }
+    
+    public static boolean isValidXNodePos(int xPos, int yPos) {
+        return xPos < Maze.MAZESIZE-1 && yPos < Maze.MAZESIZE && xPos > -1 && yPos > -1;
+    }
+
+    public static boolean isValidYNodePos(int xPos, int yPos) {
+        return yPos < Maze.MAZESIZE-1 && xPos < Maze.MAZESIZE && xPos > -1 && yPos > -1;
     }
 
     /**
