@@ -33,8 +33,8 @@ public class MazeCell {
     private Maze maze = null;
 
     public MazeCell(Maze maze, int xPos, int yPos) {
-        this.xPos = xPos;    
-        this.yPos = yPos; 
+        this.xPos = xPos;
+        this.yPos = yPos;
         this.maze = maze;
     }
 
@@ -65,7 +65,7 @@ public class MazeCell {
     public void setyPos(int yPos) {
         this.yPos = yPos;
     }
-    
+
     public boolean addListener(MazeCellListener listener) {
         if (!listeners.contains(listener)) {
             return listeners.add(listener);
@@ -76,28 +76,33 @@ public class MazeCell {
     public boolean removeListeners(MazeCellListener listener) {
         return listeners.remove(listener);
     }
-    
+
     public Node[] getNodes() {
         return Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
     }
-    
+
     public void setWalls(int walls) {
-        if ((walls & 0x01) > 0) {
-            Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
-        }
-        if ((walls & 0x02) > 0) {
-            Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
-        }
-        if ((walls & 0x04) > 0) {
-            Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
-        }
-        if ((walls & 0x08) > 0) {
-            Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
+        Node[] nodes = Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
+        if (walls > 0) {
+            if ((walls & 0x01) > 0 && nodes[Direction.NORTH.ordinal()] != null) {
+                nodes[Direction.NORTH.ordinal()].setDirection(NodeDirection.WALL);
+            }
+            if ((walls & 0x02) > 0 && nodes[Direction.EAST.ordinal()] != null) {
+                nodes[Direction.EAST.ordinal()].setDirection(NodeDirection.WALL);
+            }
+            if ((walls & 0x04) > 0 && nodes[Direction.SOUTH.ordinal()] != null) {
+                nodes[Direction.SOUTH.ordinal()].setDirection(NodeDirection.WALL);
+            }
+            if ((walls & 0x08) > 0 && nodes[Direction.WEST.ordinal()] != null) {
+                nodes[Direction.WEST.ordinal()].setDirection(NodeDirection.WALL);
+            }
+        } else {
+            for (Node node : nodes) {
+                if (node != null) {
+                    node.setDirection(NodeDirection.FORWARD);
+                }
+            }
         }
     }
-
-
-    
-
 
 }

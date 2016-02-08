@@ -194,9 +194,9 @@ public class MazeTest extends TestCase {
      */
     public void testReadMazFile() {
         System.out.println("readMazFile");
-        String filename = "X:\\Project\\Project_y4\\Project_Year4\\mazefiles\\Mazes\\00japan.bin";
+        File file = new File("X:\\Project\\Project_y4\\Project_Year4\\mazefiles\\Mazes\\00japan.bin");
         Maze instance = new Maze();
-        instance.readMazFile(filename);
+        instance.readMazFile(file);
         fail("The test case is a prototype.");
     }
 

@@ -27,9 +27,14 @@ import java.util.ArrayList;
 public class Node {
 
     private double value = -1.00;
-    private NodeDirection direction = NodeDirection.WALL;
+    private NodeDirection direction = NodeDirection.NONE;
+    private NodeTyp typ = NodeTyp.X;
 
     ArrayList<NodeListener> listeners = new ArrayList<>(10);
+    
+    public Node(NodeTyp typ) {
+        this.typ = typ;
+    }
 
     /**
      *
@@ -106,6 +111,20 @@ public class Node {
         for (NodeListener listener : listeners) {
             listener.updateDirection(direction);
         }
+    }
+
+    /**
+     * @return the typ
+     */
+    public NodeTyp getTyp() {
+        return typ;
+    }
+
+    /**
+     * @param typ the typ to set
+     */
+    public void setTyp(NodeTyp typ) {
+        this.typ = typ;
     }
 
 }

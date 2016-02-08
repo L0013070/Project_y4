@@ -49,15 +49,23 @@ public class Maze {
     private Node[][] yNodes = new Node[MAZESIZE][MAZESIZE - 1];
 
     public Maze() {
-        for (int x = 0; x < 16; x++) {
-            for (int y = 0; y < 16; y++) {
+        for (int x = 0; x < Maze.MAZESIZE; x++) {
+            for (int y = 0; y < Maze.MAZESIZE; y++) {
                 mazeCells[x][y] = new MazeCell(this, x, y);
                 if (x < 15) {
-                    xNodes[x][y] = new Node();
+                    xNodes[x][y] = new Node(NodeTyp.X);
                 }
                 if (y < 15) {
-                    yNodes[x][y] = new Node();
+                    yNodes[x][y] = new Node(NodeTyp.Y);
                 }
+            }
+        }
+    }
+    
+    public void reset() {
+        for (int x = 0; x < Maze.MAZESIZE; x++) {
+            for (int y = 0; y < Maze.MAZESIZE; y++) {
+                mazeCells[x][y].setWalls(0);
             }
         }
     }
@@ -114,38 +122,16 @@ public class Maze {
         return panel;
     }
 
-    public void readMazFile(String filename) {
-        FileInputStream file;
+    public void readMazFile(File file) {
+        FileInputStream fileIn;
         try {
-            file = new FileInputStream(filename);
+            fileIn = new FileInputStream(file);
             int i = 0;
-            while (file.available() > 0) {
-                int read = file.read();
+            while (fileIn.available() > 0) {
+                int read = fileIn.read();
                 int x = 15 - ((255 - i) % 16);
                 int y = (255 - i) / 16;
-                System.out.print("x: " + x + " y: " + y);
                 getMazeCell(x, y).setWalls(read);
-                if ((read & 1) > 0) {
-                    System.out.print(" top: true ");
-                } else {
-                    System.out.print(" top: false ");
-                }
-                if ((read & 2) > 0) {
-                    System.out.print(" right: true ");
-                } else {
-                    System.out.print(" right: false ");
-                }
-                if ((read & 4) > 0) {
-                    System.out.print(" down: true ");
-                } else {
-                    System.out.print(" down: false ");
-                }
-                if ((read & 8) > 0) {
-                    System.out.print(" left: true ");
-                } else {
-                    System.out.print(" left: false ");
-                }
-                System.out.println();
                 i++;
             }
 

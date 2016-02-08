@@ -45,7 +45,7 @@ public class NodeDirectionTest extends TestCase {
      */
     public void testValues() {
         System.out.println("values");
-        NodeDirection[] expResult = {NodeDirection.FORWARD, NodeDirection.REVERSE, NodeDirection.WALL};
+        NodeDirection[] expResult = {NodeDirection.NONE, NodeDirection.FORWARD, NodeDirection.REVERSE, NodeDirection.WALL};
         NodeDirection[] result = NodeDirection.values();
         for (int i = 0; i < result.length; i++) {
             assertEquals(expResult[i], result[i]);
@@ -67,6 +67,10 @@ public class NodeDirectionTest extends TestCase {
         assertEquals(expResult, result);
         name = "WALL";
         expResult = NodeDirection.WALL;
+        result = NodeDirection.valueOf(name);
+        assertEquals(expResult, result);
+        name = "NONE";
+        expResult = NodeDirection.NONE;
         result = NodeDirection.valueOf(name);
         assertEquals(expResult, result);
     }

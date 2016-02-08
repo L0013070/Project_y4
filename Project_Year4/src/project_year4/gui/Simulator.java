@@ -18,6 +18,9 @@
  */
 package project_year4.gui;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import project_year4.maze.Maze;
 
 /**
@@ -26,6 +29,8 @@ import project_year4.maze.Maze;
  */
 public class Simulator extends javax.swing.JFrame {
     
+    static final public String TITLE = "Year 4 Algorithm Simulator";
+
     private Maze maze = new Maze();
     private DisplayMaze panelDisplayMaze = null;
 
@@ -37,7 +42,7 @@ public class Simulator extends javax.swing.JFrame {
         panelDisplayMaze = maze.createDisplayPanel();
         getContentPane().add(panelDisplayMaze, java.awt.BorderLayout.CENTER);
         pack();
-        
+
     }
 
     /**
@@ -66,6 +71,7 @@ public class Simulator extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         menuLoad = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuExit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -164,7 +170,9 @@ public class Simulator extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.PAGE_END);
@@ -180,6 +188,15 @@ public class Simulator extends javax.swing.JFrame {
             }
         });
         fileMenu.add(menuLoad);
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem1.setText("Reset");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem1);
 
         menuExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         menuExit.setText("Exit");
@@ -198,7 +215,18 @@ public class Simulator extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoadActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser("./mazefiles/Mazes/");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Maze Files", "bin");
+        fc.setFileFilter(filter);
+        int returnVal = fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            maze.reset();
+            File file = fc.getSelectedFile();
+            maze.readMazFile(file);
+            this.setTitle(TITLE+" ("+file.getName()+")");
+            logOutput.append("reading file: "+file.getAbsolutePath()+"\n");
+        }
     }//GEN-LAST:event_menuLoadActionPerformed
 
     private void menuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExitActionPerformed
@@ -224,6 +252,12 @@ public class Simulator extends javax.swing.JFrame {
     private void cbMovementModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMovementModeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbMovementModeActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        maze.reset();
+        setTitle(TITLE);
+            logOutput.append("resetting map\n");
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,6 +303,7 @@ public class Simulator extends javax.swing.JFrame {
     private javax.swing.JComboBox cbSimulationType;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;

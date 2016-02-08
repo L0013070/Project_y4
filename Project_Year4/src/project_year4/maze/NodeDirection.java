@@ -23,6 +23,7 @@ package project_year4.maze;
  * @author L00131070
  */
 public enum NodeDirection {
+    NONE,
     FORWARD,
     REVERSE,
     WALL;

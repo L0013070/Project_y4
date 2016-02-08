@@ -61,13 +61,19 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         Dimension size = getSize();
-//        System.out.print("size: "+size);
-//        System.out.println(" typ: "+typ);
         if (getTyp() == NodeTyp.X) {
-            g2d.setColor(Color.GREEN);
+            if (getDirection() == NodeDirection.WALL) {
+                g2d.setColor(Color.BLACK);
+            } else {
+                g2d.setColor(Color.GREEN);
+            }
             g2d.fillRect(size.width / 2 - 1, 1, 2, size.height - 2);
         } else if (getTyp() == NodeTyp.Y) {
-            g2d.setColor(Color.YELLOW);
+            if (getDirection() == NodeDirection.WALL) {
+                g2d.setColor(Color.BLACK);
+            } else {
+                g2d.setColor(Color.YELLOW);
+            }
             g2d.fillRect(1, size.height / 2 - 1, size.width - 2, 2);
         }
         super.paint(g);
@@ -98,7 +104,15 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
      * @param direction the direction to set
      */
     public void setDirection(NodeDirection direction) {
-        this.direction = direction;
+        if (this.direction != direction) {
+            this.direction = direction;
+            if (direction == NodeDirection.WALL) {
+                setText("");
+            } else { 
+                setText("-1.00");
+            }
+            repaint();
+        }
     }
 
     @Override

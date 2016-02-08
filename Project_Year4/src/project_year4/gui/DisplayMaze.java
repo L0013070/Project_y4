@@ -47,37 +47,34 @@ public class DisplayMaze extends javax.swing.JPanel {
                 cell = new DisplayGridCell(x + "/" + (y));
                 cells[x][y].addListener(cell);
                 gridPanel.add(cell);
-                double value = x + (y) / 100.0;
                 if (x < (mazeSize - 1)) {
-                    node = new DisplayNode("-1", NodeTyp.X);
+                    node = new DisplayNode("-1.00", NodeTyp.X);
                     Node xNode = Direction.EAST.getNodeForCell(x, y, xNodes, yNodes);
                     xNodePanel.add(node);
                     xNode.addListener(node);
-                    xNode.setValue(value);
                 }
                 if (y < (mazeSize - 1)) {
-                    node = new DisplayNode("-1", NodeTyp.Y);
+                    node = new DisplayNode("-1.00", NodeTyp.Y);
                     Node yNode = Direction.NORTH.getNodeForCell(x, y, xNodes, yNodes);
                     yNode.addListener(node);
                     yNodePanel.add(node);
-                    yNode.setValue(value);
                 }
             }
         }
         ((GridLayout) gridPanel.getLayout()).setColumns(mazeSize);
         ((GridLayout) gridPanel.getLayout()).setRows(mazeSize);
         Dimension dim = new Dimension(mazeSize * DisplayGridCell.CELLSIZE, mazeSize * DisplayGridCell.CELLSIZE);
-        System.out.println("size: " + dim + " size: " + DisplayGridCell.CELLSIZE);
+//        System.out.println("size: " + dim + " size: " + DisplayGridCell.CELLSIZE);
         mazeLayeredPane.setSize(dim);
         mazeLayeredPane.setPreferredSize(dim);
         gridPanel.setPreferredSize(dim);
         xNodePanel.setPreferredSize(new Dimension((mazeSize - 1) * DisplayGridCell.CELLSIZE, mazeSize * DisplayGridCell.CELLSIZE));
         yNodePanel.setPreferredSize(new Dimension((mazeSize) * DisplayGridCell.CELLSIZE, (mazeSize - 1) * DisplayGridCell.CELLSIZE));
-        System.out.println("gridnode pref. size: " + mazeLayeredPane.getPreferredSize());
-        System.out.println("gridnode size: " + mazeLayeredPane.getSize());
-        System.out.println("P1: " + gridPanel.getPreferredSize() + " " + gridPanel.getLocation());
-        System.out.println("P2: " + xNodePanel.getPreferredSize() + " " + xNodePanel.getLocation());
-        System.out.println("P3: " + yNodePanel.getPreferredSize() + " " + yNodePanel.getLocation());
+//        System.out.println("gridnode pref. size: " + mazeLayeredPane.getPreferredSize());
+//        System.out.println("gridnode size: " + mazeLayeredPane.getSize());
+//        System.out.println("P1: " + gridPanel.getPreferredSize() + " " + gridPanel.getLocation());
+//        System.out.println("P2: " + xNodePanel.getPreferredSize() + " " + xNodePanel.getLocation());
+//        System.out.println("P3: " + yNodePanel.getPreferredSize() + " " + yNodePanel.getLocation());
     }
 
     /**
