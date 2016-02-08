@@ -85,6 +85,15 @@ public class MazeCell {
         if ((walls & 0x01) > 0) {
             Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
         }
+        if ((walls & 0x02) > 0) {
+            Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
+        }
+        if ((walls & 0x04) > 0) {
+            Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
+        }
+        if ((walls & 0x08) > 0) {
+            Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
+        }
     }
 
 

@@ -47,7 +47,8 @@ public class MazeCellTest extends TestCase {
      */
     public void testGetxPos() {
         System.out.println("getxPos");
-        MazeCell instance = new MazeCell(10, 20);
+        Maze maze = new Maze();
+        MazeCell instance = new MazeCell(maze, 10, 20);
         int expResult = 10;
         int result = instance.getxPos();
         assertEquals(expResult, result);
@@ -58,8 +59,9 @@ public class MazeCellTest extends TestCase {
      */
     public void testSetxPos() {
         System.out.println("setxPos");
+        Maze maze = new Maze();
         int xPos = 10;
-        MazeCell instance = new MazeCell(0, 20);
+        MazeCell instance = new MazeCell(maze, 0, 20);
         instance.setxPos(xPos);
         int result = instance.getxPos();
         assertEquals(xPos, result);
@@ -71,7 +73,8 @@ public class MazeCellTest extends TestCase {
     public void testGetyPos() {
         System.out.println("getyPos");
         int yPos = 20;
-        MazeCell instance = new MazeCell(10,yPos);
+        Maze maze = new Maze();
+        MazeCell instance = new MazeCell(maze, 10,yPos);
         int result = instance.getyPos();
         assertEquals(yPos, result);
     }
@@ -82,7 +85,8 @@ public class MazeCellTest extends TestCase {
     public void testSetyPos() {
         System.out.println("setyPos");
         int yPos = 20;
-        MazeCell instance = new MazeCell(10,0);
+        Maze maze = new Maze();
+        MazeCell instance = new MazeCell(maze,10,0);
         instance.setxPos(yPos);
         int result = instance.getxPos();
         assertEquals(yPos, result);

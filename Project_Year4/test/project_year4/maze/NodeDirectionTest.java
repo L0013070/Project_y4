@@ -25,19 +25,50 @@ import junit.framework.TestCase;
  * @author L00131070
  */
 public class NodeDirectionTest extends TestCase {
-    
+
     public NodeDirectionTest(String testName) {
         super(testName);
     }
-    
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
     }
-    
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
     }
-    
+
+    /**
+     * Test of values method, of class NodeDirection.
+     */
+    public void testValues() {
+        System.out.println("values");
+        NodeDirection[] expResult = {NodeDirection.FORWARD, NodeDirection.REVERSE, NodeDirection.WALL};
+        NodeDirection[] result = NodeDirection.values();
+        for (int i = 0; i < result.length; i++) {
+            assertEquals(expResult[i], result[i]);
+        }
+    }
+
+    /**
+     * Test of valueOf method, of class NodeDirection.
+     */
+    public void testValueOf() {
+        System.out.println("valueOf");
+        String name = "FORWARD";
+        NodeDirection expResult = NodeDirection.FORWARD;
+        NodeDirection result = NodeDirection.valueOf(name);
+        assertEquals(expResult, result);
+        name = "REVERSE";
+        expResult = NodeDirection.REVERSE;
+        result = NodeDirection.valueOf(name);
+        assertEquals(expResult, result);
+        name = "WALL";
+        expResult = NodeDirection.WALL;
+        result = NodeDirection.valueOf(name);
+        assertEquals(expResult, result);
+    }
+
 }
