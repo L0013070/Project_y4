@@ -68,15 +68,16 @@ public class DirectionTest extends TestCase {
      */
     public void testGetNodeForCell() {
         System.out.println("getNode");
+        Maze maze = new Maze();
         Node[][] xNodes = new Node[Maze.MAZESIZE - 1][Maze.MAZESIZE];
         Node[][] yNodes = new Node[Maze.MAZESIZE][Maze.MAZESIZE - 1];
         for (int x = 0; x < Maze.MAZESIZE; x++) {
             for (int y = 0; y < Maze.MAZESIZE; y++) {
                 if (x < Maze.MAZESIZE - 1) {
-                    xNodes[x][y] = new Node();
+                    xNodes[x][y] = new Node(NodeTyp.X, x, y);
                 }
                 if (y < Maze.MAZESIZE - 1) {
-                    yNodes[x][y] = new Node();
+                    yNodes[x][y] = new Node(NodeTyp.Y, x, y);
                 }
             }
         }
@@ -256,10 +257,10 @@ public class DirectionTest extends TestCase {
         for (int x = 0; x < Maze.MAZESIZE; x++) {
             for (int y = 0; y < Maze.MAZESIZE; y++) {
                 if (x < Maze.MAZESIZE - 1) {
-                    xNodes[x][y] = new Node();
+                    xNodes[x][y] = new Node(NodeTyp.X, x, y);
                 }
                 if (y < Maze.MAZESIZE - 1) {
-                    yNodes[x][y] = new Node();
+                    yNodes[x][y] = new Node(NodeTyp.Y, x, y);
                 }
             }
         }
@@ -268,7 +269,6 @@ public class DirectionTest extends TestCase {
         Node[] expResult = {yNodes[xPos][yPos], xNodes[xPos][yPos], null, null};
         Node[] result = Direction.getNodesForCell(xPos, yPos, xNodes, yNodes);
         for (int i = 0; i < expResult.length; i++) {
-            System.out.println("N: "+expResult[i]+" N: "+result[i]);
             assertEquals(expResult[i], result[i]);
         }
     }

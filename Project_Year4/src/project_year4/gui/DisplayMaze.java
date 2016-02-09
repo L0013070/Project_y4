@@ -61,6 +61,17 @@ public class DisplayMaze extends javax.swing.JPanel {
                 }
             }
         }
+        for (int y = (mazeSize - 1); y >= 0; y--) {
+            for (int x = 0; x < mazeSize; x++) {
+                if (x < (mazeSize - 1)) {
+                    xNodes[x][y].initChildren(xNodes, yNodes);
+                }
+                if (y < (mazeSize - 1)) {
+                    yNodes[x][y].initChildren(xNodes, yNodes);
+                }
+            }
+        }
+
         ((GridLayout) gridPanel.getLayout()).setColumns(mazeSize);
         ((GridLayout) gridPanel.getLayout()).setRows(mazeSize);
         Dimension dim = new Dimension(mazeSize * DisplayGridCell.CELLSIZE, mazeSize * DisplayGridCell.CELLSIZE);

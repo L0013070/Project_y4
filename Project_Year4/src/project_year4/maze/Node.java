@@ -29,11 +29,30 @@ public class Node {
     private double value = -1.00;
     private NodeDirection direction = NodeDirection.NONE;
     private NodeTyp typ = NodeTyp.X;
+    private int xPosition = 0;
+    private int yPosition = 0;
+    private Node parent = null;
+    private Node[] forwardChildren = {null,null,null};
+    private Node[] reverseChildren = {null,null,null};
 
     ArrayList<NodeListener> listeners = new ArrayList<>(10);
     
-    public Node(NodeTyp typ) {
+    public Node(NodeTyp typ, int xPosition, int yPosition) {
         this.typ = typ;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+        
+    }
+    
+    public void initChildren(Node[][] xNodes, Node[][] yNodes) {
+        for (int i = 0; i < 3; i++)
+        if (typ == NodeTyp.X) {
+            
+        } else if (typ == NodeTyp.Y) {
+            
+        } else {
+            forwardChildren[i] = null;
+        }
     }
 
     /**

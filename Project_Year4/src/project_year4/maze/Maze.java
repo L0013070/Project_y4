@@ -53,10 +53,10 @@ public class Maze {
             for (int y = 0; y < Maze.MAZESIZE; y++) {
                 mazeCells[x][y] = new MazeCell(this, x, y);
                 if (x < 15) {
-                    xNodes[x][y] = new Node(NodeTyp.X);
+                    xNodes[x][y] = new Node(NodeTyp.X, x, y);
                 }
                 if (y < 15) {
-                    yNodes[x][y] = new Node(NodeTyp.Y);
+                    yNodes[x][y] = new Node(NodeTyp.Y, x, y);
                 }
             }
         }
@@ -134,12 +134,22 @@ public class Maze {
                 getMazeCell(x, y).setWalls(read);
                 i++;
             }
-
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Maze.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Maze.class.getName()).log(Level.SEVERE, null, ex);
         }
+        for (int y = (MAZESIZE - 1); y >= 0; y--) {
+            for (int x = 0; x < MAZESIZE; x++) {
+                if (x < (MAZESIZE - 1)) {
+                    xNodes[x][y].initChildren(xNodes, yNodes);
+                }
+                if (y < (MAZESIZE - 1)) {
+                    yNodes[x][y].initChildren(xNodes, yNodes);
+                }
+            }
+        }
+        
     }
 
     /**

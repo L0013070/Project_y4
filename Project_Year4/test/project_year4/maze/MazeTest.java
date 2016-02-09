@@ -115,8 +115,6 @@ public class MazeTest extends TestCase {
         boolean expResult = false;
         boolean result = instance.load(file);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -197,7 +195,10 @@ public class MazeTest extends TestCase {
         File file = new File("X:\\Project\\Project_y4\\Project_Year4\\mazefiles\\Mazes\\00japan.bin");
         Maze instance = new Maze();
         instance.readMazFile(file);
-        fail("The test case is a prototype.");
+        Node result = instance.getxNodes()[0][0];
+        assertEquals(result.getDirection(), NodeDirection.WALL);
+        result = instance.getyNodes()[0][0];
+        assertEquals(result.getDirection(), NodeDirection.NONE);
     }
 
 
