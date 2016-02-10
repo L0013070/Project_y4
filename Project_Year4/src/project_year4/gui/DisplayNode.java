@@ -37,6 +37,7 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
 
     private NodeTyp typ = NodeTyp.X;
     private NodeDirection direction = NodeDirection.FORWARD;
+    private boolean wall = false;
 
     public DisplayNode(String text, NodeTyp typ) {
         super(text);
@@ -62,14 +63,14 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
         Graphics2D g2d = (Graphics2D) g;
         Dimension size = getSize();
         if (getTyp() == NodeTyp.X) {
-            if (getDirection() == NodeDirection.WALL) {
+            if (isWall()) {
                 g2d.setColor(Color.BLACK);
             } else {
                 g2d.setColor(Color.GREEN);
             }
             g2d.fillRect(size.width / 2 - 1, 1, 2, size.height - 2);
         } else if (getTyp() == NodeTyp.Y) {
-            if (getDirection() == NodeDirection.WALL) {
+            if (isWall()) {
                 g2d.setColor(Color.BLACK);
             } else {
                 g2d.setColor(Color.YELLOW);
@@ -106,11 +107,7 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
     public void setDirection(NodeDirection direction) {
         if (this.direction != direction) {
             this.direction = direction;
-            if (direction == NodeDirection.WALL) {
-                setText("");
-            } else { 
-                setText("-1.00");
-            }
+            setText("-1.00");
             repaint();
         }
     }
@@ -118,6 +115,26 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
     @Override
     public void updateDirection(NodeDirection direction) {
         setDirection(direction);
+    }
+
+    /**
+     * @return the wall
+     */
+    public boolean isWall() {
+        return wall;
+    }
+
+    /**
+     * @param wall the wall to set
+     */
+    public void setWall(boolean wall) {
+        this.wall = wall;
+        repaint();
+    }
+
+    @Override
+    public void updateWall(boolean wall) {
+        setWall(wall);
     }
 
 }

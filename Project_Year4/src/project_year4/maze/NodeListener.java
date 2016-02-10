@@ -8,4 +8,6 @@ public interface NodeListener {
 
     public void updateDirection(NodeDirection direction);
 
+    public void updateWall(boolean wall);
+
 }

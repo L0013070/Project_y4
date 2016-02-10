@@ -19,7 +19,6 @@
 package project_year4.maze;
 
 import java.util.ArrayList;
-import project_year4.gui.DisplayMaze;
 
 /**
  *
@@ -85,16 +84,16 @@ public class MazeCell {
         Node[] nodes = Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
         if (walls > 0) {
             if ((walls & 0x01) > 0 && nodes[Direction.NORTH.ordinal()] != null) {
-                nodes[Direction.NORTH.ordinal()].setDirection(NodeDirection.WALL);
+                nodes[Direction.NORTH.ordinal()].setWall(true);
             }
             if ((walls & 0x02) > 0 && nodes[Direction.EAST.ordinal()] != null) {
-                nodes[Direction.EAST.ordinal()].setDirection(NodeDirection.WALL);
+                nodes[Direction.EAST.ordinal()].setWall(true);
             }
             if ((walls & 0x04) > 0 && nodes[Direction.SOUTH.ordinal()] != null) {
-                nodes[Direction.SOUTH.ordinal()].setDirection(NodeDirection.WALL);
+                nodes[Direction.SOUTH.ordinal()].setWall(true);
             }
             if ((walls & 0x08) > 0 && nodes[Direction.WEST.ordinal()] != null) {
-                nodes[Direction.WEST.ordinal()].setDirection(NodeDirection.WALL);
+                nodes[Direction.WEST.ordinal()].setWall(true);
             }
         } else {
             for (Node node : nodes) {

@@ -23,8 +23,19 @@ package project_year4.maze;
  * @author L00131070
  */
 public enum NodeDirection {
-    NONE,
-    FORWARD,
-    REVERSE,
-    WALL;
+    FORWARD(NodeTyp.Y, 1, 0, NodeTyp.X , 1, 0, NodeTyp.Y, 1, -1, NodeTyp.X, -1, 1, NodeTyp.Y , 0, 1, NodeTyp.X, 0, 1),
+    REVERSE(NodeTyp.Y, 0, 0, NodeTyp.X , -1, 0, NodeTyp.Y, 0, -1, NodeTyp.X, 0, 0, NodeTyp.Y , 0, -1, NodeTyp.X, 0, -1);
+    
+    private NodeDirection(NodeTyp typForward1, int xForwardOffset1, int yForwardOffset1,
+            NodeTyp typForward2, int xForwardOffset2, int yForwardOffset2,
+            NodeTyp typForward3, int xForwardOffset3, int yForwardOffset3,
+            NodeTyp typReverse1, int xReverseOffset1, int yReverseOffset1,
+            NodeTyp typReverse2, int xReverseOffset2, int yReverseOffset2,
+            NodeTyp typReverse3, int xReverseOffset3, int yReverseOffset3) {
+        
+    }
+    
+    public void initChilden(Node node, Node[][] xNodes, Node[][] yNodes) {
+        
+    }
 }

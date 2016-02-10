@@ -26,4 +26,5 @@ public enum NodeTyp {
 
     X,
     Y;
+
 }

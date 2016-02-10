@@ -60,12 +60,27 @@ public class Maze {
                 }
             }
         }
+        for (int x = 0; x < Maze.MAZESIZE; x++) {
+            for (int y = 0; y < Maze.MAZESIZE; y++) {
+                if (x < 15) {
+                    xNodes[x][y].initChildren(xNodes, yNodes);
+                }
+                if (y < 15) {
+                    yNodes[x][y].initChildren(xNodes, yNodes);
+                }
+            }
+        }
     }
     
     public void reset() {
         for (int x = 0; x < Maze.MAZESIZE; x++) {
             for (int y = 0; y < Maze.MAZESIZE; y++) {
                 mazeCells[x][y].setWalls(0);
+                for (Node node : mazeCells[x][y].getNodes()) {
+                    if (null != node) {
+                        node.setWall(false);
+                    }
+                }
             }
         }
     }

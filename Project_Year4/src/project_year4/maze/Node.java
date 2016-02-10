@@ -27,13 +27,14 @@ import java.util.ArrayList;
 public class Node {
 
     private double value = -1.00;
-    private NodeDirection direction = NodeDirection.NONE;
+    private NodeDirection direction = NodeDirection.FORWARD;
     private NodeTyp typ = NodeTyp.X;
+    private boolean wall = false;
     private int xPosition = 0;
     private int yPosition = 0;
     private Node parent = null;
-    private Node[] forwardChildren = {null,null,null};
-    private Node[] reverseChildren = {null,null,null};
+    private Node[] forwardChildren = null;
+    private Node[] reverseChildren = null;
 
     ArrayList<NodeListener> listeners = new ArrayList<>(10);
     
@@ -45,15 +46,8 @@ public class Node {
     }
     
     public void initChildren(Node[][] xNodes, Node[][] yNodes) {
-        for (int i = 0; i < 3; i++)
-        if (typ == NodeTyp.X) {
-            
-        } else if (typ == NodeTyp.Y) {
-            
-        } else {
-            forwardChildren[i] = null;
-        }
-    }
+        typ.initChildren(xNodes, yNodes );
+   }
 
     /**
      *
@@ -145,5 +139,27 @@ public class Node {
     public void setTyp(NodeTyp typ) {
         this.typ = typ;
     }
+
+    /**
+     * @return the wall
+     */
+    public boolean isWall() {
+        return wall;
+    }
+
+    /**
+     * @param wall the wall to set
+     */
+    public void setWall(boolean wall) {
+        this.wall = wall;
+        changedWall();
+    }
+
+    private void changedWall() {
+        for (NodeListener listener : listeners) {
+            listener.updateWall(wall);
+        }
+    }
+
 
 }

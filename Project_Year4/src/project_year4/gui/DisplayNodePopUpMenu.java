@@ -59,7 +59,7 @@ public class DisplayNodePopUpMenu extends JPopupMenu implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         DisplayNode node = (DisplayNode) getInvoker();
         if (e.getActionCommand().equals("Make Wall")) {
-            ((DisplayNode) getInvoker()).setDirection(NodeDirection.WALL);
+            ((DisplayNode) getInvoker()).setWall(true);
             ((DisplayNode) getInvoker()).setText("");
             getInvoker().repaint();
         }
