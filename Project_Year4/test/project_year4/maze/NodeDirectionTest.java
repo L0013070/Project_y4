@@ -45,7 +45,7 @@ public class NodeDirectionTest extends TestCase {
      */
     public void testValues() {
         System.out.println("values");
-        NodeDirection[] expResult = {NodeDirection.NONE, NodeDirection.FORWARD, NodeDirection.REVERSE, NodeDirection.WALL};
+        NodeDirection[] expResult = {NodeDirection.FORWARD, NodeDirection.REVERSE};
         NodeDirection[] result = NodeDirection.values();
         for (int i = 0; i < result.length; i++) {
             assertEquals(expResult[i], result[i]);
@@ -65,14 +65,27 @@ public class NodeDirectionTest extends TestCase {
         expResult = NodeDirection.REVERSE;
         result = NodeDirection.valueOf(name);
         assertEquals(expResult, result);
-        name = "WALL";
-        expResult = NodeDirection.WALL;
-        result = NodeDirection.valueOf(name);
-        assertEquals(expResult, result);
-        name = "NONE";
-        expResult = NodeDirection.NONE;
-        result = NodeDirection.valueOf(name);
-        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of initChilden method, of class NodeDirection.
+     */
+    public void testInitChilden() {
+        System.out.println("initChilden");
+        Node node = null;
+        Node[][] xNodes = null;
+        Node[][] yNodes = null;
+        NodeDirection instance = null;
+        instance.initChilden(node, xNodes, yNodes);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    public void testToString() {
+        System.out.println("toString");
+        System.out.println(NodeDirection.FORWARD.toString());
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
 }

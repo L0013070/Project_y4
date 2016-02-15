@@ -46,7 +46,7 @@ public class Node {
     }
     
     public void initChildren(Node[][] xNodes, Node[][] yNodes) {
-        typ.initChildren(xNodes, yNodes );
+//        typ.initChildren(xNodes, yNodes );
    }
 
     /**
