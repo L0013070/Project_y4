@@ -45,10 +45,6 @@ public class Node {
         
     }
     
-    public void initChildren(Node[][] xNodes, Node[][] yNodes) {
-//        typ.initChildren(xNodes, yNodes );
-   }
-
     /**
      *
      * @param listener
@@ -159,6 +155,48 @@ public class Node {
         for (NodeListener listener : listeners) {
             listener.updateWall(wall);
         }
+    }
+
+    /**
+     * @return the forwardChildren
+     */
+    public Node[] getForwardChildren() {
+        return forwardChildren;
+    }
+
+    /**
+     * @param forwardChildren the forwardChildren to set
+     */
+    public void setForwardChildren(Node[] forwardChildren) {
+        this.forwardChildren = forwardChildren;
+    }
+
+    /**
+     * @return the reverseChildren
+     */
+    public Node[] getReverseChildren() {
+        return reverseChildren;
+    }
+
+    /**
+     * @param reverseChildren the reverseChildren to set
+     */
+    public void setReverseChildren(Node[] reverseChildren) {
+        this.reverseChildren = reverseChildren;
+    }
+
+    /**
+     * @return the xPosition
+     */
+    public int getxPosition() {
+        return xPosition;
+    }
+
+    /**
+     * @return the yPosition
+     */
+    public int getyPosition() {
+        return yPosition;
     }
 
 

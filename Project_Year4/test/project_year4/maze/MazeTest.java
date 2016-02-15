@@ -196,9 +196,9 @@ public class MazeTest extends TestCase {
         Maze instance = new Maze();
         instance.readMazFile(file);
         Node result = instance.getxNodes()[0][0];
-        assertEquals(result.getDirection(), NodeDirection.WALL);
+        assertEquals(result.isWall(), true);
         result = instance.getyNodes()[0][0];
-        assertEquals(result.getDirection(), NodeDirection.NONE);
+        assertEquals(result.getDirection(), NodeDirection.FORWARD);
     }
 
 

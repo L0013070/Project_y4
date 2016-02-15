@@ -81,9 +81,14 @@ public class NodeDirectionTest extends TestCase {
         fail("The test case is a prototype.");
     }
 
-    public void testToString() {
-        System.out.println("toString");
-        System.out.println(NodeDirection.FORWARD.toString());
+    /**
+     * Test of getData method, of class NodeDirection.
+     */
+    public void testGetData() {
+        System.out.println("getData");
+        String expResult = "";
+        String result = NodeDirection.FORWARD.getData();
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

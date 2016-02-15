@@ -24,54 +24,73 @@ package project_year4.maze;
  */
 public enum NodeDirection {
 
-    FORWARD(NodeTyp.Y, 1, 0, NodeTyp.X, 1, 0, NodeTyp.Y, 1, -1, NodeTyp.X, -1, 1, NodeTyp.Y, 0, 1, NodeTyp.X, 0, 1),
-    REVERSE(NodeTyp.Y, 0, 0, NodeTyp.X, -1, 0, NodeTyp.Y, 0, -1, NodeTyp.X, 0, 0, NodeTyp.Y, 0, -1, NodeTyp.X, 0, -1);
+    FORWARD(NodeTyp.Y, 1, 1, NodeTyp.X, 1, 0, NodeTyp.Y, 1, -1, NodeTyp.X, -1, 1, NodeTyp.Y, 0, 1, NodeTyp.X, 1, 1),
+    REVERSE(NodeTyp.Y, 0, 0, NodeTyp.X, -1, 0, NodeTyp.Y, -1, -1, NodeTyp.X, 0, 0, NodeTyp.Y, 0, -1, NodeTyp.X, -1, -1);
 
-    private NodeTyp[] forwardChildrenTyp = new NodeTyp[3];
-    private int[] forwardChildrenX = {0,0,0};
-    private int[] forwardChildrenY = {0,0,0};
-    private NodeTyp[] reverseChildrenTyp = new NodeTyp[3];
-    private int[] reverseChildrenX = {0,0,0};
-    private int[] reverseChildrenY = {0,0,0};
+    private final NodeTyp[] typXChildrenTyp = new NodeTyp[3];
+    private final int[] typXChildrenX = {0,0,0};
+    private final int[] typXChildrenY = {0,0,0};
+    private final NodeTyp[] typYChildrenTyp = new NodeTyp[3];
+    private final int[] typYChildrenX = {0,0,0};
+    private final int[] typYChildrenY = {0,0,0};
 
-    private NodeDirection(NodeTyp typForward1, int xForwardOffset1, int yForwardOffset1,
-            NodeTyp typForward2, int xForwardOffset2, int yForwardOffset2,
-            NodeTyp typForward3, int xForwardOffset3, int yForwardOffset3,
-            NodeTyp typReverse1, int xReverseOffset1, int yReverseOffset1,
-            NodeTyp typReverse2, int xReverseOffset2, int yReverseOffset2,
-            NodeTyp typReverse3, int xReverseOffset3, int yReverseOffset3) {
-            forwardChildrenTyp[0] = typForward1;
-            forwardChildrenX[0] = xForwardOffset1;
-            forwardChildrenY[0] = yForwardOffset1;
-            forwardChildrenTyp[1] = typForward2;
-            forwardChildrenX[1] = xForwardOffset2;
-            forwardChildrenY[1] = yForwardOffset2;
-            forwardChildrenTyp[2] = typForward3;
-            forwardChildrenX[2] = xForwardOffset3;
-            forwardChildrenY[2] = yForwardOffset3;
-            reverseChildrenTyp[0] = typReverse1;
-            reverseChildrenX[0] = xReverseOffset1;
-            reverseChildrenY[0] = yReverseOffset1;
-            reverseChildrenTyp[1] = typReverse2;
-            reverseChildrenX[1] = xReverseOffset2;
-            reverseChildrenY[1] = yReverseOffset2;
-            reverseChildrenTyp[2] = typReverse3;
-            reverseChildrenX[2] = xReverseOffset3;
-            reverseChildrenY[2] = yReverseOffset3;
+    private NodeDirection(NodeTyp typTypX1, int xTypXOffset1, int yTypXOffset1,
+            NodeTyp typTypX2, int xTypXOffset2, int yTypXOffset2,
+            NodeTyp typTypX3, int xTypXOffset3, int yTypXOffset3,
+            NodeTyp typTypY1, int xTypYOffset1, int yTypYOffset1,
+            NodeTyp typTypY2, int xTypYOffset2, int yTypYOffset2,
+            NodeTyp typTypY3, int xTypYOffset3, int yTypYOffset3) {
+            typXChildrenTyp[0] = typTypX1;
+            typXChildrenX[0] = xTypXOffset1;
+            typXChildrenY[0] = yTypXOffset1;
+            typXChildrenTyp[1] = typTypX2;
+            typXChildrenX[1] = xTypXOffset2;
+            typXChildrenY[1] = yTypXOffset2;
+            typXChildrenTyp[2] = typTypX3;
+            typXChildrenX[2] = xTypXOffset3;
+            typXChildrenY[2] = yTypXOffset3;
+            typYChildrenTyp[0] = typTypY1;
+            typYChildrenX[0] = xTypYOffset1;
+            typYChildrenY[0] = yTypYOffset1;
+            typYChildrenTyp[1] = typTypY2;
+            typYChildrenX[1] = xTypYOffset2;
+            typYChildrenY[1] = yTypYOffset2;
+            typYChildrenTyp[2] = typTypY3;
+            typYChildrenX[2] = xTypYOffset3;
+            typYChildrenY[2] = yTypYOffset3;
     }
 
-    public void initChilden(Node node, Node[][] xNodes, Node[][] yNodes) {
-
+    public static void initChilden(Node node, Node[][] xNodes, Node[][] yNodes) {
+        for (int i = 0; i < 3; i++) {
+                node.setForwardChildren(NodeDirection.FORWARD.getChildren(node.getTyp(), xNodes, yNodes));
+                node.setReverseChildren(NodeDirection.REVERSE.getChildren(node.getTyp(), xNodes, yNodes));
+        }
     }
     
-    public String toString() {
-        String ret = "";
+    public String getData() {
+        String ret = this.name();
         for (int i = 0; i < 3; i++) {
-            ret += "Child forward: "+i+"\n";
-            ret += "Typ: "+forwardChildrenTyp[i]+" x: "+forwardChildrenX[i]+" y: "+forwardChildrenY[i]+"\n";
+            ret += "Child typX: "+i+"\n";
+            ret += "Typ: "+typXChildrenTyp[i]+" x: "+typXChildrenX[i]+" y: "+typXChildrenY[i]+"\n";
             ret += "reverse:\n";
-            ret += "Typ: "+reverseChildrenTyp[i]+" x: "+reverseChildrenX[i]+" y: "+reverseChildrenY[i]+"\n";
+            ret += "Typ: "+typYChildrenTyp[i]+" x: "+typYChildrenX[i]+" y: "+typYChildrenY[i]+"\n";
         }
         return ret;
+    }
+
+    private Node[] getChildren(Node node, Node[][] xNodes, Node[][] yNodes) {
+        Node[] nodes = new Node[3];
+        if (node.getTyp() == NodeTyp.X) {
+            for (int i = 0; i < 3; i++) {
+                if (this.typXChildrenTyp[i] == NodeTyp.X) {
+                    nodes[i] = xNodes[(node.getxPosition()+this.typXChildrenX[i])][(node.getyPosition()+this.typXChildrenY[i])];
+                } else {
+                    nodes[i] = xNodes[(node.getxPosition()+this.typYChildrenX[i])][(node.getyPosition()+this.typYChildrenY[i])];
+                }
+            }
+        } else {
+            
+        }
+        return nodes;
     }
 }
