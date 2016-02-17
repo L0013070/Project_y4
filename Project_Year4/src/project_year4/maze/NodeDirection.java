@@ -60,10 +60,10 @@ public enum NodeDirection {
             typYChildrenY[2] = yTypYOffset3;
     }
 
-    public static void initChilden(Node node, Node[][] xNodes, Node[][] yNodes) {
+    public static void initChilden(Node node, Nodes nodes) {
         for (int i = 0; i < 3; i++) {
-                node.setForwardChildren(NodeDirection.FORWARD.getChildren(node.getTyp(), xNodes, yNodes));
-                node.setReverseChildren(NodeDirection.REVERSE.getChildren(node.getTyp(), xNodes, yNodes));
+                node.setForwardChildren(NodeDirection.FORWARD.getChildren(node, nodes));
+                node.setReverseChildren(NodeDirection.REVERSE.getChildren(node, nodes));
         }
     }
     
@@ -78,19 +78,19 @@ public enum NodeDirection {
         return ret;
     }
 
-    private Node[] getChildren(Node node, Node[][] xNodes, Node[][] yNodes) {
-        Node[] nodes = new Node[3];
+    private Node[] getChildren(Node node, Nodes nodes) {
+        Node[] children = new Node[3];
         if (node.getTyp() == NodeTyp.X) {
             for (int i = 0; i < 3; i++) {
                 if (this.typXChildrenTyp[i] == NodeTyp.X) {
-                    nodes[i] = xNodes[(node.getxPosition()+this.typXChildrenX[i])][(node.getyPosition()+this.typXChildrenY[i])];
+                    children[i] = nodes.getNode(NodeTyp.X, (node.getxPosition()+this.typXChildrenX[i]), (node.getyPosition()+this.typXChildrenY[i]));
                 } else {
-                    nodes[i] = xNodes[(node.getxPosition()+this.typYChildrenX[i])][(node.getyPosition()+this.typYChildrenY[i])];
+                    children[i] = nodes.getNode(NodeTyp.Y, (node.getxPosition()+this.typYChildrenX[i]), (node.getyPosition()+this.typYChildrenY[i]));
                 }
             }
         } else {
             
         }
-        return nodes;
+        return children;
     }
 }

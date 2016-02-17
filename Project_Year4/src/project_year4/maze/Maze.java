@@ -45,29 +45,12 @@ public class Maze {
     ArrayList<MazeListener> listeners = new ArrayList<>(10);
 
     private MazeCell[][] mazeCells = new MazeCell[MAZESIZE][MAZESIZE];
-    private Node[][] xNodes = new Node[MAZESIZE - 1][MAZESIZE];
-    private Node[][] yNodes = new Node[MAZESIZE][MAZESIZE - 1];
-
+    private Nodes nodes = new Nodes();
+    
     public Maze() {
         for (int x = 0; x < Maze.MAZESIZE; x++) {
             for (int y = 0; y < Maze.MAZESIZE; y++) {
                 mazeCells[x][y] = new MazeCell(this, x, y);
-                if (x < 15) {
-                    xNodes[x][y] = new Node(NodeTyp.X, x, y);
-                }
-                if (y < 15) {
-                    yNodes[x][y] = new Node(NodeTyp.Y, x, y);
-                }
-            }
-        }
-        for (int x = 0; x < Maze.MAZESIZE; x++) {
-            for (int y = 0; y < Maze.MAZESIZE; y++) {
-                if (x < 15) {
-                    xNodes[x][y].initChildren(xNodes, yNodes);
-                }
-                if (y < 15) {
-                    yNodes[x][y].initChildren(xNodes, yNodes);
-                }
             }
         }
     }
@@ -133,7 +116,7 @@ public class Maze {
     }
 
     public DisplayMaze createDisplayPanel() {
-        DisplayMaze panel = new DisplayMaze(getMazeCells(), getxNodes(), getyNodes());
+        DisplayMaze panel = new DisplayMaze(getMazeCells(), getNodes());
         return panel;
     }
 
@@ -154,17 +137,7 @@ public class Maze {
         } catch (IOException ex) {
             Logger.getLogger(Maze.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for (int y = (MAZESIZE - 1); y >= 0; y--) {
-            for (int x = 0; x < MAZESIZE; x++) {
-                if (x < (MAZESIZE - 1)) {
-                    xNodes[x][y].initChildren(xNodes, yNodes);
-                }
-                if (y < (MAZESIZE - 1)) {
-                    yNodes[x][y].initChildren(xNodes, yNodes);
-                }
-            }
-        }
-        
+       
     }
 
     /**
@@ -175,16 +148,10 @@ public class Maze {
     }
 
     /**
-     * @return the xNodes
+     * @return the Nodes
      */
-    protected Node[][] getxNodes() {
-        return xNodes;
+    protected Nodes getNodes() {
+        return nodes;
     }
 
-    /**
-     * @return the yNodes
-     */
-    protected Node[][] getyNodes() {
-        return yNodes;
-    }
 }

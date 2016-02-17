@@ -27,6 +27,7 @@ import project_year4.maze.Maze;
 import project_year4.maze.MazeCell;
 import project_year4.maze.Node;
 import project_year4.maze.NodeTyp;
+import project_year4.maze.Nodes;
 
 /**
  *
@@ -37,7 +38,7 @@ public class DisplayMaze extends javax.swing.JPanel {
     /**
      * Creates new form DisplayMaze1
      */
-    public DisplayMaze(MazeCell[][] cells, Node[][] xNodes, Node[][] yNodes) {
+    public DisplayMaze(MazeCell[][] cells, Nodes nodes) {
         int mazeSize = Maze.MAZESIZE;
         initComponents();
         DisplayGridCell cell = null;
@@ -49,25 +50,15 @@ public class DisplayMaze extends javax.swing.JPanel {
                 gridPanel.add(cell);
                 if (x < (mazeSize - 1)) {
                     node = new DisplayNode("-1.00", NodeTyp.X);
-                    Node xNode = Direction.EAST.getNodeForCell(x, y, xNodes, yNodes);
+                    Node xNode = Direction.EAST.getXNodeForCell(x, y, nodes);
                     xNodePanel.add(node);
                     xNode.addListener(node);
                 }
                 if (y < (mazeSize - 1)) {
                     node = new DisplayNode("-1.00", NodeTyp.Y);
-                    Node yNode = Direction.NORTH.getNodeForCell(x, y, xNodes, yNodes);
+                    Node yNode = Direction.NORTH.getYNodeForCell(x, y, nodes);
                     yNode.addListener(node);
                     yNodePanel.add(node);
-                }
-            }
-        }
-        for (int y = (mazeSize - 1); y >= 0; y--) {
-            for (int x = 0; x < mazeSize; x++) {
-                if (x < (mazeSize - 1)) {
-                    xNodes[x][y].initChildren(xNodes, yNodes);
-                }
-                if (y < (mazeSize - 1)) {
-                    yNodes[x][y].initChildren(xNodes, yNodes);
                 }
             }
         }

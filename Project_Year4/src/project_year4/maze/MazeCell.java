@@ -77,11 +77,11 @@ public class MazeCell {
     }
 
     public Node[] getNodes() {
-        return Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
+        return Direction.getNodesForCell(xPos, yPos, maze.getNodes());
     }
 
     public void setWalls(int walls) {
-        Node[] nodes = Direction.getNodesForCell(xPos, yPos, maze.getxNodes(), maze.getyNodes());
+        Node[] nodes = Direction.getNodesForCell(xPos, yPos, maze.getNodes());
         if (walls > 0) {
             if ((walls & 0x01) > 0 && nodes[Direction.NORTH.ordinal()] != null) {
                 nodes[Direction.NORTH.ordinal()].setWall(true);

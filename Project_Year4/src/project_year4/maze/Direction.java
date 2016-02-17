@@ -39,39 +39,32 @@ public enum Direction {
         this.typ = typ;
     }
     
-    public Node getNodeForCell(int xPos, int yPos, Node[][] xNodes, Node[][] yNodes) {
-        Node ret = null;
+    public Node getNodeForCell(int xPos, int yPos, Nodes nodes) {
         xPos += xCellOffset;
         yPos += yCellOffset;
-        if (getTyp() == NodeTyp.X && isValidXNodePos(xPos, yPos)) {
-            ret = xNodes[xPos][yPos];
-        }
-        if (getTyp() == NodeTyp.Y && isValidYNodePos(xPos, yPos)) {
-            ret = yNodes[xPos][yPos];
-        }
-        return ret;
+        return nodes.getNode(typ, xPos , yPos);
     }
     
-    public static Node[] getNodesForCell(int xPos, int yPos, Node[][] xNodes, Node[][] yNodes) {
+    public static Node[] getNodesForCell(int xPos, int yPos, Nodes nodes) {
         Node[] ret = new Node[4]; 
         for (int i = 0; i < Direction.values().length; i++) {
-            ret[i] = Direction.values()[i].getNodeForCell(xPos, yPos, xNodes, yNodes);
+            ret[i] = Direction.values()[i].getNodeForCell(xPos, yPos, nodes);
         }
         return ret;
     }
     
-    public static boolean isValidXNodePos(int xPos, int yPos) {
-        return xPos < Maze.MAZESIZE-1 && yPos < Maze.MAZESIZE && xPos > -1 && yPos > -1;
-    }
-
-    public static boolean isValidYNodePos(int xPos, int yPos) {
-        return yPos < Maze.MAZESIZE-1 && xPos < Maze.MAZESIZE && xPos > -1 && yPos > -1;
-    }
-
     /**
      * @return the typ
      */
     public NodeTyp getTyp() {
         return typ;
+    }
+
+    public Node getXNodeForCell(int x, int y, Nodes nodes) {
+        return nodes.getNode(NodeTyp.X, x, y);
+    }
+
+    public Node getYNodeForCell(int x, int y, Nodes nodes) {
+        return nodes.getNode(NodeTyp.Y, x, y);
     }
 }
