@@ -26,14 +26,14 @@ import junit.framework.TestSuite;
  *
  * @author L00131070
  */
-public class NodeTypTest extends TestCase {
+public class MazeCellListenerTest extends TestCase {
     
-    public NodeTypTest(String testName) {
+    public MazeCellListenerTest(String testName) {
         super(testName);
     }
 
     public static Test suite() {
-        TestSuite suite = new TestSuite(NodeTypTest.class);
+        TestSuite suite = new TestSuite(MazeCellListenerTest.class);
         return suite;
     }
     
@@ -48,28 +48,21 @@ public class NodeTypTest extends TestCase {
     }
 
     /**
-     * Test of values method, of class NodeTyp.
+     * Test of changedMazeCell method, of class MazeCellListener.
      */
-    public void testValues() {
-        System.out.println("values");
-        NodeTyp[] expResult = null;
-        NodeTyp[] result = NodeTyp.values();
-        assertEquals(expResult, result);
+    public void testChangedMazeCell() {
+        System.out.println("changedMazeCell");
+        MazeCell cell = null;
+        MazeCellListener instance = new MazeCellListenerImpl();
+        instance.changedMazeCell(cell);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of valueOf method, of class NodeTyp.
-     */
-    public void testValueOf() {
-        System.out.println("valueOf");
-        String name = "";
-        NodeTyp expResult = null;
-        NodeTyp result = NodeTyp.valueOf(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public class MazeCellListenerImpl implements MazeCellListener {
+
+        public void changedMazeCell(MazeCell cell) {
+        }
     }
     
 }

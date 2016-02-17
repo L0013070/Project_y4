@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package project_year4.maze;
+package project_year4.maze.typ;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -26,14 +26,18 @@ import junit.framework.TestSuite;
  *
  * @author L00131070
  */
-public class NodeTypTest extends TestCase {
+public class TypSuite extends TestCase {
     
-    public NodeTypTest(String testName) {
+    public TypSuite(String testName) {
         super(testName);
     }
-
+    
     public static Test suite() {
-        TestSuite suite = new TestSuite(NodeTypTest.class);
+        TestSuite suite = new TestSuite("TypSuite");
+        suite.addTest(ConstantSpeedTest.suite());
+        suite.addTest(ArcMovementTest.suite());
+        suite.addTest(SimulationTypTest.suite());
+        suite.addTest(VariableSpeedTest.suite());
         return suite;
     }
     
@@ -45,31 +49,6 @@ public class NodeTypTest extends TestCase {
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
-    }
-
-    /**
-     * Test of values method, of class NodeTyp.
-     */
-    public void testValues() {
-        System.out.println("values");
-        NodeTyp[] expResult = null;
-        NodeTyp[] result = NodeTyp.values();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of valueOf method, of class NodeTyp.
-     */
-    public void testValueOf() {
-        System.out.println("valueOf");
-        String name = "";
-        NodeTyp expResult = null;
-        NodeTyp result = NodeTyp.valueOf(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

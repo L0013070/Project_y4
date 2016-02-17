@@ -19,7 +19,9 @@
 package project_year4.maze;
 
 import java.io.File;
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 import project_year4.algorithm.Algorithm;
 import project_year4.algorithm.heuristic.Heuristic;
 import project_year4.gui.DisplayMaze;
@@ -34,6 +36,11 @@ public class MazeTest extends TestCase {
     
     public MazeTest(String testName) {
         super(testName);
+    }
+
+    public static Test suite() {
+        TestSuite suite = new TestSuite(MazeTest.class);
+        return suite;
     }
     
     @Override
@@ -199,6 +206,43 @@ public class MazeTest extends TestCase {
         assertEquals(result.isWall(), true);
         result = instance.getyNodes()[0][0];
         assertEquals(result.getDirection(), NodeDirection.FORWARD);
+    }
+
+    /**
+     * Test of reset method, of class Maze.
+     */
+    public void testReset() {
+        System.out.println("reset");
+        Maze instance = new Maze();
+        instance.reset();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getMazeCells method, of class Maze.
+     */
+    public void testGetMazeCells() {
+        System.out.println("getMazeCells");
+        Maze instance = new Maze();
+        MazeCell[][] expResult = null;
+        MazeCell[][] result = instance.getMazeCells();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getNodes method, of class Maze.
+     */
+    public void testGetNodes() {
+        System.out.println("getNodes");
+        Maze instance = new Maze();
+        Nodes expResult = null;
+        Nodes result = instance.getNodes();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
 

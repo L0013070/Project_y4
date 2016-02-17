@@ -21,19 +21,33 @@ package project_year4.maze;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import project_year4.maze.mode.ModeSuite;
+import project_year4.maze.typ.TypSuite;
 
 /**
  *
  * @author L00131070
  */
-public class NodeTypTest extends TestCase {
+public class MazeSuite extends TestCase {
     
-    public NodeTypTest(String testName) {
+    public MazeSuite(String testName) {
         super(testName);
     }
-
+    
     public static Test suite() {
-        TestSuite suite = new TestSuite(NodeTypTest.class);
+        TestSuite suite = new TestSuite("MazeSuite");
+        suite.addTest(MazeTest.suite());
+        suite.addTest(MazeCellTest.suite());
+        suite.addTest(DirectionTest.suite());
+        suite.addTest(MazeListenerTest.suite());
+        suite.addTest(TypSuite.suite());
+        suite.addTest(MazeCellListenerTest.suite());
+        suite.addTest(NodesTest.suite());
+        suite.addTest(NodeTest.suite());
+        suite.addTest(NodeListenerTest.suite());
+        suite.addTest(NodeDirectionTest.suite());
+        suite.addTest(ModeSuite.suite());
+        suite.addTest(NodeTypTest.suite());
         return suite;
     }
     
@@ -45,31 +59,6 @@ public class NodeTypTest extends TestCase {
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
-    }
-
-    /**
-     * Test of values method, of class NodeTyp.
-     */
-    public void testValues() {
-        System.out.println("values");
-        NodeTyp[] expResult = null;
-        NodeTyp[] result = NodeTyp.values();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of valueOf method, of class NodeTyp.
-     */
-    public void testValueOf() {
-        System.out.println("valueOf");
-        String name = "";
-        NodeTyp expResult = null;
-        NodeTyp result = NodeTyp.valueOf(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

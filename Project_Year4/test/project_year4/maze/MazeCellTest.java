@@ -20,7 +20,9 @@ package project_year4.maze;
 
 import java.util.ArrayList;
 import javax.swing.text.Position;
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *
@@ -30,6 +32,11 @@ public class MazeCellTest extends TestCase {
 
     public MazeCellTest(String testName) {
         super(testName);
+    }
+
+    public static Test suite() {
+        TestSuite suite = new TestSuite(MazeCellTest.class);
+        return suite;
     }
 
     @Override
@@ -90,6 +97,59 @@ public class MazeCellTest extends TestCase {
         instance.setxPos(yPos);
         int result = instance.getxPos();
         assertEquals(yPos, result);
+    }
+
+    /**
+     * Test of addListener method, of class MazeCell.
+     */
+    public void testAddListener() {
+        System.out.println("addListener");
+        MazeCellListener listener = null;
+        MazeCell instance = null;
+        boolean expResult = false;
+        boolean result = instance.addListener(listener);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of removeListeners method, of class MazeCell.
+     */
+    public void testRemoveListeners() {
+        System.out.println("removeListeners");
+        MazeCellListener listener = null;
+        MazeCell instance = null;
+        boolean expResult = false;
+        boolean result = instance.removeListeners(listener);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getNodes method, of class MazeCell.
+     */
+    public void testGetNodes() {
+        System.out.println("getNodes");
+        MazeCell instance = null;
+        Node[] expResult = null;
+        Node[] result = instance.getNodes();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setWalls method, of class MazeCell.
+     */
+    public void testSetWalls() {
+        System.out.println("setWalls");
+        int walls = 0;
+        MazeCell instance = null;
+        instance.setWalls(walls);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
 }

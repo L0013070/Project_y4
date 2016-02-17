@@ -18,7 +18,9 @@
  */
 package project_year4.maze;
 
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *
@@ -28,6 +30,11 @@ public class NodeDirectionTest extends TestCase {
 
     public NodeDirectionTest(String testName) {
         super(testName);
+    }
+
+    public static Test suite() {
+        TestSuite suite = new TestSuite(NodeDirectionTest.class);
+        return suite;
     }
 
     @Override

@@ -18,7 +18,9 @@
  */
 package project_year4.maze;
 
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *
@@ -28,6 +30,11 @@ public class DirectionTest extends TestCase {
 
     public DirectionTest(String testName) {
         super(testName);
+    }
+
+    public static Test suite() {
+        TestSuite suite = new TestSuite(DirectionTest.class);
+        return suite;
     }
 
     @Override
@@ -69,70 +76,59 @@ public class DirectionTest extends TestCase {
     public void testGetNodeForCell() {
         System.out.println("getNode");
         Maze maze = new Maze();
-        Node[][] xNodes = new Node[Maze.MAZESIZE - 1][Maze.MAZESIZE];
-        Node[][] yNodes = new Node[Maze.MAZESIZE][Maze.MAZESIZE - 1];
-        for (int x = 0; x < Maze.MAZESIZE; x++) {
-            for (int y = 0; y < Maze.MAZESIZE; y++) {
-                if (x < Maze.MAZESIZE - 1) {
-                    xNodes[x][y] = new Node(NodeTyp.X, x, y);
-                }
-                if (y < Maze.MAZESIZE - 1) {
-                    yNodes[x][y] = new Node(NodeTyp.Y, x, y);
-                }
-            }
-        }
+        Nodes nodes = maze.getNodes();
         int xPos = 0;
         int yPos = 0;
         Direction instance = Direction.NORTH;
-        Node result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        Node result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result != null);
         instance = Direction.SOUTH;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result == null);
         instance = Direction.EAST;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result != null);
         instance = Direction.WEST;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result == null);
         xPos = 15;
         instance = Direction.NORTH;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result != null);
         instance = Direction.SOUTH;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result == null);
         instance = Direction.EAST;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result == null);
         instance = Direction.WEST;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result != null);
         yPos = 15;
         instance = Direction.NORTH;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result == null);
         instance = Direction.SOUTH;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result != null);
         instance = Direction.EAST;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result == null);
         instance = Direction.WEST;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result != null);
         xPos = 0;
         instance = Direction.NORTH;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result == null);
         instance = Direction.SOUTH;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result != null);
         instance = Direction.EAST;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result != null);
         instance = Direction.WEST;
-        result = instance.getNodeForCell(xPos, yPos, xNodes, yNodes);
+        result = instance.getNodeForCell(xPos, yPos, nodes);
         assertTrue(result == null);
     }
 
@@ -160,117 +156,49 @@ public class DirectionTest extends TestCase {
     }
 
     /**
-     * Test of isValidXNodePos method, of class Direction.
-     */
-    public void testIsValidXNodePos() {
-        System.out.println("isValidXNodePos");
-        int xPos = 0;
-        int yPos = 0;
-        boolean expResult = true;
-        boolean result = Direction.isValidXNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        xPos = -1;
-        yPos = 0;
-        expResult = false;
-        result = Direction.isValidXNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        xPos = 0;
-        yPos = -1;
-        expResult = false;
-        result = Direction.isValidXNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        xPos = 15;
-        yPos = 0;
-        expResult = false;
-        result = Direction.isValidXNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        xPos = 14;
-        yPos = 0;
-        expResult = true;
-        result = Direction.isValidXNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        result = Direction.isValidXNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        xPos = 14;
-        yPos = 15;
-        expResult = true;
-        result = Direction.isValidXNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        result = Direction.isValidXNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        xPos = 14;
-        yPos = 16;
-        expResult = false;
-        result = Direction.isValidXNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of isValidYNodePos method, of class Direction.
-     */
-    public void testIsValidYNodePos() {
-        System.out.println("isValidYNodePos");
-        int xPos = 0;
-        int yPos = 0;
-        boolean expResult = true;
-        boolean result = Direction.isValidYNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        xPos = -1;
-        yPos = 0;
-        expResult = false;
-        result = Direction.isValidYNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        xPos = 0;
-        yPos = -1;
-        expResult = false;
-        result = Direction.isValidYNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        xPos = 15;
-        yPos = 14;
-        expResult = true;
-        result = Direction.isValidYNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        xPos = 0;
-        yPos = 14;
-        expResult = true;
-        result = Direction.isValidYNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        xPos = 15;
-        yPos = 14;
-        expResult = true;
-        result = Direction.isValidYNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-        xPos = 16;
-        yPos = 14;
-        expResult = false;
-        result = Direction.isValidYNodePos(xPos, yPos);
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getNodesForCell method, of class Direction.
      */
     public void testGetNodesForCell() {
         System.out.println("getNodesForCell");
-        Node[][] xNodes = new Node[Maze.MAZESIZE - 1][Maze.MAZESIZE];
-        Node[][] yNodes = new Node[Maze.MAZESIZE][Maze.MAZESIZE - 1];
-        for (int x = 0; x < Maze.MAZESIZE; x++) {
-            for (int y = 0; y < Maze.MAZESIZE; y++) {
-                if (x < Maze.MAZESIZE - 1) {
-                    xNodes[x][y] = new Node(NodeTyp.X, x, y);
-                }
-                if (y < Maze.MAZESIZE - 1) {
-                    yNodes[x][y] = new Node(NodeTyp.Y, x, y);
-                }
-            }
-        }
+        Maze maze = new Maze();
+        Nodes nodes = maze.getNodes();
         int xPos = 0;
         int yPos = 0;
-        Node[] expResult = {yNodes[xPos][yPos], xNodes[xPos][yPos], null, null};
-        Node[] result = Direction.getNodesForCell(xPos, yPos, xNodes, yNodes);
+        Node[] expResult = {nodes.getNode(NodeTyp.Y, xPos, yPos), nodes.getNode(NodeTyp.X, xPos, yPos), null, null};
+        Node[] result = Direction.getNodesForCell(xPos, yPos, nodes);
         for (int i = 0; i < expResult.length; i++) {
             assertEquals(expResult[i], result[i]);
         }
+    }
+
+    /**
+     * Test of getXNodeForCell method, of class Direction.
+     */
+    public void testGetXNodeForCell() {
+        System.out.println("getXNodeForCell");
+        Maze maze = new Maze();
+        Nodes nodes = maze.getNodes();
+        int x = 0;
+        int y = 0;
+        Direction instance = Direction.WEST;
+        Node expResult = null;
+        Node result = instance.getXNodeForCell(x, y, nodes);
+        assertEquals(expResult, result);
+   }
+
+    /**
+     * Test of getYNodeForCell method, of class Direction.
+     */
+    public void testGetYNodeForCell() {
+        System.out.println("getYNodeForCell");
+        Maze maze = new Maze();
+        Nodes nodes = maze.getNodes();
+        int x = 0;
+        int y = 0;
+        Direction instance = Direction.SOUTH;
+        Node expResult = null;
+        Node result = instance.getYNodeForCell(x, y, nodes);
+        assertEquals(expResult, result);
     }
 
 }
