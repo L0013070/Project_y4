@@ -79,11 +79,11 @@ public class NodeDirectionTest extends TestCase {
      */
     public void testInitChilden() {
         System.out.println("initChilden");
-        Node node = null;
-        Node[][] xNodes = null;
-        Node[][] yNodes = null;
+        Maze maze = new Maze();
+        Nodes nodes = maze.getNodes();
+        Node node = nodes.getNode(NodeTyp.X, 0, 0);
         NodeDirection instance = null;
-        instance.initChilden(node, xNodes, yNodes);
+        instance.initChilden(node, nodes);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

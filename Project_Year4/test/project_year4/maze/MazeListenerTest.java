@@ -55,8 +55,6 @@ public class MazeListenerTest extends TestCase {
         Maze maze = null;
         MazeListener instance = new MazeListenerImpl();
         instance.changedMaze(maze);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     public class MazeListenerImpl implements MazeListener {

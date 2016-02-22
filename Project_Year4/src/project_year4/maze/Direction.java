@@ -61,10 +61,10 @@ public enum Direction {
     }
 
     public Node getXNodeForCell(int x, int y, Nodes nodes) {
-        return nodes.getNode(NodeTyp.X, x, y);
+        return nodes.getNode(NodeTyp.X, x+this.xCellOffset, y+this.yCellOffset);
     }
 
     public Node getYNodeForCell(int x, int y, Nodes nodes) {
-        return nodes.getNode(NodeTyp.Y, x, y);
+        return nodes.getNode(NodeTyp.Y, x+this.xCellOffset, y+this.yCellOffset);
     }
 }

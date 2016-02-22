@@ -23,6 +23,7 @@ import javax.swing.text.Position;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import project_year4.gui.DisplayGridCell;
 
 /**
  *
@@ -81,7 +82,7 @@ public class MazeCellTest extends TestCase {
         System.out.println("getyPos");
         int yPos = 20;
         Maze maze = new Maze();
-        MazeCell instance = new MazeCell(maze, 10,yPos);
+        MazeCell instance = new MazeCell(maze, 10, yPos);
         int result = instance.getyPos();
         assertEquals(yPos, result);
     }
@@ -93,7 +94,7 @@ public class MazeCellTest extends TestCase {
         System.out.println("setyPos");
         int yPos = 20;
         Maze maze = new Maze();
-        MazeCell instance = new MazeCell(maze,10,0);
+        MazeCell instance = new MazeCell(maze, 10, 0);
         instance.setxPos(yPos);
         int result = instance.getxPos();
         assertEquals(yPos, result);
@@ -104,13 +105,12 @@ public class MazeCellTest extends TestCase {
      */
     public void testAddListener() {
         System.out.println("addListener");
-        MazeCellListener listener = null;
-        MazeCell instance = null;
-        boolean expResult = false;
+        Maze maze = new Maze();
+        MazeCellListener listener = new DisplayGridCell("");
+        MazeCell instance = new MazeCell(maze, 0, 0);
+        boolean expResult = true;
         boolean result = instance.addListener(listener);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -118,13 +118,12 @@ public class MazeCellTest extends TestCase {
      */
     public void testRemoveListeners() {
         System.out.println("removeListeners");
-        MazeCellListener listener = null;
-        MazeCell instance = null;
+        Maze maze = new Maze();
+        MazeCellListener listener = new DisplayGridCell("");
+        MazeCell instance = new MazeCell(maze, 0, 0);
         boolean expResult = false;
         boolean result = instance.removeListeners(listener);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -132,12 +131,16 @@ public class MazeCellTest extends TestCase {
      */
     public void testGetNodes() {
         System.out.println("getNodes");
-        MazeCell instance = null;
-        Node[] expResult = null;
+        Maze maze = new Maze();
+        MazeCell instance = new MazeCell(maze, 0, 0);
         Node[] result = instance.getNodes();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        for (int i = 0; i < result.length; i++) {
+            if (3 == i || 2 == i) {
+                assertNull(result[i]);
+            } else {
+                assertNotNull(result[i]);
+            }
+        }
     }
 
     /**
@@ -145,11 +148,12 @@ public class MazeCellTest extends TestCase {
      */
     public void testSetWalls() {
         System.out.println("setWalls");
-        int walls = 0;
-        MazeCell instance = null;
+        Maze maze = new Maze();
+        int walls = 1;
+        MazeCell instance = maze.getMazeCell(0, 0);
+        assertFalse(Direction.NORTH.getNodeForCell(0,0, maze.getNodes()).isWall());
         instance.setWalls(walls);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(Direction.NORTH.getNodeForCell(0,0, maze.getNodes()).isWall());
     }
 
 }

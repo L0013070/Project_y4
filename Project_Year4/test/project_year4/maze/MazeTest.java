@@ -174,11 +174,10 @@ public class MazeTest extends TestCase {
         int x = 0;
         int y = 0;
         Maze instance = new Maze();
-        MazeCell expResult = null;
         MazeCell result = instance.getMazeCell(x, y);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
+        assertEquals(x, result.getxPos());
+        assertEquals(y, result.getyPos());
     }
 
     /**
@@ -201,10 +200,11 @@ public class MazeTest extends TestCase {
         System.out.println("readMazFile");
         File file = new File("X:\\Project\\Project_y4\\Project_Year4\\mazefiles\\Mazes\\00japan.bin");
         Maze instance = new Maze();
+        Nodes nodes = instance.getNodes();
         instance.readMazFile(file);
-        Node result = instance.getxNodes()[0][0];
+        Node result = nodes.getNode(NodeTyp.X, 0, 0);
         assertEquals(result.isWall(), true);
-        result = instance.getyNodes()[0][0];
+        result = nodes.getNode(NodeTyp.Y, 0, 0);
         assertEquals(result.getDirection(), NodeDirection.FORWARD);
     }
 
@@ -225,11 +225,9 @@ public class MazeTest extends TestCase {
     public void testGetMazeCells() {
         System.out.println("getMazeCells");
         Maze instance = new Maze();
-        MazeCell[][] expResult = null;
         MazeCell[][] result = instance.getMazeCells();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
+        assertEquals(Maze.MAZESIZE, result.length);
     }
 
     /**
@@ -238,11 +236,8 @@ public class MazeTest extends TestCase {
     public void testGetNodes() {
         System.out.println("getNodes");
         Maze instance = new Maze();
-        Nodes expResult = null;
         Nodes result = instance.getNodes();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
     }
 
 
