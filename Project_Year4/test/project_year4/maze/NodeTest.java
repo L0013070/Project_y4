@@ -21,6 +21,7 @@ package project_year4.maze;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import project_year4.gui.DisplayNode;
 
 /**
  *
@@ -52,13 +53,14 @@ public class NodeTest extends TestCase {
      */
     public void testAddListener() {
         System.out.println("addListener");
-        NodeListener listener = null;
-        Node instance = null;
-        boolean expResult = false;
+        NodeListener listener = new DisplayNode("", NodeTyp.X);
+        Node instance = new Node(NodeTyp.X, 4, 4);
+        boolean expResult = true;
         boolean result = instance.addListener(listener);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        expResult = false;
+        result = instance.addListener(listener);
+        assertEquals(expResult, result);
     }
 
     /**
@@ -278,12 +280,16 @@ public class NodeTest extends TestCase {
      */
     public void testInitChildren() {
         System.out.println("initChildren");
-        Node[][] xNodes = null;
-        Node[][] yNodes = null;
-        Node instance = null;
-        instance.initChildren(xNodes, yNodes);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Maze maze = new Maze();
+        Nodes nodes = maze.getNodes();
+        Node instance = nodes.getNode(NodeTyp.X, 0, 0);
+        instance.initChildren(nodes);
+        instance.setDirection(NodeDirection.FORWARD);
+        Node[] children = instance.getChildren();
+        for (Node node : children) {
+            System.out.println(node.toString());
+        }
+        
     }
     
 }

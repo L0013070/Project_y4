@@ -34,29 +34,29 @@ public enum NodeDirection {
     private final int[] typYChildrenX = {0,0,0};
     private final int[] typYChildrenY = {0,0,0};
 
-    private NodeDirection(NodeTyp typTypX1, int xTypXOffset1, int yTypXOffset1,
-            NodeTyp typTypX2, int xTypXOffset2, int yTypXOffset2,
-            NodeTyp typTypX3, int xTypXOffset3, int yTypXOffset3,
-            NodeTyp typTypY1, int xTypYOffset1, int yTypYOffset1,
-            NodeTyp typTypY2, int xTypYOffset2, int yTypYOffset2,
-            NodeTyp typTypY3, int xTypYOffset3, int yTypYOffset3) {
+    private NodeDirection(NodeTyp typTypX1, int xTypXOffset1, int xTypYOffset1,
+            NodeTyp typTypX2, int xTypXOffset2, int xTypYOffset2,
+            NodeTyp typTypX3, int xTypXOffset3, int xTypYOffset3,
+            NodeTyp typTypY1, int yTypXOffset1, int yTypYOffset1,
+            NodeTyp typTypY2, int yTypXOffset2, int yTypYOffset2,
+            NodeTyp typTypY3, int yTypXOffset3, int yTypYOffset3) {
             typXChildrenTyp[0] = typTypX1;
             typXChildrenX[0] = xTypXOffset1;
-            typXChildrenY[0] = yTypXOffset1;
+            typXChildrenY[0] = xTypYOffset1;
             typXChildrenTyp[1] = typTypX2;
             typXChildrenX[1] = xTypXOffset2;
-            typXChildrenY[1] = yTypXOffset2;
+            typXChildrenY[1] = xTypYOffset2;
             typXChildrenTyp[2] = typTypX3;
             typXChildrenX[2] = xTypXOffset3;
-            typXChildrenY[2] = yTypXOffset3;
+            typXChildrenY[2] = xTypYOffset3;
             typYChildrenTyp[0] = typTypY1;
-            typYChildrenX[0] = xTypYOffset1;
+            typYChildrenX[0] = yTypXOffset1;
             typYChildrenY[0] = yTypYOffset1;
             typYChildrenTyp[1] = typTypY2;
-            typYChildrenX[1] = xTypYOffset2;
+            typYChildrenX[1] = yTypXOffset2;
             typYChildrenY[1] = yTypYOffset2;
             typYChildrenTyp[2] = typTypY3;
-            typYChildrenX[2] = xTypYOffset3;
+            typYChildrenX[2] = yTypXOffset3;
             typYChildrenY[2] = yTypYOffset3;
     }
 
@@ -85,11 +85,17 @@ public enum NodeDirection {
                 if (this.typXChildrenTyp[i] == NodeTyp.X) {
                     children[i] = nodes.getNode(NodeTyp.X, (node.getxPosition()+this.typXChildrenX[i]), (node.getyPosition()+this.typXChildrenY[i]));
                 } else {
+                    children[i] = nodes.getNode(NodeTyp.Y, (node.getxPosition()+this.typXChildrenX[i]), (node.getyPosition()+this.typXChildrenY[i]));
+                }
+            }
+        } else if (node.getTyp() == NodeTyp.Y){
+            for (int i = 0; i < 3; i++) {
+                if (this.typXChildrenTyp[i] == NodeTyp.X) {
+                    children[i] = nodes.getNode(NodeTyp.X, (node.getxPosition()+this.typYChildrenX[i]), (node.getyPosition()+this.typYChildrenY[i]));
+                } else {
                     children[i] = nodes.getNode(NodeTyp.Y, (node.getxPosition()+this.typYChildrenX[i]), (node.getyPosition()+this.typYChildrenY[i]));
                 }
             }
-        } else {
-            
         }
         return children;
     }

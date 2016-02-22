@@ -82,10 +82,53 @@ public class NodeDirectionTest extends TestCase {
         Maze maze = new Maze();
         Nodes nodes = maze.getNodes();
         Node node = nodes.getNode(NodeTyp.X, 0, 0);
-        NodeDirection instance = null;
-        instance.initChilden(node, nodes);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        NodeDirection.initChilden(node, nodes);
+        Node[] children = node.getChildren();
+        System.out.println(node.getDirection());
+        System.out.println(node.getTyp());
+
+        for (Node child : children) {
+            if (child != null) {
+                System.out.println("typ: " + child.getTyp() + " x: " + child.getxPosition() + " y: " + child.getyPosition());
+            } else {
+                System.out.println(child);
+            }
+        }
+        node = nodes.getNode(NodeTyp.Y, 0, 0);
+        NodeDirection.initChilden(node, nodes);
+        children = node.getChildren();
+        System.out.println(node.getTyp());
+        for (Node child : children) {
+            if (child != null) {
+                System.out.println("typ: " + child.getTyp() + " x: " + child.getxPosition() + " y: " + child.getyPosition());
+            } else {
+                System.out.println(child);
+            }
+        }
+        node = nodes.getNode(NodeTyp.X, 0, 0);
+        node.setDirection(NodeDirection.REVERSE);
+        children = node.getChildren();
+        System.out.println(node.getDirection());
+        System.out.println(node.getTyp());
+
+        for (Node child : children) {
+            if (child != null) {
+                System.out.println("typ: " + child.getTyp() + " x: " + child.getxPosition() + " y: " + child.getyPosition());
+            } else {
+                System.out.println(child);
+            }
+        }
+        node = nodes.getNode(NodeTyp.Y, 0, 0);
+        node.setDirection(NodeDirection.REVERSE);
+        children = node.getChildren();
+        System.out.println(node.getTyp());
+        for (Node child : children) {
+            if (child != null) {
+                System.out.println("typ: " + child.getTyp() + " x: " + child.getxPosition() + " y: " + child.getyPosition());
+            } else {
+                System.out.println(child);
+            }
+        }
     }
 
     /**
@@ -93,11 +136,34 @@ public class NodeDirectionTest extends TestCase {
      */
     public void testGetData() {
         System.out.println("getData");
-        String expResult = "";
+        String expResult = "FORWARDChild typX: 0\n"
+                + "Typ: Y x: 1 y: 1\n"
+                + "reverse:\n"
+                + "Typ: X x: -1 y: 1\n"
+                + "Child typX: 1\n"
+                + "Typ: X x: 1 y: 0\n"
+                + "reverse:\n"
+                + "Typ: Y x: 0 y: 1\n"
+                + "Child typX: 2\n"
+                + "Typ: Y x: 1 y: -1\n"
+                + "reverse:\n"
+                + "Typ: X x: 1 y: 1\n";
         String result = NodeDirection.FORWARD.getData();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        expResult = "REVERSEChild typX: 0\n"
+                + "Typ: Y x: 0 y: 0\n"
+                + "reverse:\n"
+                + "Typ: X x: 0 y: 0\n"
+                + "Child typX: 1\n"
+                + "Typ: X x: -1 y: 0\n"
+                + "reverse:\n"
+                + "Typ: Y x: 0 y: -1\n"
+                + "Child typX: 2\n"
+                + "Typ: Y x: -1 y: -1\n"
+                + "reverse:\n"
+                + "Typ: X x: -1 y: -1\n";
+        result = NodeDirection.REVERSE.getData();
+        assertEquals(expResult, result);
     }
 
 }

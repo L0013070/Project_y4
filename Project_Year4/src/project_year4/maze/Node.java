@@ -199,8 +199,22 @@ public class Node {
         return yPosition;
     }
 
-    void initChildren(Node[][] xNodes, Node[][] yNodes) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void initChildren(Nodes nodes) {
+        NodeDirection.initChilden(this, nodes);
+    }
+
+    public Node[] getChildren() {
+        Node[] children = null;
+        if (direction != null) {
+            if (direction == NodeDirection.FORWARD) {
+                children = this.getForwardChildren();
+            } else {
+                children = this.getReverseChildren();
+            }
+        } else {
+            children = new Node[3];
+        }
+        return children;
     }
 
 

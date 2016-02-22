@@ -129,6 +129,9 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
      */
     public void setWall(boolean wall) {
         this.wall = wall;
+        if (wall) {
+            setText("");
+        }
         repaint();
     }
 
