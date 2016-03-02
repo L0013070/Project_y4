@@ -20,8 +20,6 @@ package project_year4.gui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Point;
-import java.awt.event.MouseEvent;
 import project_year4.maze.Direction;
 import project_year4.maze.Maze;
 import project_year4.maze.MazeCell;
@@ -96,24 +94,40 @@ public class DisplayMaze extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         mazeLayeredPane.setBackground(new java.awt.Color(51, 51, 51));
-        mazeLayeredPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         gridPanel.setBackground(new java.awt.Color(51, 51, 51));
         gridPanel.setPreferredSize(new java.awt.Dimension(800, 800));
         gridPanel.setLayout(new java.awt.GridLayout(16, 16, 2, 2));
-        mazeLayeredPane.add(gridPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         xNodePanel.setBackground(new java.awt.Color(153, 255, 0));
         xNodePanel.setOpaque(false);
         xNodePanel.setPreferredSize(new java.awt.Dimension(725, 800));
         xNodePanel.setLayout(new java.awt.GridLayout(16, 15, 2, 2));
-        mazeLayeredPane.add(xNodePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 0, -1, -1));
-        mazeLayeredPane.setLayer(xNodePanel, javax.swing.JLayeredPane.MODAL_LAYER);
 
         yNodePanel.setOpaque(false);
         yNodePanel.setPreferredSize(new java.awt.Dimension(800, 775));
         yNodePanel.setLayout(new java.awt.GridLayout(15, 16, 0, 13));
-        mazeLayeredPane.add(yNodePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 26, -1, -1));
+
+        javax.swing.GroupLayout mazeLayeredPaneLayout = new javax.swing.GroupLayout(mazeLayeredPane);
+        mazeLayeredPane.setLayout(mazeLayeredPaneLayout);
+        mazeLayeredPaneLayout.setHorizontalGroup(
+            mazeLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(yNodePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(gridPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(mazeLayeredPaneLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(xNodePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        mazeLayeredPaneLayout.setVerticalGroup(
+            mazeLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mazeLayeredPaneLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(yNodePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(gridPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(xNodePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        mazeLayeredPane.setLayer(gridPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mazeLayeredPane.setLayer(xNodePanel, javax.swing.JLayeredPane.MODAL_LAYER);
         mazeLayeredPane.setLayer(yNodePanel, javax.swing.JLayeredPane.POPUP_LAYER);
 
         add(mazeLayeredPane, java.awt.BorderLayout.CENTER);

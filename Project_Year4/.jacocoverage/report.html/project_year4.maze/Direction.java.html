@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Direction.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Project_Year4&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">project_year4.maze</a> &gt; <span class="el_source">Direction.java</span></div><h1>Direction.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 L00131070.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301  USA
+ */
+package project_year4.maze;
+
+
+/**
+ *
+ * @author L00131070
+ */
+<span class="fc" id="L26">public enum Direction {</span>
+<span class="fc" id="L27">    NORTH(0,0, NodeTyp.Y),</span>
+<span class="fc" id="L28">    EAST(0,0, NodeTyp.X),</span>
+<span class="fc" id="L29">    SOUTH(0,-1, NodeTyp.Y),</span>
+<span class="fc" id="L30">    WEST(-1,0, NodeTyp.X);</span>
+    
+<span class="fc" id="L32">    private int xCellOffset = 0;</span>
+<span class="fc" id="L33">    private int yCellOffset = 0;</span>
+    private NodeTyp typ;
+    
+<span class="fc" id="L36">    Direction(int xCellOffset, int yCellOffset, NodeTyp typ) {</span>
+<span class="fc" id="L37">        this.xCellOffset = xCellOffset;</span>
+<span class="fc" id="L38">        this.yCellOffset = yCellOffset;</span>
+<span class="fc" id="L39">        this.typ = typ;</span>
+<span class="fc" id="L40">    }</span>
+    
+    public Node getNodeForCell(int xPos, int yPos, Nodes nodes) {
+<span class="fc" id="L43">        xPos += xCellOffset;</span>
+<span class="fc" id="L44">        yPos += yCellOffset;</span>
+<span class="fc" id="L45">        return nodes.getNode(typ, xPos , yPos);</span>
+    }
+    
+    public static Node[] getNodesForCell(int xPos, int yPos, Nodes nodes) {
+<span class="fc" id="L49">        Node[] ret = new Node[4]; </span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        for (int i = 0; i &lt; Direction.values().length; i++) {</span>
+<span class="fc" id="L51">            ret[i] = Direction.values()[i].getNodeForCell(xPos, yPos, nodes);</span>
+        }
+<span class="fc" id="L53">        return ret;</span>
+    }
+    
+    /**
+     * @return the typ
+     */
+    public NodeTyp getTyp() {
+<span class="fc" id="L60">        return typ;</span>
+    }
+
+    public Node getXNodeForCell(int x, int y, Nodes nodes) {
+<span class="fc" id="L64">        return nodes.getNode(NodeTyp.X, x+this.xCellOffset, y+this.yCellOffset);</span>
+    }
+
+    public Node getYNodeForCell(int x, int y, Nodes nodes) {
+<span class="fc" id="L68">        return nodes.getNode(NodeTyp.Y, x+this.xCellOffset, y+this.yCellOffset);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

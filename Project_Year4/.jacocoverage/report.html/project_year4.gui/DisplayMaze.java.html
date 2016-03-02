@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DisplayMaze.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Project_Year4&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">project_year4.gui</a> &gt; <span class="el_source">DisplayMaze.java</span></div><h1>DisplayMaze.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 L00131070.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301  USA
+ */
+package project_year4.gui;
+
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import project_year4.maze.Direction;
+import project_year4.maze.Maze;
+import project_year4.maze.MazeCell;
+import project_year4.maze.Node;
+import project_year4.maze.NodeTyp;
+import project_year4.maze.Nodes;
+
+/**
+ *
+ * @author L00131070
+ */
+public class DisplayMaze extends javax.swing.JPanel {
+
+    /**
+     * Creates new form DisplayMaze1
+     */
+<span class="fc" id="L41">    public DisplayMaze(MazeCell[][] cells, Nodes nodes) {</span>
+<span class="fc" id="L42">        int mazeSize = Maze.MAZESIZE;</span>
+<span class="fc" id="L43">        initComponents();</span>
+<span class="fc" id="L44">        DisplayGridCell cell = null;</span>
+<span class="fc" id="L45">        DisplayNode node = null;</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        for (int y = (mazeSize - 1); y &gt;= 0; y--) {</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            for (int x = 0; x &lt; mazeSize; x++) {</span>
+<span class="fc" id="L48">                cell = new DisplayGridCell(x + &quot;/&quot; + (y));</span>
+<span class="fc" id="L49">                cells[x][y].addListener(cell);</span>
+<span class="fc" id="L50">                gridPanel.add(cell);</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">                if (x &lt; (mazeSize - 1)) {</span>
+<span class="fc" id="L52">                    node = new DisplayNode(&quot;-1.00&quot;, NodeTyp.X);</span>
+<span class="fc" id="L53">                    Node xNode = Direction.EAST.getXNodeForCell(x, y, nodes);</span>
+<span class="fc" id="L54">                    xNodePanel.add(node);</span>
+<span class="fc" id="L55">                    xNode.addListener(node);</span>
+                }
+<span class="fc bfc" id="L57" title="All 2 branches covered.">                if (y &lt; (mazeSize - 1)) {</span>
+<span class="fc" id="L58">                    node = new DisplayNode(&quot;-1.00&quot;, NodeTyp.Y);</span>
+<span class="fc" id="L59">                    Node yNode = Direction.NORTH.getYNodeForCell(x, y, nodes);</span>
+<span class="fc" id="L60">                    yNode.addListener(node);</span>
+<span class="fc" id="L61">                    yNodePanel.add(node);</span>
+                }
+            }
+        }
+
+<span class="fc" id="L66">        ((GridLayout) gridPanel.getLayout()).setColumns(mazeSize);</span>
+<span class="fc" id="L67">        ((GridLayout) gridPanel.getLayout()).setRows(mazeSize);</span>
+<span class="fc" id="L68">        Dimension dim = new Dimension(mazeSize * DisplayGridCell.CELLSIZE, mazeSize * DisplayGridCell.CELLSIZE);</span>
+//        System.out.println(&quot;size: &quot; + dim + &quot; size: &quot; + DisplayGridCell.CELLSIZE);
+<span class="fc" id="L70">        mazeLayeredPane.setSize(dim);</span>
+<span class="fc" id="L71">        mazeLayeredPane.setPreferredSize(dim);</span>
+<span class="fc" id="L72">        gridPanel.setPreferredSize(dim);</span>
+<span class="fc" id="L73">        xNodePanel.setPreferredSize(new Dimension((mazeSize - 1) * DisplayGridCell.CELLSIZE, mazeSize * DisplayGridCell.CELLSIZE));</span>
+<span class="fc" id="L74">        yNodePanel.setPreferredSize(new Dimension((mazeSize) * DisplayGridCell.CELLSIZE, (mazeSize - 1) * DisplayGridCell.CELLSIZE));</span>
+//        System.out.println(&quot;gridnode pref. size: &quot; + mazeLayeredPane.getPreferredSize());
+//        System.out.println(&quot;gridnode size: &quot; + mazeLayeredPane.getSize());
+//        System.out.println(&quot;P1: &quot; + gridPanel.getPreferredSize() + &quot; &quot; + gridPanel.getLocation());
+//        System.out.println(&quot;P2: &quot; + xNodePanel.getPreferredSize() + &quot; &quot; + xNodePanel.getLocation());
+//        System.out.println(&quot;P3: &quot; + yNodePanel.getPreferredSize() + &quot; &quot; + yNodePanel.getLocation());
+<span class="fc" id="L80">    }</span>
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="fc" id="L91">        mazeLayeredPane = new javax.swing.JLayeredPane();</span>
+<span class="fc" id="L92">        gridPanel = new javax.swing.JPanel();</span>
+<span class="fc" id="L93">        xNodePanel = new javax.swing.JPanel();</span>
+<span class="fc" id="L94">        yNodePanel = new javax.swing.JPanel();</span>
+
+<span class="fc" id="L96">        setLayout(new java.awt.BorderLayout());</span>
+
+<span class="fc" id="L98">        mazeLayeredPane.setBackground(new java.awt.Color(51, 51, 51));</span>
+<span class="fc" id="L99">        mazeLayeredPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());</span>
+
+<span class="fc" id="L101">        gridPanel.setBackground(new java.awt.Color(51, 51, 51));</span>
+<span class="fc" id="L102">        gridPanel.setPreferredSize(new java.awt.Dimension(800, 800));</span>
+<span class="fc" id="L103">        gridPanel.setLayout(new java.awt.GridLayout(16, 16, 2, 2));</span>
+<span class="fc" id="L104">        mazeLayeredPane.add(gridPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));</span>
+
+<span class="fc" id="L106">        xNodePanel.setBackground(new java.awt.Color(153, 255, 0));</span>
+<span class="fc" id="L107">        xNodePanel.setOpaque(false);</span>
+<span class="fc" id="L108">        xNodePanel.setPreferredSize(new java.awt.Dimension(725, 800));</span>
+<span class="fc" id="L109">        xNodePanel.setLayout(new java.awt.GridLayout(16, 15, 2, 2));</span>
+<span class="fc" id="L110">        mazeLayeredPane.add(xNodePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 0, -1, -1));</span>
+<span class="fc" id="L111">        mazeLayeredPane.setLayer(xNodePanel, javax.swing.JLayeredPane.MODAL_LAYER);</span>
+
+<span class="fc" id="L113">        yNodePanel.setOpaque(false);</span>
+<span class="fc" id="L114">        yNodePanel.setPreferredSize(new java.awt.Dimension(800, 775));</span>
+<span class="fc" id="L115">        yNodePanel.setLayout(new java.awt.GridLayout(15, 16, 0, 13));</span>
+<span class="fc" id="L116">        mazeLayeredPane.add(yNodePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 26, -1, -1));</span>
+<span class="fc" id="L117">        mazeLayeredPane.setLayer(yNodePanel, javax.swing.JLayeredPane.POPUP_LAYER);</span>
+
+<span class="fc" id="L119">        add(mazeLayeredPane, java.awt.BorderLayout.CENTER);</span>
+<span class="fc" id="L120">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel gridPanel;
+    private javax.swing.JLayeredPane mazeLayeredPane;
+    private javax.swing.JPanel xNodePanel;
+    private javax.swing.JPanel yNodePanel;
+    // End of variables declaration//GEN-END:variables
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

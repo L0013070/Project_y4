@@ -23,6 +23,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import project_year4.algorithm.Algorithm;
+import project_year4.algorithm.BreadthFirst;
 import project_year4.algorithm.heuristic.Heuristic;
 import project_year4.gui.DisplayMaze;
 import project_year4.maze.mode.MovementMode;
@@ -107,6 +108,8 @@ public class MazeTest extends TestCase {
     public void testSolve() {
         System.out.println("solve");
         Maze instance = new Maze();
+        instance.solve();
+        instance.setAlgorithm(new BreadthFirst());
         instance.solve();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
