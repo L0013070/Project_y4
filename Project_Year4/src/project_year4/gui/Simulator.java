@@ -18,9 +18,11 @@
  */
 package project_year4.gui;
 
+import java.awt.event.ItemEvent;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import project_year4.algorithm.BreadthFirst;
 import project_year4.maze.Maze;
 
 /**
@@ -92,7 +94,7 @@ public class Simulator extends javax.swing.JFrame {
         labelAlgorithm.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(labelAlgorithm);
 
-        cbAlgorithm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAlgorithm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Breadth First", "Dijkstra", "Algorithm A" }));
         cbAlgorithm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbAlgorithmActionPerformed(evt);
@@ -234,11 +236,18 @@ public class Simulator extends javax.swing.JFrame {
     }//GEN-LAST:event_menuExitActionPerformed
 
     private void buttonDoSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDoSimulationActionPerformed
-        // TODO add your handling code here:
+        maze.setStart(maze.getMazeCell(0, 0));
+        maze.solve();
     }//GEN-LAST:event_buttonDoSimulationActionPerformed
 
     private void cbAlgorithmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlgorithmActionPerformed
-        // TODO add your handling code here:
+        if (evt.getActionCommand().equals("comboBoxChanged")) {
+            switch (cbAlgorithm.getSelectedIndex()) {
+                case 1: {
+                    maze.setAlgorithm(new BreadthFirst());
+                }
+            }
+        }
     }//GEN-LAST:event_cbAlgorithmActionPerformed
 
     private void cbHeuristicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHeuristicActionPerformed

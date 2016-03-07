@@ -24,7 +24,7 @@ package project_year4.maze;
  */
 public enum NodeDirection {
 
-    FORWARD(NodeTyp.Y, 1, 1, NodeTyp.X, 1, 0, NodeTyp.Y, 1, -1, NodeTyp.X, -1, 1, NodeTyp.Y, 0, 1, NodeTyp.X, 1, 1),
+    FORWARD(NodeTyp.Y, 1, 0, NodeTyp.X, 1, 0, NodeTyp.Y, 1, -1, NodeTyp.X, -1, 1, NodeTyp.Y, 0, 1, NodeTyp.X, 0, 1),
     REVERSE(NodeTyp.Y, 0, 0, NodeTyp.X, -1, 0, NodeTyp.Y, -1, -1, NodeTyp.X, 0, 0, NodeTyp.Y, 0, -1, NodeTyp.X, -1, -1);
 
     private final NodeTyp[] typXChildrenTyp = new NodeTyp[3];

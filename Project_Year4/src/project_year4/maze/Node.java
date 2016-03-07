@@ -26,7 +26,7 @@ import java.util.ArrayList;
  */
 public class Node {
 
-    private double value = -1.00;
+    private double value = 500.0;
     private NodeDirection direction = NodeDirection.FORWARD;
     private NodeTyp typ = NodeTyp.X;
     private boolean wall = false;

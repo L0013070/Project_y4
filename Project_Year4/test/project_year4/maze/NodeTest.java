@@ -28,7 +28,7 @@ import project_year4.gui.DisplayNode;
  * @author L00131070
  */
 public class NodeTest extends TestCase {
-    
+
     public NodeTest(String testName) {
         super(testName);
     }
@@ -37,12 +37,12 @@ public class NodeTest extends TestCase {
         TestSuite suite = new TestSuite(NodeTest.class);
         return suite;
     }
-    
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
     }
-    
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
@@ -287,9 +287,13 @@ public class NodeTest extends TestCase {
         instance.setDirection(NodeDirection.FORWARD);
         Node[] children = instance.getChildren();
         for (Node node : children) {
-            System.out.println(node.toString());
+            if (node != null) {
+                System.out.println(node.toString());
+            } else {
+                System.out.println(node);
+            }
         }
-        
+
     }
-    
+
 }

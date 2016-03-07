@@ -46,6 +46,8 @@ public class Maze {
 
     private MazeCell[][] mazeCells = new MazeCell[MAZESIZE][MAZESIZE];
     private Nodes nodes = new Nodes();
+    private MazeCell start = null;
+    private MazeCell goal = null;
     
     public Maze() {
         for (int x = 0; x < Maze.MAZESIZE; x++) {
@@ -152,6 +154,42 @@ public class Maze {
      */
     protected Nodes getNodes() {
         return nodes;
+    }
+
+    public Node[] getStartNodes() {
+        if (getStart() != null) {
+            return getStart().getNodes();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @return the start
+     */
+    public MazeCell getStart() {
+        return start;
+    }
+
+    /**
+     * @param start the start to set
+     */
+    public void setStart(MazeCell start) {
+        this.start = start;
+    }
+
+    /**
+     * @return the goal
+     */
+    public MazeCell getGoal() {
+        return goal;
+    }
+
+    /**
+     * @param goal the goal to set
+     */
+    public void setGoal(MazeCell goal) {
+        this.goal = goal;
     }
 
 }
