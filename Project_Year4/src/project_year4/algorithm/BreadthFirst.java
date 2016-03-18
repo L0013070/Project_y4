@@ -56,10 +56,10 @@ public class BreadthFirst extends Algorithm {
             for (Node child : children) {
                 if (child != null && !child.isWall() && node.getValue() + 1.00 < child.getValue()) {
                     child.setValue(node.getValue() + 1.00);
-                    child.setDirection(NodeDirection.FORWARD);
+                    child.setParent(node);
                     openList.addLast(child);
-                    System.out.println("node: "+ node.getxPosition()+"/"+node.getyPosition()+ node.getTyp() + " " + node.getValue());
-                    System.out.println("child: "+ child.getxPosition()+"/"+child.getyPosition()+ node.getTyp() + " " + child.getValue());
+                    System.out.println("node: "+ node.getxPosition()+"/"+node.getyPosition()+ node.getTyp() + " " + node.getValue() + "parent: " + node.getDirection());
+                    System.out.println("child: "+ child.getxPosition()+"/"+child.getyPosition()+ node.getTyp() + " " + child.getValue() + "parent: " + node.getDirection());
                     
                 }
             }

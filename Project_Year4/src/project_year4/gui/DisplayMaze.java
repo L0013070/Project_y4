@@ -51,12 +51,14 @@ public class DisplayMaze extends javax.swing.JPanel {
                     Node xNode = Direction.EAST.getXNodeForCell(x, y, nodes);
                     xNodePanel.add(node);
                     xNode.addListener(node);
+                    xNode.setValue(xNode.getValue());
                 }
                 if (y < (mazeSize - 1)) {
                     node = new DisplayNode("-1.00", NodeTyp.Y);
                     Node yNode = Direction.NORTH.getYNodeForCell(x, y, nodes);
                     yNode.addListener(node);
                     yNodePanel.add(node);
+                    yNode.setValue(yNode.getValue());
                 }
             }
         }

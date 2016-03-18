@@ -19,6 +19,7 @@
 package project_year4.maze;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -37,14 +38,14 @@ public class Node {
     private Node[] reverseChildren = null;
 
     ArrayList<NodeListener> listeners = new ArrayList<>(10);
-    
+
     public Node(NodeTyp typ, int xPosition, int yPosition) {
         this.typ = typ;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
-        
+
     }
-    
+
     /**
      *
      * @param listener
@@ -217,5 +218,41 @@ public class Node {
         return children;
     }
 
+    /**
+     * @return the parent
+     */
+    public Node getParent() {
+        return parent;
+    }
+
+    /**
+     * @param parent the parent to set
+     */
+    public void setParent(Node parent) {
+        System.out.println("setParent");
+        System.out.print("forward Children: ");
+        for (Node child : forwardChildren) {
+            if (child != null) {
+                System.out.print(" " + child.xPosition + "/" + child.yPosition + " " + child.typ);
+            }
+        }
+        System.out.println();
+        if (Arrays.asList(forwardChildren).contains(parent)) {
+            System.out.println("set Direction Reverse");
+            this.setDirection(NodeDirection.REVERSE);
+        }
+        System.out.print("reverse Children: ");
+        for (Node child : reverseChildren) {
+            if (child != null) {
+                System.out.print(" " + child.xPosition + "/" + child.yPosition + " " + child.typ);
+            }
+        }
+        System.out.println();
+        if (Arrays.asList(reverseChildren).contains(parent)) {
+            System.out.println("set Direction Forward");
+            this.setDirection(NodeDirection.FORWARD);
+        }
+        this.parent = parent;
+    }
 
 }

@@ -64,6 +64,7 @@ public class Maze {
                 for (Node node : mazeCells[x][y].getNodes()) {
                     if (null != node) {
                         node.setWall(false);
+                        node.setValue(500.0);
                     }
                 }
             }
