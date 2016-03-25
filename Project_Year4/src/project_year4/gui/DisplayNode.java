@@ -27,6 +27,7 @@ import java.awt.event.MouseListener;
 import project_year4.maze.Node;
 import project_year4.maze.NodeDirection;
 import project_year4.maze.NodeListener;
+import project_year4.maze.NodeState;
 import project_year4.maze.NodeTyp;
 
 /**
@@ -38,12 +39,14 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
     private NodeTyp typ = NodeTyp.X;
     private NodeDirection direction = NodeDirection.FORWARD;
     private boolean wall = false;
+    private String value;
+    private NodeState state = NodeState.NORMAL;
 
     public DisplayNode(String text, NodeTyp typ) {
         super(text);
         this.typ = typ;
         this.setOpaque(false);
-        this.setForeground(Color.red);
+        this.setForeground(Color.BLACK);
         setFont(new Font("Courier New", Font.BOLD, 10));
         this.setComponentPopupMenu(DisplayNodePopUpMenu.getMenu());
     }
@@ -55,7 +58,9 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
 
     @Override
     public void updateValue(String value) {
+        this.value = value;
         setText(value);
+        repaint();
     }
 
     @Override
@@ -66,14 +71,14 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
             if (isWall()) {
                 g2d.setColor(Color.BLACK);
             } else {
-                g2d.setColor(Color.GREEN);
+                g2d.setColor(state.getColor());
             }
             g2d.fillRect(size.width / 2 - 1, 1, 2, size.height - 2);
         } else if (getTyp() == NodeTyp.Y) {
             if (isWall()) {
                 g2d.setColor(Color.BLACK);
             } else {
-                g2d.setColor(Color.YELLOW);
+                g2d.setColor(state.getColor());
             }
             g2d.fillRect(1, size.height / 2 - 1, size.width - 2, 2);
         }
@@ -107,7 +112,6 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
     public void setDirection(NodeDirection direction) {
         if (this.direction != direction) {
             this.direction = direction;
-            setText("-1.00");
             repaint();
         }
     }
@@ -138,6 +142,12 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
     @Override
     public void updateWall(boolean wall) {
         setWall(wall);
+    }
+
+    @Override
+    public void updateState(NodeState state) {
+        this.state = state;
+        repaint();
     }
 
 }

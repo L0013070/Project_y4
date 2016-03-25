@@ -30,6 +30,7 @@ public class MazeCell {
     private int xPos = -1;
     private int yPos = -1;
     private Maze maze = null;
+    private MazeCellState state = MazeCellState.NORMAL;
 
     public MazeCell(Maze maze, int xPos, int yPos) {
         this.xPos = xPos;
@@ -67,7 +68,9 @@ public class MazeCell {
 
     public boolean addListener(MazeCellListener listener) {
         if (!listeners.contains(listener)) {
-            return listeners.add(listener);
+            boolean ret = listeners.add(listener);
+            changedCell();
+            return ret;
         }
         return false;
     }
@@ -101,6 +104,21 @@ public class MazeCell {
                     node.setDirection(NodeDirection.FORWARD);
                 }
             }
+        }
+    }
+    
+    public MazeCellState getState() {
+        return state;
+    }
+
+    public void setState(MazeCellState state) {
+        this.state = state;
+        changedCell();
+    }
+    
+    public void changedCell() {
+        for (MazeCellListener listener : listeners) {
+            listener.changedMazeCell(this);
         }
     }
 

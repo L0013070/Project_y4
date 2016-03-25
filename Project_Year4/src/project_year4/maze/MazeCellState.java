@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 L00131070.
+ * Copyright (C) 2016 Dietmar.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,27 +16,31 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package project_year4.gui;
+package project_year4.maze;
 
 import java.awt.Color;
-import project_year4.maze.MazeCell;
-import project_year4.maze.MazeCellListener;
 
 
 /**
  *
- * @author L00131070
+ * @author Dietmar
  */
-public class DisplayGridCell extends DisplayMazeElement  implements MazeCellListener{
-
-    public DisplayGridCell(String text) {
-        super(text);
-        setBackground(Color.LIGHT_GRAY);
+public enum MazeCellState {
+    
+    NORMAL (Color.WHITE),
+    START (Color.GREEN),
+    GOAL (Color.RED);
+    
+    private Color color = Color.WHITE;
+    
+    private MazeCellState(Color color) {
+        this.color = color;
     }
 
-    @Override
-    public void changedMazeCell(MazeCell cell) {
-        setBackground(cell.getState().getColor());
+    public Color getColor() {
+        return color;
     }
+    
+    
     
 }

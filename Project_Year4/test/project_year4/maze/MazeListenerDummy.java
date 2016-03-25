@@ -18,11 +18,13 @@
  */
 package project_year4.maze;
 
+import project_year4.maze.MazeListener;
+
 /**
  *
  * @author L00131070
  */
-public class MazeListenerDummy implements MazeListener{
+public class MazeListenerDummy implements project_year4.maze.MazeListener{
     
     private int calls = 0;
     

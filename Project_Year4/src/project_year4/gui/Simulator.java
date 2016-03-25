@@ -22,7 +22,9 @@ import java.awt.event.ItemEvent;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import project_year4.algorithm.AlgorithmA;
 import project_year4.algorithm.BreadthFirst;
+import project_year4.algorithm.Dijkstra;
 import project_year4.maze.Maze;
 
 /**
@@ -94,7 +96,7 @@ public class Simulator extends javax.swing.JFrame {
         labelAlgorithm.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(labelAlgorithm);
 
-        cbAlgorithm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Breadth First", "Dijkstra", "Algorithm A" }));
+        cbAlgorithm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "select algorithm", "Breadth First", "Dijkstra", "Algorithm A" }));
         cbAlgorithm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbAlgorithmActionPerformed(evt);
@@ -107,7 +109,8 @@ public class Simulator extends javax.swing.JFrame {
         labelHeuristic.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(labelHeuristic);
 
-        cbHeuristic.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbHeuristic.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "select heuristic", "direct distance" }));
+        cbHeuristic.setEnabled(false);
         cbHeuristic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbHeuristicActionPerformed(evt);
@@ -236,22 +239,57 @@ public class Simulator extends javax.swing.JFrame {
     }//GEN-LAST:event_menuExitActionPerformed
 
     private void buttonDoSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDoSimulationActionPerformed
-        maze.setStart(maze.getMazeCell(0, 0));
-        maze.solve();
+        maze.resetNodes();
+        Thread thread = new Thread(new SimulatorThread(maze));
+        thread.start();
     }//GEN-LAST:event_buttonDoSimulationActionPerformed
 
     private void cbAlgorithmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlgorithmActionPerformed
+        System.out.println(cbAlgorithm.getSelectedIndex());
         if (evt.getActionCommand().equals("comboBoxChanged")) {
             switch (cbAlgorithm.getSelectedIndex()) {
                 case 1: {
+                    cbHeuristic.setEnabled(false);
                     maze.setAlgorithm(new BreadthFirst());
+                    logOutput.append("Algorithm Breadth First set\n");
+                    break;
+                }
+                case 2: {
+                    cbHeuristic.setEnabled(false);
+                    maze.setAlgorithm(new Dijkstra());
+                    logOutput.append("Algorithm Dijkstra set\n");
+                    break;
+                }
+                case 3: {
+                    cbHeuristic.setEnabled(true);
+                    maze.setAlgorithm(new AlgorithmA());
+                    logOutput.append("Algorithm A set\n");
+                    break;
+                }
+                default: {
+                    cbHeuristic.setEnabled(false);
                 }
             }
+            maze.resetNodes();
         }
     }//GEN-LAST:event_cbAlgorithmActionPerformed
 
     private void cbHeuristicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHeuristicActionPerformed
-        // TODO add your handling code here:
+        System.out.println(cbHeuristic.getSelectedIndex());
+        if (evt.getActionCommand().equals("comboBoxChanged")) {
+            switch (cbHeuristic.getSelectedIndex()) {
+                case 1: {
+                    break;
+                }
+                case 2: {
+                    break;
+                }
+                case 3: {
+                    break;
+                }
+            }
+            maze.resetNodes();
+        }
     }//GEN-LAST:event_cbHeuristicActionPerformed
 
     private void cbSimulationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSimulationTypeActionPerformed

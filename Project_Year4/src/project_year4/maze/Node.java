@@ -25,7 +25,7 @@ import java.util.Arrays;
  *
  * @author L00131070
  */
-public class Node {
+public class Node implements Comparable<Node>{
 
     private double value = 500.0;
     private NodeDirection direction = NodeDirection.FORWARD;
@@ -36,6 +36,16 @@ public class Node {
     private Node parent = null;
     private Node[] forwardChildren = null;
     private Node[] reverseChildren = null;
+    private NodeState state = NodeState.NORMAL;
+
+    public void setState(NodeState state) {
+        this.state = state;
+        changedState();
+    }
+
+    public NodeState getState() {
+        return state;
+    }
 
     ArrayList<NodeListener> listeners = new ArrayList<>(10);
 
@@ -158,6 +168,12 @@ public class Node {
         }
     }
 
+    private void changedState() {
+        for (NodeListener listener : listeners) {
+            listener.updateState(state);
+        }
+    }
+
     /**
      * @return the forwardChildren
      */
@@ -229,30 +245,49 @@ public class Node {
      * @param parent the parent to set
      */
     public void setParent(Node parent) {
-        System.out.println("setParent");
-        System.out.print("forward Children: ");
-        for (Node child : forwardChildren) {
-            if (child != null) {
-                System.out.print(" " + child.xPosition + "/" + child.yPosition + " " + child.typ);
-            }
-        }
-        System.out.println();
         if (Arrays.asList(forwardChildren).contains(parent)) {
-            System.out.println("set Direction Reverse");
             this.setDirection(NodeDirection.REVERSE);
         }
-        System.out.print("reverse Children: ");
-        for (Node child : reverseChildren) {
-            if (child != null) {
-                System.out.print(" " + child.xPosition + "/" + child.yPosition + " " + child.typ);
-            }
-        }
-        System.out.println();
         if (Arrays.asList(reverseChildren).contains(parent)) {
-            System.out.println("set Direction Forward");
             this.setDirection(NodeDirection.FORWARD);
         }
         this.parent = parent;
+    }
+
+    public String print() {
+        return this.typ + ":" + this.xPosition + "/" + this.yPosition;
+    }
+
+    public String printData() {
+        String ret = print() + "\nForwardChildren\n";
+        for (Node child : forwardChildren) {
+            if (child != null) {
+                ret += child.print() + ", ";
+            }
+        }
+        ret += "\nReverseChildren\n";
+        for (Node child : reverseChildren) {
+            if (child != null) {
+                ret += child.print() + ", ";
+            }
+        }
+        ret += "\n";
+        return ret;
+    }
+
+    public int compare(Node o1, Node o2) {
+        int ret = 0;
+        if (o1.getValue() < o2.getValue()) {
+            ret = -1;
+        } else if (o1.getValue() > o2.getValue()) {
+            ret = 1;
+        }
+        return ret;
+    }
+
+    @Override
+    public int compareTo(Node o) {
+        return compare(this, o);
     }
 
 }

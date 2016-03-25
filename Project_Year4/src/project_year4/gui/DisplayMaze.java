@@ -43,18 +43,19 @@ public class DisplayMaze extends javax.swing.JPanel {
         DisplayNode node = null;
         for (int y = (mazeSize - 1); y >= 0; y--) {
             for (int x = 0; x < mazeSize; x++) {
-                cell = new DisplayGridCell(x + "/" + (y));
+//                cell = new DisplayGridCell(x + "/" + (y));
+                cell = new DisplayGridCell("");
                 cells[x][y].addListener(cell);
                 gridPanel.add(cell);
                 if (x < (mazeSize - 1)) {
-                    node = new DisplayNode("-1.00", NodeTyp.X);
+                    node = new DisplayNode("testx", NodeTyp.X);
                     Node xNode = Direction.EAST.getXNodeForCell(x, y, nodes);
                     xNodePanel.add(node);
                     xNode.addListener(node);
                     xNode.setValue(xNode.getValue());
                 }
                 if (y < (mazeSize - 1)) {
-                    node = new DisplayNode("-1.00", NodeTyp.Y);
+                    node = new DisplayNode("testy", NodeTyp.Y);
                     Node yNode = Direction.NORTH.getYNodeForCell(x, y, nodes);
                     yNode.addListener(node);
                     yNodePanel.add(node);

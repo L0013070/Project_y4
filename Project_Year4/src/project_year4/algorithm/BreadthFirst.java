@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 import project_year4.maze.Maze;
 import project_year4.maze.Node;
 import project_year4.maze.NodeDirection;
+import project_year4.maze.NodeState;
 
 /**
  *
@@ -37,6 +38,8 @@ public class BreadthFirst extends Algorithm {
     @Override
     public void run(Maze maze) {
         init();
+        System.out.println(NodeDirection.FORWARD.getData());
+        System.out.println(NodeDirection.REVERSE.getData());
         Node[] startNodes = maze.getStartNodes();
         if (startNodes == null) {
             return;
@@ -49,20 +52,23 @@ public class BreadthFirst extends Algorithm {
             }
         }
         while (!openList.isEmpty()) {
-            System.out.println("start count: " + openList.size());
             Node node = openList.removeFirst();
             Node[] children = node.getChildren();
-            System.out.println("children: "+children.length);
             for (Node child : children) {
-                if (child != null && !child.isWall() && node.getValue() + 1.00 < child.getValue()) {
+                if (child != null && !child.isWall() && child.getValue() ==  500.0) {
                     child.setValue(node.getValue() + 1.00);
                     child.setParent(node);
                     openList.addLast(child);
-                    System.out.println("node: "+ node.getxPosition()+"/"+node.getyPosition()+ node.getTyp() + " " + node.getValue() + "parent: " + node.getDirection());
-                    System.out.println("child: "+ child.getxPosition()+"/"+child.getyPosition()+ node.getTyp() + " " + child.getValue() + "parent: " + node.getDirection());
-                    
+                    child.setState(NodeState.OPEN);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(BreadthFirst.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
             }
+            node.setState(NodeState.CLOSED);
 
         }
     }

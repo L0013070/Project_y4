@@ -44,11 +44,11 @@ public class Maze {
     SimulationTyp simulationTyp = null;
     ArrayList<MazeListener> listeners = new ArrayList<>(10);
 
-    private MazeCell[][] mazeCells = new MazeCell[MAZESIZE][MAZESIZE];
-    private Nodes nodes = new Nodes();
+    private final MazeCell[][] mazeCells = new MazeCell[MAZESIZE][MAZESIZE];
+    private final Nodes nodes = new Nodes();
     private MazeCell start = null;
     private MazeCell goal = null;
-    
+
     public Maze() {
         for (int x = 0; x < Maze.MAZESIZE; x++) {
             for (int y = 0; y < Maze.MAZESIZE; y++) {
@@ -56,7 +56,7 @@ public class Maze {
             }
         }
     }
-    
+
     public void reset() {
         for (int x = 0; x < Maze.MAZESIZE; x++) {
             for (int y = 0; y < Maze.MAZESIZE; y++) {
@@ -65,6 +65,20 @@ public class Maze {
                     if (null != node) {
                         node.setWall(false);
                         node.setValue(500.0);
+                    }
+                }
+            }
+        }
+    }
+
+    public void resetNodes() {
+        for (int x = 0; x < Maze.MAZESIZE; x++) {
+            for (int y = 0; y < Maze.MAZESIZE; y++) {
+                for (Node node : mazeCells[x][y].getNodes()) {
+                    if (null != node && !node.isWall()) {
+                        node.setValue(500.0);
+                        node.setDirection(NodeDirection.FORWARD);
+                        node.setState(NodeState.NORMAL);
                     }
                 }
             }
@@ -140,7 +154,7 @@ public class Maze {
         } catch (IOException ex) {
             Logger.getLogger(Maze.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
     }
 
     /**
@@ -176,7 +190,11 @@ public class Maze {
      * @param start the start to set
      */
     public void setStart(MazeCell start) {
+        if (this.start != null) {
+            this.start.setState(MazeCellState.NORMAL);
+        }
         this.start = start;
+        this.start.setState(MazeCellState.START);
     }
 
     /**

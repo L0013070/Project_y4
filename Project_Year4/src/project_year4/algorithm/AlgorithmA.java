@@ -18,14 +18,64 @@
  */
 package project_year4.algorithm;
 
-import project_year4.algorithm.heuristic.Heuristic;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import project_year4.maze.Maze;
+import project_year4.maze.Node;
+import project_year4.maze.NodeDirection;
+import project_year4.maze.NodeState;
 
 /**
  *
  * @author L00131070
  */
-public class AlgorithmA extends Dijkstra {
-    
-    private Heuristic heuristic = null;
-    
+public class AlgorithmA extends Algorithm {
+
+    PriorityQueue<Node> openList = new PriorityQueue<>();
+
+    @Override
+    public void run(Maze maze) {
+        init();
+        System.out.println(NodeDirection.FORWARD.getData());
+        System.out.println(NodeDirection.REVERSE.getData());
+        Node[] startNodes = maze.getStartNodes();
+        if (startNodes == null) {
+            return;
+        }
+        for (Node node : startNodes) {
+            if (node != null && !node.isWall()) {
+                node.setValue(0.5);
+                node.setDirection(NodeDirection.FORWARD);
+                openList.add(node);
+            }
+        }
+        while (!openList.isEmpty()) {
+            Node node = openList.poll();
+            Node[] children = node.getChildren();
+            for (Node child : children) {
+                if (child != null && !child.isWall() && node.getValue() + 1.00 < child.getValue()) {
+                    child.setValue(node.getValue() + 1.00);
+                    child.setParent(node);
+                    openList.add(child);
+                    child.setState(NodeState.OPEN);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(AlgorithmA.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+                node.setState(NodeState.CLOSED);
+            }
+
+        }
+    }
+
+    private void init() {
+        openList.clear();
+    }
+
 }
