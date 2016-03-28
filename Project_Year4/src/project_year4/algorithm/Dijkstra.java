@@ -19,6 +19,7 @@
 package project_year4.algorithm;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
@@ -39,8 +40,6 @@ public class Dijkstra extends Algorithm {
     @Override
     public void run(Maze maze) {
         init();
-        System.out.println(NodeDirection.FORWARD.getData());
-        System.out.println(NodeDirection.REVERSE.getData());
         Node[] startNodes = maze.getStartNodes();
         if (startNodes == null) {
             return;
@@ -52,12 +51,20 @@ public class Dijkstra extends Algorithm {
                 openList.add(node);
             }
         }
-        while (!openList.isEmpty()) {
-            Node node = openList.poll();
+        Node node = null;
+        int i = 0;
+        while (node == null) {
+            node = startNodes[i];
+            i++;
+        }
+        Node[] goalNodes = maze.getGoal().getNodes();
+        while (!openList.isEmpty()&& !Arrays.asList(goalNodes).contains(node)) {
+            node = openList.poll();
             Node[] children = node.getChildren();
             for (Node child : children) {
-                if (child != null && !child.isWall() && node.getValue() + 1.00 < child.getValue()) {
-                    child.setValue(node.getValue() + 1.00);
+                if (child != null && !child.isWall() && (node.getValue() + maze.getMovementMode().getCost(node, child) < child.getValue() || child.getValue() < 0)) {
+                    child.setValue(node.getValue() + maze.getMovementMode().getCost(node, child));
+                    child.setHeuristicValue(child.getValue());
                     child.setParent(node);
                     openList.add(child);
                     child.setState(NodeState.OPEN);

@@ -24,15 +24,15 @@ package project_year4.maze;
  */
 <span class="fc" id="L25">public enum NodeDirection {</span>
 
-<span class="fc" id="L27">    FORWARD(NodeTyp.Y, 1, 1, NodeTyp.X, 1, 0, NodeTyp.Y, 1, -1, NodeTyp.X, -1, 1, NodeTyp.Y, 0, 1, NodeTyp.X, 1, 1),</span>
-<span class="fc" id="L28">    REVERSE(NodeTyp.Y, 0, 0, NodeTyp.X, -1, 0, NodeTyp.Y, -1, -1, NodeTyp.X, 0, 0, NodeTyp.Y, 0, -1, NodeTyp.X, -1, -1);</span>
+<span class="fc" id="L27">    FORWARD(NodeTyp.Y, 1, 0, NodeTyp.X, 1, 0, NodeTyp.Y, 1, -1, NodeTyp.X, -1, 1, NodeTyp.Y, 0, 1, NodeTyp.X, 0, 1),</span>
+<span class="fc" id="L28">    REVERSE(NodeTyp.Y, 0, 0, NodeTyp.X, -1, 0, NodeTyp.Y, 0, -1, NodeTyp.X, 0, 0, NodeTyp.Y, 0, -1, NodeTyp.X, -1, 0);</span>
 
 <span class="fc" id="L30">    private final NodeTyp[] typXChildrenTyp = new NodeTyp[3];</span>
-<span class="fc" id="L31">    private final int[] typXChildrenX = {0,0,0};</span>
-<span class="fc" id="L32">    private final int[] typXChildrenY = {0,0,0};</span>
+<span class="fc" id="L31">    private final int[] typXChildrenX = {0, 0, 0};</span>
+<span class="fc" id="L32">    private final int[] typXChildrenY = {0, 0, 0};</span>
 <span class="fc" id="L33">    private final NodeTyp[] typYChildrenTyp = new NodeTyp[3];</span>
-<span class="fc" id="L34">    private final int[] typYChildrenX = {0,0,0};</span>
-<span class="fc" id="L35">    private final int[] typYChildrenY = {0,0,0};</span>
+<span class="fc" id="L34">    private final int[] typYChildrenX = {0, 0, 0};</span>
+<span class="fc" id="L35">    private final int[] typYChildrenY = {0, 0, 0};</span>
 
     private NodeDirection(NodeTyp typTypX1, int xTypXOffset1, int xTypYOffset1,
             NodeTyp typTypX2, int xTypXOffset2, int xTypYOffset2,
@@ -40,64 +40,63 @@ package project_year4.maze;
             NodeTyp typTypY1, int yTypXOffset1, int yTypYOffset1,
             NodeTyp typTypY2, int yTypXOffset2, int yTypYOffset2,
 <span class="fc" id="L42">            NodeTyp typTypY3, int yTypXOffset3, int yTypYOffset3) {</span>
-<span class="fc" id="L43">            typXChildrenTyp[0] = typTypX1;</span>
-<span class="fc" id="L44">            typXChildrenX[0] = xTypXOffset1;</span>
-<span class="fc" id="L45">            typXChildrenY[0] = xTypYOffset1;</span>
-<span class="fc" id="L46">            typXChildrenTyp[1] = typTypX2;</span>
-<span class="fc" id="L47">            typXChildrenX[1] = xTypXOffset2;</span>
-<span class="fc" id="L48">            typXChildrenY[1] = xTypYOffset2;</span>
-<span class="fc" id="L49">            typXChildrenTyp[2] = typTypX3;</span>
-<span class="fc" id="L50">            typXChildrenX[2] = xTypXOffset3;</span>
-<span class="fc" id="L51">            typXChildrenY[2] = xTypYOffset3;</span>
-<span class="fc" id="L52">            typYChildrenTyp[0] = typTypY1;</span>
-<span class="fc" id="L53">            typYChildrenX[0] = yTypXOffset1;</span>
-<span class="fc" id="L54">            typYChildrenY[0] = yTypYOffset1;</span>
-<span class="fc" id="L55">            typYChildrenTyp[1] = typTypY2;</span>
-<span class="fc" id="L56">            typYChildrenX[1] = yTypXOffset2;</span>
-<span class="fc" id="L57">            typYChildrenY[1] = yTypYOffset2;</span>
-<span class="fc" id="L58">            typYChildrenTyp[2] = typTypY3;</span>
-<span class="fc" id="L59">            typYChildrenX[2] = yTypXOffset3;</span>
-<span class="fc" id="L60">            typYChildrenY[2] = yTypYOffset3;</span>
+<span class="fc" id="L43">        typXChildrenTyp[0] = typTypX1;</span>
+<span class="fc" id="L44">        typXChildrenX[0] = xTypXOffset1;</span>
+<span class="fc" id="L45">        typXChildrenY[0] = xTypYOffset1;</span>
+<span class="fc" id="L46">        typXChildrenTyp[1] = typTypX2;</span>
+<span class="fc" id="L47">        typXChildrenX[1] = xTypXOffset2;</span>
+<span class="fc" id="L48">        typXChildrenY[1] = xTypYOffset2;</span>
+<span class="fc" id="L49">        typXChildrenTyp[2] = typTypX3;</span>
+<span class="fc" id="L50">        typXChildrenX[2] = xTypXOffset3;</span>
+<span class="fc" id="L51">        typXChildrenY[2] = xTypYOffset3;</span>
+<span class="fc" id="L52">        typYChildrenTyp[0] = typTypY1;</span>
+<span class="fc" id="L53">        typYChildrenX[0] = yTypXOffset1;</span>
+<span class="fc" id="L54">        typYChildrenY[0] = yTypYOffset1;</span>
+<span class="fc" id="L55">        typYChildrenTyp[1] = typTypY2;</span>
+<span class="fc" id="L56">        typYChildrenX[1] = yTypXOffset2;</span>
+<span class="fc" id="L57">        typYChildrenY[1] = yTypYOffset2;</span>
+<span class="fc" id="L58">        typYChildrenTyp[2] = typTypY3;</span>
+<span class="fc" id="L59">        typYChildrenX[2] = yTypXOffset3;</span>
+<span class="fc" id="L60">        typYChildrenY[2] = yTypYOffset3;</span>
 <span class="fc" id="L61">    }</span>
 
     public static void initChilden(Node node, Nodes nodes) {
 <span class="fc bfc" id="L64" title="All 2 branches covered.">        for (int i = 0; i &lt; 3; i++) {</span>
-<span class="fc" id="L65">                node.setForwardChildren(NodeDirection.FORWARD.getChildren(node, nodes));</span>
-<span class="fc" id="L66">                node.setReverseChildren(NodeDirection.REVERSE.getChildren(node, nodes));</span>
+<span class="fc" id="L65">            node.setForwardChildren(NodeDirection.FORWARD.getChildren(node, nodes));</span>
+<span class="fc" id="L66">            node.setReverseChildren(NodeDirection.REVERSE.getChildren(node, nodes));</span>
         }
 <span class="fc" id="L68">    }</span>
-    
+
     public String getData() {
 <span class="fc" id="L71">        String ret = this.name();</span>
 <span class="fc bfc" id="L72" title="All 2 branches covered.">        for (int i = 0; i &lt; 3; i++) {</span>
-<span class="fc" id="L73">            ret += &quot;Child typX: &quot;+i+&quot;\n&quot;;</span>
-<span class="fc" id="L74">            ret += &quot;Typ: &quot;+typXChildrenTyp[i]+&quot; x: &quot;+typXChildrenX[i]+&quot; y: &quot;+typXChildrenY[i]+&quot;\n&quot;;</span>
+<span class="fc" id="L73">            ret += &quot;Child typX: &quot; + i + &quot;\n&quot;;</span>
+<span class="fc" id="L74">            ret += &quot;Typ: &quot; + typXChildrenTyp[i] + &quot; x: &quot; + typXChildrenX[i] + &quot; y: &quot; + typXChildrenY[i] + &quot;\n&quot;;</span>
 <span class="fc" id="L75">            ret += &quot;reverse:\n&quot;;</span>
-<span class="fc" id="L76">            ret += &quot;Typ: &quot;+typYChildrenTyp[i]+&quot; x: &quot;+typYChildrenX[i]+&quot; y: &quot;+typYChildrenY[i]+&quot;\n&quot;;</span>
+<span class="fc" id="L76">            ret += &quot;Typ: &quot; + typYChildrenTyp[i] + &quot; x: &quot; + typYChildrenX[i] + &quot; y: &quot; + typYChildrenY[i] + &quot;\n&quot;;</span>
         }
 <span class="fc" id="L78">        return ret;</span>
     }
 
-    private Node[] getChildren(Node node, Nodes nodes) {
-<span class="fc" id="L82">        Node[] children = new Node[3];</span>
-<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (node.getTyp() == NodeTyp.X) {</span>
-<span class="fc bfc" id="L84" title="All 2 branches covered.">            for (int i = 0; i &lt; 3; i++) {</span>
-<span class="fc bfc" id="L85" title="All 2 branches covered.">                if (this.typXChildrenTyp[i] == NodeTyp.X) {</span>
-<span class="fc" id="L86">                    children[i] = nodes.getNode(NodeTyp.X, (node.getxPosition()+this.typXChildrenX[i]), (node.getyPosition()+this.typXChildrenY[i]));</span>
+<span class="fc" id="L81">    private Node[] getChildren(Node node, Nodes nodes) {        Node[] children = new Node[3];</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (node.getTyp() == NodeTyp.X) {</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">            for (int i = 0; i &lt; 3; i++) {</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">                if (this.typXChildrenTyp[i] == NodeTyp.X) {</span>
+<span class="fc" id="L85">                    children[i] = nodes.getNode(NodeTyp.X, (node.getxPosition() + this.typXChildrenX[i]), (node.getyPosition() + this.typXChildrenY[i]));</span>
                 } else {
-<span class="fc" id="L88">                    children[i] = nodes.getNode(NodeTyp.Y, (node.getxPosition()+this.typXChildrenX[i]), (node.getyPosition()+this.typXChildrenY[i]));</span>
+<span class="fc" id="L87">                    children[i] = nodes.getNode(NodeTyp.Y, (node.getxPosition() + this.typXChildrenX[i]), (node.getyPosition() + this.typXChildrenY[i]));</span>
                 }
             }
-<span class="pc bpc" id="L91" title="1 of 2 branches missed.">        } else if (node.getTyp() == NodeTyp.Y){</span>
-<span class="fc bfc" id="L92" title="All 2 branches covered.">            for (int i = 0; i &lt; 3; i++) {</span>
-<span class="fc bfc" id="L93" title="All 2 branches covered.">                if (this.typXChildrenTyp[i] == NodeTyp.X) {</span>
-<span class="fc" id="L94">                    children[i] = nodes.getNode(NodeTyp.X, (node.getxPosition()+this.typYChildrenX[i]), (node.getyPosition()+this.typYChildrenY[i]));</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">        } else if (node.getTyp() == NodeTyp.Y) {</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">            for (int i = 0; i &lt; 3; i++) {</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">                if (this.typYChildrenTyp[i] == NodeTyp.X) {</span>
+<span class="fc" id="L93">                    children[i] = nodes.getNode(NodeTyp.X, (node.getxPosition() + this.typYChildrenX[i]), (node.getyPosition() + this.typYChildrenY[i]));</span>
                 } else {
-<span class="fc" id="L96">                    children[i] = nodes.getNode(NodeTyp.Y, (node.getxPosition()+this.typYChildrenX[i]), (node.getyPosition()+this.typYChildrenY[i]));</span>
+<span class="fc" id="L95">                    children[i] = nodes.getNode(NodeTyp.Y, (node.getxPosition() + this.typYChildrenX[i]), (node.getyPosition() + this.typYChildrenY[i]));</span>
                 }
-            }
+          }
         }
-<span class="fc" id="L100">        return children;</span>
+<span class="fc" id="L99">        return children;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

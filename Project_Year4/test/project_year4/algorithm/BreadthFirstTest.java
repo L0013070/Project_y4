@@ -18,6 +18,7 @@
  */
 package project_year4.algorithm;
 
+import junit.framework.TestSuite;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -35,6 +36,11 @@ import project_year4.maze.Node;
 public class BreadthFirstTest {
 
     public BreadthFirstTest() {
+    }
+
+    public static junit.framework.Test suite() {
+        TestSuite suite = new TestSuite(BreadthFirstTest.class);
+        return suite;
     }
 
     @BeforeClass

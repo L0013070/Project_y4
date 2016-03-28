@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 L00131070.
+ * Copyright (C) 2016 Dietmar.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,7 +24,7 @@ import junit.framework.TestSuite;
 
 /**
  *
- * @author L00131070
+ * @author Dietmar
  */
 public class NodeListenerTest extends TestCase {
     
@@ -95,6 +95,18 @@ public class NodeListenerTest extends TestCase {
         fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of updateState method, of class NodeListener.
+     */
+    public void testUpdateState() {
+        System.out.println("updateState");
+        NodeState state = null;
+        NodeListener instance = new NodeListenerImpl();
+        instance.updateState(state);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
     public class NodeListenerImpl implements NodeListener {
 
         public void changedNode(Node node) {
@@ -108,6 +120,9 @@ public class NodeListenerTest extends TestCase {
 
         public void updateWall(boolean wall) {
         }
+
+        public void updateState(NodeState state) {
+        }
     }
-    
+
 }

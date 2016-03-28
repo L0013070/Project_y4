@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 L00131070.
+ * Copyright (C) 2016 Dietmar.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,7 +24,7 @@ import junit.framework.TestSuite;
 
 /**
  *
- * @author L00131070
+ * @author Dietmar
  */
 public class MazeListenerTest extends TestCase {
     
@@ -48,6 +48,28 @@ public class MazeListenerTest extends TestCase {
     }
 
     /**
+     * Test of simulationEnded method, of class MazeListener.
+     */
+    public void testSimulationEnded() {
+        System.out.println("simulationEnded");
+        MazeListener instance = new MazeListenerImpl();
+        instance.simulationEnded();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    public class MazeListenerImpl implements MazeListener {
+
+        @Override
+        public void simulationEnded() {
+        }
+
+        @Override
+        public void changedMaze(Maze maze) {
+        }
+    }
+
+    /**
      * Test of changedMaze method, of class MazeListener.
      */
     public void testChangedMaze() {
@@ -55,12 +77,8 @@ public class MazeListenerTest extends TestCase {
         Maze maze = null;
         MazeListener instance = new MazeListenerImpl();
         instance.changedMaze(maze);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
-    public class MazeListenerImpl implements MazeListener {
-
-        public void changedMaze(Maze maze) {
-        }
-    }
-    
 }

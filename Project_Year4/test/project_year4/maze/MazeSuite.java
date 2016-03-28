@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 L00131070.
+ * Copyright (C) 2016 Dietmar.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -21,12 +21,10 @@ package project_year4.maze;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import project_year4.maze.mode.ModeSuite;
-import project_year4.maze.typ.TypSuite;
 
 /**
  *
- * @author L00131070
+ * @author Dietmar
  */
 public class MazeSuite extends TestCase {
     
@@ -36,18 +34,18 @@ public class MazeSuite extends TestCase {
     
     public static Test suite() {
         TestSuite suite = new TestSuite("MazeSuite");
+        suite.addTest(MazeCellListenerTest.suite());
+        suite.addTest(MazeListenerTest.suite());
+        suite.addTest(NodeDirectionTest.suite());
+        suite.addTest(NodesTest.suite());
+        suite.addTest(DirectionTest.suite());
+        suite.addTest(NodeTest.suite());
+        suite.addTest(MazeCellStateTest.suite());
+        suite.addTest(NodeTypTest.suite());
         suite.addTest(MazeTest.suite());
         suite.addTest(MazeCellTest.suite());
-        suite.addTest(DirectionTest.suite());
-        suite.addTest(MazeListenerTest.suite());
-        suite.addTest(TypSuite.suite());
-        suite.addTest(MazeCellListenerTest.suite());
-        suite.addTest(NodesTest.suite());
-        suite.addTest(NodeTest.suite());
         suite.addTest(NodeListenerTest.suite());
-        suite.addTest(NodeDirectionTest.suite());
-        suite.addTest(ModeSuite.suite());
-        suite.addTest(NodeTypTest.suite());
+        suite.addTest(NodeStateTest.suite());
         return suite;
     }
     

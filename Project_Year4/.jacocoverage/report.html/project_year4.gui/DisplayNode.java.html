@@ -27,6 +27,7 @@ import java.awt.event.MouseListener;
 import project_year4.maze.Node;
 import project_year4.maze.NodeDirection;
 import project_year4.maze.NodeListener;
+import project_year4.maze.NodeState;
 import project_year4.maze.NodeTyp;
 
 /**
@@ -35,110 +36,119 @@ import project_year4.maze.NodeTyp;
  */
 public class DisplayNode extends DisplayMazeElement implements NodeListener {
 
-<span class="fc" id="L38">    private NodeTyp typ = NodeTyp.X;</span>
-<span class="fc" id="L39">    private NodeDirection direction = NodeDirection.FORWARD;</span>
-<span class="fc" id="L40">    private boolean wall = false;</span>
+<span class="fc" id="L39">    private NodeTyp typ = NodeTyp.X;</span>
+<span class="fc" id="L40">    private NodeDirection direction = NodeDirection.FORWARD;</span>
+<span class="fc" id="L41">    private boolean wall = false;</span>
+    private String value;
+<span class="fc" id="L43">    private NodeState state = NodeState.NORMAL;</span>
 
     public DisplayNode(String text, NodeTyp typ) {
-<span class="fc" id="L43">        super(text);</span>
-<span class="fc" id="L44">        this.typ = typ;</span>
-<span class="fc" id="L45">        this.setOpaque(false);</span>
-<span class="fc" id="L46">        this.setForeground(Color.red);</span>
-<span class="fc" id="L47">        setFont(new Font(&quot;Courier New&quot;, Font.BOLD, 10));</span>
-<span class="fc" id="L48">        this.setComponentPopupMenu(DisplayNodePopUpMenu.getMenu());</span>
-<span class="fc" id="L49">    }</span>
+<span class="fc" id="L46">        super(text);</span>
+<span class="fc" id="L47">        this.typ = typ;</span>
+<span class="fc" id="L48">        this.setOpaque(false);</span>
+<span class="fc" id="L49">        this.setForeground(Color.BLACK);</span>
+<span class="fc" id="L50">        setFont(new Font(&quot;Courier New&quot;, Font.BOLD, 10));</span>
+<span class="fc" id="L51">        this.setComponentPopupMenu(DisplayNodePopUpMenu.getMenu());</span>
+<span class="fc" id="L52">    }</span>
 
     @Override
     public void changedNode(Node node) {
         // TODO Auto-generated method stub
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L57">    }</span>
 
     @Override
     public void updateValue(String value) {
-<span class="nc" id="L58">        setText(value);</span>
-<span class="nc" id="L59">    }</span>
+<span class="fc" id="L61">        this.value = value;</span>
+<span class="fc" id="L62">        setText(value);</span>
+<span class="fc" id="L63">        repaint();</span>
+<span class="fc" id="L64">    }</span>
 
     @Override
     public void paint(Graphics g) {
-<span class="nc" id="L63">        Graphics2D g2d = (Graphics2D) g;</span>
-<span class="nc" id="L64">        Dimension size = getSize();</span>
-<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (getTyp() == NodeTyp.X) {</span>
-<span class="nc bnc" id="L66" title="All 2 branches missed.">            if (isWall()) {</span>
-<span class="nc" id="L67">                g2d.setColor(Color.BLACK);</span>
+<span class="nc" id="L68">        Graphics2D g2d = (Graphics2D) g;</span>
+<span class="nc" id="L69">        Dimension size = getSize();</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (getTyp() == NodeTyp.X) {</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">            if (isWall()) {</span>
+<span class="nc" id="L72">                g2d.setColor(Color.BLACK);</span>
             } else {
-<span class="nc" id="L69">                g2d.setColor(Color.GREEN);</span>
+<span class="nc" id="L74">                g2d.setColor(state.getColor());</span>
             }
-<span class="nc" id="L71">            g2d.fillRect(size.width / 2 - 1, 1, 2, size.height - 2);</span>
-<span class="nc bnc" id="L72" title="All 2 branches missed.">        } else if (getTyp() == NodeTyp.Y) {</span>
-<span class="nc bnc" id="L73" title="All 2 branches missed.">            if (isWall()) {</span>
-<span class="nc" id="L74">                g2d.setColor(Color.BLACK);</span>
+<span class="nc" id="L76">            g2d.fillRect(size.width / 2 - 1, 1, 2, size.height - 2);</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        } else if (getTyp() == NodeTyp.Y) {</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            if (isWall()) {</span>
+<span class="nc" id="L79">                g2d.setColor(Color.BLACK);</span>
             } else {
-<span class="nc" id="L76">                g2d.setColor(Color.YELLOW);</span>
+<span class="nc" id="L81">                g2d.setColor(state.getColor());</span>
             }
-<span class="nc" id="L78">            g2d.fillRect(1, size.height / 2 - 1, size.width - 2, 2);</span>
+<span class="nc" id="L83">            g2d.fillRect(1, size.height / 2 - 1, size.width - 2, 2);</span>
         }
-<span class="nc" id="L80">        super.paint(g);</span>
-<span class="nc" id="L81">    }</span>
+<span class="nc" id="L85">        super.paint(g);</span>
+<span class="nc" id="L86">    }</span>
 
     /**
      * @return the typ
      */
     public NodeTyp getTyp() {
-<span class="nc" id="L87">        return typ;</span>
+<span class="nc" id="L92">        return typ;</span>
     }
 
     /**
      * @param typ the typ to set
      */
     public void setTyp(NodeTyp typ) {
-<span class="nc" id="L94">        this.typ = typ;</span>
-<span class="nc" id="L95">    }</span>
+<span class="nc" id="L99">        this.typ = typ;</span>
+<span class="nc" id="L100">    }</span>
 
     /**
      * @return the direction
      */
     public NodeDirection getDirection() {
-<span class="nc" id="L101">        return direction;</span>
+<span class="nc" id="L106">        return direction;</span>
     }
 
     /**
      * @param direction the direction to set
      */
     public void setDirection(NodeDirection direction) {
-<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (this.direction != direction) {</span>
-<span class="nc" id="L109">            this.direction = direction;</span>
-<span class="nc" id="L110">            setText(&quot;-1.00&quot;);</span>
-<span class="nc" id="L111">            repaint();</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        if (this.direction != direction) {</span>
+<span class="nc" id="L114">            this.direction = direction;</span>
+<span class="nc" id="L115">            repaint();</span>
         }
-<span class="nc" id="L113">    }</span>
+<span class="nc" id="L117">    }</span>
 
     @Override
     public void updateDirection(NodeDirection direction) {
-<span class="nc" id="L117">        setDirection(direction);</span>
-<span class="nc" id="L118">    }</span>
+<span class="nc" id="L121">        setDirection(direction);</span>
+<span class="nc" id="L122">    }</span>
 
     /**
      * @return the wall
      */
     public boolean isWall() {
-<span class="nc" id="L124">        return wall;</span>
+<span class="nc" id="L128">        return wall;</span>
     }
 
     /**
      * @param wall the wall to set
      */
     public void setWall(boolean wall) {
-<span class="nc" id="L131">        this.wall = wall;</span>
-<span class="nc bnc" id="L132" title="All 2 branches missed.">        if (wall) {</span>
-<span class="nc" id="L133">            setText(&quot;&quot;);</span>
+<span class="nc" id="L135">        this.wall = wall;</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        if (wall) {</span>
+<span class="nc" id="L137">            setText(&quot;&quot;);</span>
         }
-<span class="nc" id="L135">        repaint();</span>
-<span class="nc" id="L136">    }</span>
+<span class="nc" id="L139">        repaint();</span>
+<span class="nc" id="L140">    }</span>
 
     @Override
     public void updateWall(boolean wall) {
-<span class="nc" id="L140">        setWall(wall);</span>
-<span class="nc" id="L141">    }</span>
+<span class="nc" id="L144">        setWall(wall);</span>
+<span class="nc" id="L145">    }</span>
+
+    @Override
+    public void updateState(NodeState state) {
+<span class="nc" id="L149">        this.state = state;</span>
+<span class="nc" id="L150">        repaint();</span>
+<span class="nc" id="L151">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

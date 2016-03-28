@@ -55,10 +55,10 @@ public class Nodes {
 
     Node getNode(NodeTyp typ, int xPos, int yPos) {
 <span class="fc" id="L57">        Node ret = null;</span>
-<span class="pc bpc" id="L58" title="1 of 10 branches missed.">        if (typ == NodeTyp.X &amp;&amp; xPos &lt; Maze.MAZESIZE - 1 &amp;&amp; xPos &gt;= 0 &amp;&amp; yPos &gt;= 0 &amp;&amp; yPos &lt; Maze.MAZESIZE) {</span>
+<span class="pc bpc" id="L58" title="2 of 10 branches missed.">        if (typ == NodeTyp.X &amp;&amp; xPos &lt; Maze.MAZESIZE - 1 &amp;&amp; xPos &gt;= 0 &amp;&amp; yPos &gt;= 0 &amp;&amp; yPos &lt; Maze.MAZESIZE) {</span>
 <span class="fc" id="L59">            ret = xNodes[xPos][yPos];</span>
         }
-<span class="fc bfc" id="L61" title="All 10 branches covered.">        if (typ == NodeTyp.Y &amp;&amp; yPos &lt; Maze.MAZESIZE - 1 &amp;&amp; yPos &gt;= 0 &amp;&amp; xPos &gt;= 0 &amp;&amp; xPos &lt; Maze.MAZESIZE) {</span>
+<span class="pc bpc" id="L61" title="2 of 10 branches missed.">        if (typ == NodeTyp.Y &amp;&amp; yPos &lt; Maze.MAZESIZE - 1 &amp;&amp; yPos &gt;= 0 &amp;&amp; xPos &gt;= 0 &amp;&amp; xPos &lt; Maze.MAZESIZE) {</span>
 <span class="fc" id="L62">            ret = yNodes[xPos][yPos];</span>
         }
 <span class="fc" id="L64">        return ret;</span>

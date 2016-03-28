@@ -156,4 +156,40 @@ public class MazeCellTest extends TestCase {
         assertTrue(Direction.NORTH.getNodeForCell(0,0, maze.getNodes()).isWall());
     }
 
+    /**
+     * Test of getState method, of class MazeCell.
+     */
+    public void testGetState() {
+        System.out.println("getState");
+        MazeCell instance = null;
+        MazeCellState expResult = null;
+        MazeCellState result = instance.getState();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setState method, of class MazeCell.
+     */
+    public void testSetState() {
+        System.out.println("setState");
+        MazeCellState state = null;
+        MazeCell instance = null;
+        instance.setState(state);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of changedCell method, of class MazeCell.
+     */
+    public void testChangedCell() {
+        System.out.println("changedCell");
+        MazeCell instance = null;
+        instance.changedCell();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
 }

@@ -18,18 +18,29 @@
  */
 package project_year4.algorithm.heuristic;
 
-import static project_year4.algorithm.heuristic.Heuristics.NONE;
+import project_year4.maze.MazeCell;
+import project_year4.maze.Node;
 
 /**
  *
  * @author L00131070
  */
-<span class="nc" id="L27">public abstract class Heuristic {</span>
+<span class="fc" id="L28">public abstract class Heuristic {</span>
     
-<span class="nc" id="L29">        Heuristics heuristic = NONE;</span>
-	
-	public abstract double calculate();
-        
+        public double getDistance(Node from, MazeCell goal) {
+<span class="fc" id="L31">           double distance = Double.MAX_VALUE;</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">           for (Node node : goal.getNodes()) {</span>
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">               if (node != null) {</span>
+<span class="fc" id="L34">                   double calcDistance = calculate(from, node);</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">                   if (calcDistance &lt; distance) {</span>
+<span class="fc" id="L36">                       distance = calcDistance;</span>
+                   }
+               }
+           }
+<span class="fc" id="L40">           return distance;</span>
+        }
+    
+	public abstract double calculate(Node from, Node to);
    
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -25,9 +25,10 @@ import java.util.Arrays;
  *
  * @author L00131070
  */
-public class Node implements Comparable<Node>{
+public class Node implements Comparable<Node> {
 
-    private double value = 500.0;
+    private double value = -1.0;
+    private double heuristicValue = 0.0;
     private NodeDirection direction = NodeDirection.FORWARD;
     private NodeTyp typ = NodeTyp.X;
     private boolean wall = false;
@@ -37,6 +38,7 @@ public class Node implements Comparable<Node>{
     private Node[] forwardChildren = null;
     private Node[] reverseChildren = null;
     private NodeState state = NodeState.NORMAL;
+    private int straightCount = 0;
 
     public void setState(NodeState state) {
         this.state = state;
@@ -91,7 +93,7 @@ public class Node implements Comparable<Node>{
      */
     protected void changedValue() {
         for (NodeListener listener : listeners) {
-            listener.updateValue(String.format("%.2f", getValue()));
+            listener.updateValue(String.format("<HTML>%.2f<BR>%d/%C<HTML>", getValue(),straightCount,getDirection().toString().charAt(0)));
         }
     }
 
@@ -251,7 +253,13 @@ public class Node implements Comparable<Node>{
         if (Arrays.asList(reverseChildren).contains(parent)) {
             this.setDirection(NodeDirection.FORWARD);
         }
+        if (parent != null && getTyp() == parent.getTyp()) {
+            setStraightCount(parent.getStraightCount() + 1);
+        } else {
+            setStraightCount(0);
+        }
         this.parent = parent;
+        changedValue();
     }
 
     public String print() {
@@ -277,9 +285,9 @@ public class Node implements Comparable<Node>{
 
     public int compare(Node o1, Node o2) {
         int ret = 0;
-        if (o1.getValue() < o2.getValue()) {
+        if (o1.getHeuristicValue() < o2.getHeuristicValue()) {
             ret = -1;
-        } else if (o1.getValue() > o2.getValue()) {
+        } else if (o1.getHeuristicValue() > o2.getHeuristicValue()) {
             ret = 1;
         }
         return ret;
@@ -288,6 +296,24 @@ public class Node implements Comparable<Node>{
     @Override
     public int compareTo(Node o) {
         return compare(this, o);
+    }
+
+    public double getHeuristicValue() {
+        return heuristicValue;
+    }
+
+    public void setHeuristicValue(double heuristicValue) {
+        this.heuristicValue = heuristicValue;
+        changedValue();
+
+    }
+
+    public int getStraightCount() {
+        return straightCount;
+    }
+
+    public void setStraightCount(int straightCount) {
+        this.straightCount = straightCount;
     }
 
 }

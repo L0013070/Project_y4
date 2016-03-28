@@ -18,6 +18,10 @@
  */
 package project_year4.algorithm;
 
+import project_year4.algorithm.heuristic.Heuristic;
+import project_year4.algorithm.heuristic.NullHeuristic;
+import project_year4.algorithm.mode.Constant;
+import project_year4.algorithm.mode.MovementMode;
 import project_year4.maze.Maze;
 
 /**
@@ -25,6 +29,7 @@ import project_year4.maze.Maze;
  * @author L00131070
  */
 public abstract class Algorithm {
-	public abstract void run(Maze maze);
     
+    public abstract void run(Maze maze);
+
 }

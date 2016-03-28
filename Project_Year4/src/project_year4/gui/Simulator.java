@@ -18,13 +18,18 @@
  */
 package project_year4.gui;
 
-import java.awt.event.ItemEvent;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import project_year4.algorithm.AlgorithmA;
 import project_year4.algorithm.BreadthFirst;
 import project_year4.algorithm.Dijkstra;
+import project_year4.algorithm.heuristic.DirectDistance;
+import project_year4.algorithm.heuristic.ManhattenDistance;
+import project_year4.algorithm.heuristic.NullHeuristic;
+import project_year4.algorithm.mode.Constant;
+import project_year4.algorithm.mode.RealPath;
+import project_year4.algorithm.mode.TimeMode;
 import project_year4.maze.Maze;
 
 /**
@@ -65,8 +70,6 @@ public class Simulator extends javax.swing.JFrame {
         cbAlgorithm = new javax.swing.JComboBox();
         labelHeuristic = new javax.swing.JLabel();
         cbHeuristic = new javax.swing.JComboBox();
-        labelSimulationMode = new javax.swing.JLabel();
-        cbSimulationType = new javax.swing.JComboBox();
         labelMovementMode = new javax.swing.JLabel();
         cbMovementMode = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
@@ -109,7 +112,7 @@ public class Simulator extends javax.swing.JFrame {
         labelHeuristic.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(labelHeuristic);
 
-        cbHeuristic.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "select heuristic", "direct distance" }));
+        cbHeuristic.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "select heuristic", "null distance", "direct distance", "manhatten distance" }));
         cbHeuristic.setEnabled(false);
         cbHeuristic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,25 +121,12 @@ public class Simulator extends javax.swing.JFrame {
         });
         jPanel2.add(cbHeuristic);
 
-        labelSimulationMode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelSimulationMode.setText("Simulation Type");
-        labelSimulationMode.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel2.add(labelSimulationMode);
-
-        cbSimulationType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbSimulationType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSimulationTypeActionPerformed(evt);
-            }
-        });
-        jPanel2.add(cbSimulationType);
-
         labelMovementMode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelMovementMode.setText("Movement Mode");
         labelMovementMode.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(labelMovementMode);
 
-        cbMovementMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbMovementMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Constant Cost", "Variable Cost (real path length)", "Time Cost", " " }));
         cbMovementMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbMovementModeActionPerformed(evt);
@@ -148,7 +138,7 @@ public class Simulator extends javax.swing.JFrame {
         panelConfiguration.setLayout(panelConfigurationLayout);
         panelConfigurationLayout.setHorizontalGroup(
             panelConfigurationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(buttonDoSimulation, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addComponent(buttonDoSimulation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelConfigurationLayout.setVerticalGroup(
@@ -279,12 +269,18 @@ public class Simulator extends javax.swing.JFrame {
         if (evt.getActionCommand().equals("comboBoxChanged")) {
             switch (cbHeuristic.getSelectedIndex()) {
                 case 1: {
+                    maze.setHeuristic(new NullHeuristic());
+                    logOutput.append("Null Heuristic set\n");
                     break;
                 }
                 case 2: {
+                    maze.setHeuristic(new DirectDistance());
+                    logOutput.append("Direct Distance Heuristic set\n");
                     break;
                 }
                 case 3: {
+                    maze.setHeuristic(new ManhattenDistance());
+                    logOutput.append("Manhatten Distance Heuristic set\n");
                     break;
                 }
             }
@@ -292,12 +288,28 @@ public class Simulator extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbHeuristicActionPerformed
 
-    private void cbSimulationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSimulationTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbSimulationTypeActionPerformed
-
     private void cbMovementModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMovementModeActionPerformed
-        // TODO add your handling code here:
+        System.out.println(cbMovementMode.getSelectedIndex());
+        if (evt.getActionCommand().equals("comboBoxChanged")) {
+            switch (cbMovementMode.getSelectedIndex()) {
+                case 1: {
+                    maze.setMovementMode(new RealPath());
+                    logOutput.append("Mode Real Path set\n");
+                    break;
+                }
+                case 2: {
+                    maze.setMovementMode(new TimeMode());
+                    logOutput.append("Mode Time set\n");
+                    break;
+                }
+                default: {
+                    maze.setMovementMode(new Constant());
+                    logOutput.append("Mode Constant set\n");
+                    break;
+                }
+            }
+            maze.resetNodes();
+        }
     }//GEN-LAST:event_cbMovementModeActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -347,7 +359,6 @@ public class Simulator extends javax.swing.JFrame {
     private javax.swing.JComboBox cbAlgorithm;
     private javax.swing.JComboBox cbHeuristic;
     private javax.swing.JComboBox cbMovementMode;
-    private javax.swing.JComboBox cbSimulationType;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -357,7 +368,6 @@ public class Simulator extends javax.swing.JFrame {
     private javax.swing.JLabel labelAlgorithm;
     private javax.swing.JLabel labelHeuristic;
     private javax.swing.JLabel labelMovementMode;
-    private javax.swing.JLabel labelSimulationMode;
     private javax.swing.JTextArea logOutput;
     private javax.swing.JMenuItem menuExit;
     private javax.swing.JMenuItem menuLoad;

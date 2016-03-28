@@ -18,8 +18,7 @@
  */
 package project_year4.algorithm;
 
-import java.io.IOException;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,12 +38,11 @@ public class AlgorithmA extends Algorithm {
     @Override
     public void run(Maze maze) {
         init();
-        System.out.println(NodeDirection.FORWARD.getData());
-        System.out.println(NodeDirection.REVERSE.getData());
         Node[] startNodes = maze.getStartNodes();
         if (startNodes == null) {
             return;
         }
+        Node[] goalNodes = maze.getGoal().getNodes();
         for (Node node : startNodes) {
             if (node != null && !node.isWall()) {
                 node.setValue(0.5);
@@ -52,12 +50,20 @@ public class AlgorithmA extends Algorithm {
                 openList.add(node);
             }
         }
-        while (!openList.isEmpty()) {
-            Node node = openList.poll();
+        Node node = null;
+        int i = 0;
+        while (node == null) {
+            node = startNodes[i];
+            i++;
+        }
+        System.out.println(node.print());
+        while (!openList.isEmpty() && !Arrays.asList(goalNodes).contains(node)) {
+            node = openList.poll();
             Node[] children = node.getChildren();
             for (Node child : children) {
-                if (child != null && !child.isWall() && node.getValue() + 1.00 < child.getValue()) {
-                    child.setValue(node.getValue() + 1.00);
+                if (child != null && !child.isWall() && (node.getValue() + maze.getMovementMode().getCost(node, child) < child.getValue() || child.getValue() < 0)) {
+                    child.setValue(node.getValue() + maze.getMovementMode().getCost(node, child));
+                    child.setHeuristicValue(child.getValue()+maze.getHeuristic().getDistance(child, maze.getGoal()));
                     child.setParent(node);
                     openList.add(child);
                     child.setState(NodeState.OPEN);

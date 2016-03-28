@@ -27,7 +27,8 @@ import java.awt.Color;
 public enum NodeState {
     NORMAL (new Color(0xF0F0F0)),
     OPEN(Color.RED),
-    CLOSED(Color.GREEN);
+    CLOSED(Color.GREEN),
+    PATH(Color.ORANGE);
     
     private Color color;
     

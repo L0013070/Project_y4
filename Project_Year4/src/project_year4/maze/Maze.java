@@ -27,9 +27,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import project_year4.algorithm.Algorithm;
 import project_year4.algorithm.heuristic.Heuristic;
+import project_year4.algorithm.heuristic.NullHeuristic;
+import project_year4.algorithm.mode.Constant;
 import project_year4.gui.DisplayMaze;
-import project_year4.maze.mode.MovementMode;
-import project_year4.maze.typ.SimulationTyp;
+import project_year4.algorithm.mode.MovementMode;
 
 /**
  *
@@ -39,10 +40,10 @@ public class Maze {
 
     public static final int MAZESIZE = 16;
 
-    Algorithm algorithm = null;
-    MovementMode movementMode = null;
-    SimulationTyp simulationTyp = null;
-    ArrayList<MazeListener> listeners = new ArrayList<>(10);
+    private Algorithm algorithm = null;
+    private MovementMode movementMode = new Constant();
+    private Heuristic heuristic = new NullHeuristic(); 
+    private final ArrayList<MazeListener> listeners = new ArrayList<>(10);
 
     private final MazeCell[][] mazeCells = new MazeCell[MAZESIZE][MAZESIZE];
     private final Nodes nodes = new Nodes();
@@ -61,10 +62,14 @@ public class Maze {
         for (int x = 0; x < Maze.MAZESIZE; x++) {
             for (int y = 0; y < Maze.MAZESIZE; y++) {
                 mazeCells[x][y].setWalls(0);
+                mazeCells[x][y].setState(MazeCellState.NORMAL);
                 for (Node node : mazeCells[x][y].getNodes()) {
                     if (null != node) {
+                        node.setState(NodeState.NORMAL);
+                        node.setStraightCount(0);
                         node.setWall(false);
-                        node.setValue(500.0);
+                        node.setValue(-1.0);
+                        node.setParent(null);
                     }
                 }
             }
@@ -76,11 +81,14 @@ public class Maze {
             for (int y = 0; y < Maze.MAZESIZE; y++) {
                 for (Node node : mazeCells[x][y].getNodes()) {
                     if (null != node && !node.isWall()) {
-                        node.setValue(500.0);
+                        node.setStraightCount(0);
+                        node.setValue(-1.0);
                         node.setDirection(NodeDirection.FORWARD);
                         node.setState(NodeState.NORMAL);
+                        node.setParent(null);
                     }
                 }
+                mazeCells[x][y].setState(MazeCellState.NORMAL);
             }
         }
     }
@@ -94,15 +102,11 @@ public class Maze {
     }
 
     public void setHeuristic(Heuristic heuristic) {
-
+        this.heuristic = heuristic;
     }
 
     public void setMovementMode(MovementMode mode) {
         movementMode = mode;
-    }
-
-    public void setSimulationTyp(SimulationTyp typ) {
-        simulationTyp = typ;
     }
 
     public void solve() {
@@ -208,7 +212,19 @@ public class Maze {
      * @param goal the goal to set
      */
     public void setGoal(MazeCell goal) {
+        if (this.goal != null) {
+            this.goal.setState(MazeCellState.NORMAL);
+        }
+        goal.setState(MazeCellState.GOAL);
         this.goal = goal;
+    }
+
+    public MovementMode getMovementMode() {
+        return movementMode;
+    }
+
+    public Heuristic getHeuristic() {
+        return heuristic;
     }
 
 }

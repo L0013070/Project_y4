@@ -29,7 +29,8 @@ public enum MazeCellState {
     
     NORMAL (Color.WHITE),
     START (Color.GREEN),
-    GOAL (Color.RED);
+    GOAL (Color.RED),
+    PATH (Color.GRAY);
     
     private Color color = Color.WHITE;
     

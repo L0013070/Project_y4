@@ -35,9 +35,9 @@ public class DisplayGridCell extends DisplayMazeElement  implements MazeCellList
 <span class="fc" id="L35">    }</span>
 
     @Override
-    public void changedMazeCell(MazeCell maze) {
-<span class="nc" id="L39">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
-    }
+    public void changedMazeCell(MazeCell cell) {
+<span class="fc" id="L39">        setBackground(cell.getState().getColor());</span>
+<span class="fc" id="L40">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

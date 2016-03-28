@@ -62,5 +62,5 @@ public class MazeCellListenerTest extends TestCase {
         public void changedMazeCell(MazeCell cell) {
         }
     }
-    
+
 }

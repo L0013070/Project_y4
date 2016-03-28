@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SimulatorThread.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Project_Year4&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">project_year4.gui</a> &gt; <span class="el_source">SimulatorThread.java</span></div><h1>SimulatorThread.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 Dietmar.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301  USA
+ */
+package project_year4.gui;
+
+import project_year4.maze.Maze;
+import project_year4.maze.MazeCell;
+import project_year4.maze.MazeCellState;
+import project_year4.maze.Node;
+import project_year4.maze.NodeState;
+
+/**
+ *
+ * @author Dietmar
+ */
+public class SimulatorThread implements Runnable {
+
+    private final Maze maze;
+
+<span class="nc" id="L35">    public SimulatorThread(Maze maze) {</span>
+<span class="nc" id="L36">        this.maze = maze;</span>
+<span class="nc" id="L37">    }</span>
+
+    @Override
+    public void run() {
+<span class="nc" id="L41">        maze.setStart(maze.getMazeCell(0, 0));</span>
+<span class="nc" id="L42">        MazeCell goal = maze.getMazeCell(7, 7);</span>
+<span class="nc" id="L43">        maze.setGoal(goal);</span>
+<span class="nc" id="L44">        maze.solve();</span>
+<span class="nc" id="L45">        Node goalNode = null;</span>
+<span class="nc" id="L46">        double value = 1000.0;</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        for (Node node : goal.getNodes()) {</span>
+<span class="nc bnc" id="L48" title="All 4 branches missed.">            if (!node.isWall() &amp;&amp; node.getValue() &lt; value) {</span>
+<span class="nc" id="L49">                value = node.getValue();</span>
+<span class="nc" id="L50">                goalNode = node;</span>
+            }
+        }
+<span class="nc" id="L53">        Node actNode = goalNode;</span>
+<span class="nc" id="L54">        actNode = actNode.getParent();</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        while (actNode.getValue() &gt;  0.5 ) {</span>
+<span class="nc" id="L56">            actNode.setState(NodeState.PATH);</span>
+<span class="nc" id="L57">            actNode = actNode.getParent();</span>
+        }
+<span class="nc" id="L59">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

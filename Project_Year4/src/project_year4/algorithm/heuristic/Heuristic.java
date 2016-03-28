@@ -18,7 +18,8 @@
  */
 package project_year4.algorithm.heuristic;
 
-import static project_year4.algorithm.heuristic.Heuristics.NONE;
+import project_year4.maze.MazeCell;
+import project_year4.maze.Node;
 
 /**
  *
@@ -26,9 +27,19 @@ import static project_year4.algorithm.heuristic.Heuristics.NONE;
  */
 public abstract class Heuristic {
     
-        Heuristics heuristic = NONE;
-	
-	public abstract double calculate();
-        
+        public double getDistance(Node from, MazeCell goal) {
+           double distance = Double.MAX_VALUE;
+           for (Node node : goal.getNodes()) {
+               if (node != null) {
+                   double calcDistance = calculate(from, node);
+                   if (calcDistance < distance) {
+                       distance = calcDistance;
+                   }
+               }
+           }
+           return distance;
+        }
+    
+	public abstract double calculate(Node from, Node to);
    
 }

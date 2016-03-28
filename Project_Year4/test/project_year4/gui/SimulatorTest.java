@@ -18,7 +18,9 @@
  */
 package project_year4.gui;
 
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  *
@@ -28,6 +30,11 @@ public class SimulatorTest extends TestCase {
     
     public SimulatorTest(String testName) {
         super(testName);
+    }
+
+    public static Test suite() {
+        TestSuite suite = new TestSuite(SimulatorTest.class);
+        return suite;
     }
     
     @Override

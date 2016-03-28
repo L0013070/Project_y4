@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DirectDistance.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Project_Year4&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">project_year4.algorithm.heuristic</a> &gt; <span class="el_source">DirectDistance.java</span></div><h1>DirectDistance.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 Dietmar.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301  USA
+ */
+package project_year4.algorithm.heuristic;
+
+import project_year4.maze.Node;
+
+/**
+ *
+ * @author Dietmar
+ */
+<span class="fc" id="L27">public class DirectDistance extends Heuristic{</span>
+
+    @Override
+    public double calculate(Node from, Node to) {
+<span class="fc" id="L31">        double distance = 0.0;</span>
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if (from.getxPosition() == to.getxPosition()) {</span>
+<span class="nc" id="L33">            distance = Math.abs(from.getyPosition() - to.getyPosition());</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        } else if (from.getyPosition() == to.getyPosition()) {</span>
+<span class="nc" id="L35">            distance = Math.abs(from.getxPosition() - to.getxPosition());</span>
+        } else {
+<span class="fc" id="L37">            double x = from.getxPosition() - to.getxPosition();</span>
+<span class="fc" id="L38">            double y = from.getyPosition() - to.getyPosition();</span>
+<span class="fc" id="L39">            distance = Math.sqrt(Math.pow(y, 2)+Math.pow(x, 2));</span>
+        }
+<span class="fc" id="L41">        return distance;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

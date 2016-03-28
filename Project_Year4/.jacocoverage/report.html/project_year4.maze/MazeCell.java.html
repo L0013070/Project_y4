@@ -30,79 +30,97 @@ public class MazeCell {
 <span class="fc" id="L30">    private int xPos = -1;</span>
 <span class="fc" id="L31">    private int yPos = -1;</span>
 <span class="fc" id="L32">    private Maze maze = null;</span>
+<span class="fc" id="L33">    private MazeCellState state = MazeCellState.NORMAL;</span>
 
-<span class="fc" id="L34">    public MazeCell(Maze maze, int xPos, int yPos) {</span>
-<span class="fc" id="L35">        this.xPos = xPos;</span>
-<span class="fc" id="L36">        this.yPos = yPos;</span>
-<span class="fc" id="L37">        this.maze = maze;</span>
-<span class="fc" id="L38">    }</span>
+<span class="fc" id="L35">    public MazeCell(Maze maze, int xPos, int yPos) {</span>
+<span class="fc" id="L36">        this.xPos = xPos;</span>
+<span class="fc" id="L37">        this.yPos = yPos;</span>
+<span class="fc" id="L38">        this.maze = maze;</span>
+<span class="fc" id="L39">    }</span>
 
     /**
      * @return the xPos
      */
     public int getxPos() {
-<span class="fc" id="L44">        return xPos;</span>
+<span class="fc" id="L45">        return xPos;</span>
     }
 
     /**
      * @param xPos the xPos to set
      */
     public void setxPos(int xPos) {
-<span class="fc" id="L51">        this.xPos = xPos;</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L52">        this.xPos = xPos;</span>
+<span class="fc" id="L53">    }</span>
 
     /**
      * @return the yPos
      */
     public int getyPos() {
-<span class="fc" id="L58">        return yPos;</span>
+<span class="fc" id="L59">        return yPos;</span>
     }
 
     /**
      * @param yPos the yPos to set
      */
     public void setyPos(int yPos) {
-<span class="nc" id="L65">        this.yPos = yPos;</span>
-<span class="nc" id="L66">    }</span>
+<span class="nc" id="L66">        this.yPos = yPos;</span>
+<span class="nc" id="L67">    }</span>
 
     public boolean addListener(MazeCellListener listener) {
-<span class="pc bpc" id="L69" title="1 of 2 branches missed.">        if (!listeners.contains(listener)) {</span>
-<span class="fc" id="L70">            return listeners.add(listener);</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (!listeners.contains(listener)) {</span>
+<span class="fc" id="L71">            boolean ret = listeners.add(listener);</span>
+<span class="fc" id="L72">            changedCell();</span>
+<span class="fc" id="L73">            return ret;</span>
         }
-<span class="nc" id="L72">        return false;</span>
+<span class="nc" id="L75">        return false;</span>
     }
 
     public boolean removeListeners(MazeCellListener listener) {
-<span class="fc" id="L76">        return listeners.remove(listener);</span>
+<span class="fc" id="L79">        return listeners.remove(listener);</span>
     }
 
     public Node[] getNodes() {
-<span class="fc" id="L80">        return Direction.getNodesForCell(xPos, yPos, maze.getNodes());</span>
+<span class="fc" id="L83">        return Direction.getNodesForCell(xPos, yPos, maze.getNodes());</span>
     }
 
     public void setWalls(int walls) {
-<span class="fc" id="L84">        Node[] nodes = Direction.getNodesForCell(xPos, yPos, maze.getNodes());</span>
-<span class="fc bfc" id="L85" title="All 2 branches covered.">        if (walls &gt; 0) {</span>
-<span class="fc bfc" id="L86" title="All 4 branches covered.">            if ((walls &amp; 0x01) &gt; 0 &amp;&amp; nodes[Direction.NORTH.ordinal()] != null) {</span>
-<span class="fc" id="L87">                nodes[Direction.NORTH.ordinal()].setWall(true);</span>
+<span class="fc" id="L87">        Node[] nodes = Direction.getNodesForCell(xPos, yPos, maze.getNodes());</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (walls &gt; 0) {</span>
+<span class="pc bpc" id="L89" title="2 of 4 branches missed.">            if ((walls &amp; 0x01) &gt; 0 &amp;&amp; nodes[Direction.NORTH.ordinal()] != null) {</span>
+<span class="fc" id="L90">                nodes[Direction.NORTH.ordinal()].setWall(true);</span>
             }
-<span class="fc bfc" id="L89" title="All 4 branches covered.">            if ((walls &amp; 0x02) &gt; 0 &amp;&amp; nodes[Direction.EAST.ordinal()] != null) {</span>
-<span class="fc" id="L90">                nodes[Direction.EAST.ordinal()].setWall(true);</span>
+<span class="pc bpc" id="L92" title="3 of 4 branches missed.">            if ((walls &amp; 0x02) &gt; 0 &amp;&amp; nodes[Direction.EAST.ordinal()] != null) {</span>
+<span class="nc" id="L93">                nodes[Direction.EAST.ordinal()].setWall(true);</span>
             }
-<span class="fc bfc" id="L92" title="All 4 branches covered.">            if ((walls &amp; 0x04) &gt; 0 &amp;&amp; nodes[Direction.SOUTH.ordinal()] != null) {</span>
-<span class="fc" id="L93">                nodes[Direction.SOUTH.ordinal()].setWall(true);</span>
+<span class="pc bpc" id="L95" title="3 of 4 branches missed.">            if ((walls &amp; 0x04) &gt; 0 &amp;&amp; nodes[Direction.SOUTH.ordinal()] != null) {</span>
+<span class="nc" id="L96">                nodes[Direction.SOUTH.ordinal()].setWall(true);</span>
             }
-<span class="fc bfc" id="L95" title="All 4 branches covered.">            if ((walls &amp; 0x08) &gt; 0 &amp;&amp; nodes[Direction.WEST.ordinal()] != null) {</span>
-<span class="fc" id="L96">                nodes[Direction.WEST.ordinal()].setWall(true);</span>
+<span class="pc bpc" id="L98" title="3 of 4 branches missed.">            if ((walls &amp; 0x08) &gt; 0 &amp;&amp; nodes[Direction.WEST.ordinal()] != null) {</span>
+<span class="nc" id="L99">                nodes[Direction.WEST.ordinal()].setWall(true);</span>
             }
         } else {
-<span class="fc bfc" id="L99" title="All 2 branches covered.">            for (Node node : nodes) {</span>
-<span class="fc bfc" id="L100" title="All 2 branches covered.">                if (node != null) {</span>
-<span class="fc" id="L101">                    node.setDirection(NodeDirection.FORWARD);</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">            for (Node node : nodes) {</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">                if (node != null) {</span>
+<span class="fc" id="L104">                    node.setDirection(NodeDirection.FORWARD);</span>
                 }
             }
         }
-<span class="fc" id="L105">    }</span>
+<span class="fc" id="L108">    }</span>
+    
+    public MazeCellState getState() {
+<span class="fc" id="L111">        return state;</span>
+    }
+
+    public void setState(MazeCellState state) {
+<span class="fc" id="L115">        this.state = state;</span>
+<span class="fc" id="L116">        changedCell();</span>
+<span class="fc" id="L117">    }</span>
+    
+    public void changedCell() {
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        for (MazeCellListener listener : listeners) {</span>
+<span class="fc" id="L121">            listener.changedMazeCell(this);</span>
+<span class="fc" id="L122">        }</span>
+<span class="fc" id="L123">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

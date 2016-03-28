@@ -19,15 +19,19 @@
 package project_year4.gui;
 
 import project_year4.maze.Maze;
+import project_year4.maze.MazeCell;
+import project_year4.maze.MazeCellState;
+import project_year4.maze.Node;
+import project_year4.maze.NodeState;
 
 /**
  *
  * @author Dietmar
  */
-public class SimulatorThread implements Runnable{
+public class SimulatorThread implements Runnable {
 
     private final Maze maze;
-    
+
     public SimulatorThread(Maze maze) {
         this.maze = maze;
     }
@@ -35,7 +39,26 @@ public class SimulatorThread implements Runnable{
     @Override
     public void run() {
         maze.setStart(maze.getMazeCell(0, 0));
+        MazeCell goal = maze.getMazeCell(7, 7);
+        maze.setGoal(goal);
         maze.solve();
+        Node goalNode = null;
+        double value = 1000.0;
+        for (Node node : goal.getNodes()) {
+            if (!node.isWall() && node.getValue() < value) {
+                value = node.getValue();
+                goalNode = node;
+            }
+        }
+        goalNode.setState(NodeState.PATH);
+        Node actNode = goalNode;
+        actNode = actNode.getParent();
+        actNode.setState(NodeState.PATH);
+        while (actNode.getValue() > 0.5) {
+            actNode.setState(NodeState.PATH);
+            actNode = actNode.getParent();
+        }
+        actNode.setState(NodeState.PATH);
     }
-    
+
 }

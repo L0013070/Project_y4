@@ -296,4 +296,147 @@ public class NodeTest extends TestCase {
 
     }
 
+    /**
+     * Test of setState method, of class Node.
+     */
+    public void testSetState() {
+        System.out.println("setState");
+        NodeState state = null;
+        Node instance = null;
+        instance.setState(state);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getState method, of class Node.
+     */
+    public void testGetState() {
+        System.out.println("getState");
+        Node instance = null;
+        NodeState expResult = null;
+        NodeState result = instance.getState();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getChildren method, of class Node.
+     */
+    public void testGetChildren() {
+        System.out.println("getChildren");
+        Node instance = null;
+        Node[] expResult = null;
+        Node[] result = instance.getChildren();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getParent method, of class Node.
+     */
+    public void testGetParent() {
+        System.out.println("getParent");
+        Node instance = null;
+        Node expResult = null;
+        Node result = instance.getParent();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setParent method, of class Node.
+     */
+    public void testSetParent() {
+        System.out.println("setParent");
+        Node parent = null;
+        Node instance = null;
+        instance.setParent(parent);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of print method, of class Node.
+     */
+    public void testPrint() {
+        System.out.println("print");
+        Node instance = null;
+        String expResult = "";
+        String result = instance.print();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of printData method, of class Node.
+     */
+    public void testPrintData() {
+        System.out.println("printData");
+        Node instance = null;
+        String expResult = "";
+        String result = instance.printData();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of compare method, of class Node.
+     */
+    public void testCompare() {
+        System.out.println("compare");
+        Node o1 = null;
+        Node o2 = null;
+        Node instance = null;
+        int expResult = 0;
+        int result = instance.compare(o1, o2);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of compareTo method, of class Node.
+     */
+    public void testCompareTo() {
+        System.out.println("compareTo");
+        Node o = null;
+        Node instance = null;
+        int expResult = 0;
+        int result = instance.compareTo(o);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getHeuristicValue method, of class Node.
+     */
+    public void testGetHeuristicValue() {
+        System.out.println("getHeuristicValue");
+        Node instance = null;
+        double expResult = 0.0;
+        double result = instance.getHeuristicValue();
+        assertEquals(expResult, result, 0.0);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setHeuristicValue method, of class Node.
+     */
+    public void testSetHeuristicValue() {
+        System.out.println("setHeuristicValue");
+        double heuristicValue = 0.0;
+        Node instance = null;
+        instance.setHeuristicValue(heuristicValue);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
 }

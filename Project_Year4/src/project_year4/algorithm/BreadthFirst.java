@@ -38,8 +38,6 @@ public class BreadthFirst extends Algorithm {
     @Override
     public void run(Maze maze) {
         init();
-        System.out.println(NodeDirection.FORWARD.getData());
-        System.out.println(NodeDirection.REVERSE.getData());
         Node[] startNodes = maze.getStartNodes();
         if (startNodes == null) {
             return;
@@ -55,17 +53,20 @@ public class BreadthFirst extends Algorithm {
             Node node = openList.removeFirst();
             Node[] children = node.getChildren();
             for (Node child : children) {
-                if (child != null && !child.isWall() && child.getValue() ==  500.0) {
-                    child.setValue(node.getValue() + 1.00);
-                    child.setParent(node);
-                    openList.addLast(child);
-                    child.setState(NodeState.OPEN);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(BreadthFirst.class.getName()).log(Level.SEVERE, null, ex);
+                if (child != null && !child.isWall()) {
+                    double cost = node.getValue() + maze.getMovementMode().getCost(node, child);
+                    if (child.getValue() < 0) {
+                        child.setValue(cost);
+                        child.setHeuristicValue(cost);
+                        child.setParent(node);
+                        openList.addLast(child);
+                        child.setState(NodeState.OPEN);
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(BreadthFirst.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-
                 }
             }
             node.setState(NodeState.CLOSED);

@@ -26,8 +26,7 @@ import project_year4.algorithm.Algorithm;
 import project_year4.algorithm.BreadthFirst;
 import project_year4.algorithm.heuristic.Heuristic;
 import project_year4.gui.DisplayMaze;
-import project_year4.maze.mode.MovementMode;
-import project_year4.maze.typ.SimulationTyp;
+import project_year4.algorithm.mode.MovementMode;
 
 /**
  *
@@ -91,18 +90,6 @@ public class MazeTest extends TestCase {
     }
 
     /**
-     * Test of setSimulationTyp method, of class Maze.
-     */
-    public void testSetSimulationTyp() {
-        System.out.println("setSimulationTyp");
-        SimulationTyp typ = null;
-        Maze instance = new Maze();
-        instance.setSimulationTyp(typ);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of solve method, of class Maze.
      */
     public void testSolve() {
@@ -125,48 +112,6 @@ public class MazeTest extends TestCase {
         boolean expResult = false;
         boolean result = instance.load(file);
         assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of addListener method, of class Maze.
-     */
-    public void testAddListener() {
-        System.out.println("addListener");
-        MazeListener listener = (MazeListener) new MazeListenerDummy();
-        Maze instance = new Maze();
-        assertTrue(instance.addListener(listener));
-        assertFalse(instance.addListener(listener));
-    }
-
-    /**
-     * Test of removeListeners method, of class Maze.
-     */
-    public void testRemoveListeners() {
-        System.out.println("removeListeners");
-        MazeListener listener = (MazeListener) new MazeListenerDummy();
-        Maze instance = new Maze();
-        instance.addListener(listener);
-        assertTrue(instance.removeListeners(listener));
-        assertFalse(instance.removeListeners(listener));
-    }
-
-    /**
-     * Test of changedMaze method, of class Maze.
-     */
-    public void testChangedMaze() {
-        System.out.println("changedMaze");
-        MazeListenerDummy listener = new MazeListenerDummy();
-        Maze instance = new Maze();
-        instance.changedMaze();
-        assertEquals(listener.getCalls(), 0);
-        instance.addListener(listener);
-        assertEquals(listener.getCalls(), 0);
-        instance.changedMaze();
-        assertEquals(listener.getCalls(), 1);
-        instance.changedMaze();
-        assertEquals(listener.getCalls(), 2);
-        assertTrue(instance.removeListeners(listener));
-        assertFalse(instance.removeListeners(listener));
     }
 
     /**
@@ -241,6 +186,145 @@ public class MazeTest extends TestCase {
         Maze instance = new Maze();
         Nodes result = instance.getNodes();
         assertNotNull(result);
+    }
+
+    /**
+     * Test of resetNodes method, of class Maze.
+     */
+    public void testResetNodes() {
+        System.out.println("resetNodes");
+        Maze instance = new Maze();
+        instance.resetNodes();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of addListener method, of class Maze.
+     */
+    public void testAddListener() {
+        System.out.println("addListener");
+        project_year4.maze.MazeListener listener = null;
+        Maze instance = new Maze();
+        boolean expResult = false;
+        boolean result = instance.addListener(listener);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of removeListeners method, of class Maze.
+     */
+    public void testRemoveListeners() {
+        System.out.println("removeListeners");
+        project_year4.maze.MazeListener listener = null;
+        Maze instance = new Maze();
+        boolean expResult = false;
+        boolean result = instance.removeListeners(listener);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of changedMaze method, of class Maze.
+     */
+    public void testChangedMaze() {
+        System.out.println("changedMaze");
+        Maze instance = new Maze();
+        instance.changedMaze();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getStartNodes method, of class Maze.
+     */
+    public void testGetStartNodes() {
+        System.out.println("getStartNodes");
+        Maze instance = new Maze();
+        Node[] expResult = null;
+        Node[] result = instance.getStartNodes();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getStart method, of class Maze.
+     */
+    public void testGetStart() {
+        System.out.println("getStart");
+        Maze instance = new Maze();
+        MazeCell expResult = null;
+        MazeCell result = instance.getStart();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setStart method, of class Maze.
+     */
+    public void testSetStart() {
+        System.out.println("setStart");
+        MazeCell start = null;
+        Maze instance = new Maze();
+        instance.setStart(start);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getGoal method, of class Maze.
+     */
+    public void testGetGoal() {
+        System.out.println("getGoal");
+        Maze instance = new Maze();
+        MazeCell expResult = null;
+        MazeCell result = instance.getGoal();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setGoal method, of class Maze.
+     */
+    public void testSetGoal() {
+        System.out.println("setGoal");
+        MazeCell goal = null;
+        Maze instance = new Maze();
+        instance.setGoal(goal);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getMovementMode method, of class Maze.
+     */
+    public void testGetMovementMode() {
+        System.out.println("getMovementMode");
+        Maze instance = new Maze();
+        MovementMode expResult = null;
+        MovementMode result = instance.getMovementMode();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getHeuristic method, of class Maze.
+     */
+    public void testGetHeuristic() {
+        System.out.println("getHeuristic");
+        Maze instance = new Maze();
+        Heuristic expResult = null;
+        Heuristic result = instance.getHeuristic();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
 

@@ -18,19 +18,65 @@
  */
 package project_year4.algorithm;
 
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import project_year4.maze.Maze;
+import project_year4.maze.Node;
+import project_year4.maze.NodeDirection;
+import project_year4.maze.NodeState;
 
 /**
  *
  * @author L00131070
  */
-<span class="fc" id="L27">public class BreadthFirst extends Algorithm{</span>
+<span class="fc" id="L34">public class BreadthFirst extends Algorithm {</span>
 
-	@Override
-	public void run(Maze maze) {
-		// TODO Auto-generated method stub
-		
-<span class="fc" id="L33">	}</span>
-    
+<span class="fc" id="L36">    LinkedList&lt;Node&gt; openList = new LinkedList();</span>
+
+    @Override
+    public void run(Maze maze) {
+<span class="fc" id="L40">        init();</span>
+<span class="fc" id="L41">        Node[] startNodes = maze.getStartNodes();</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (startNodes == null) {</span>
+<span class="fc" id="L43">            return;</span>
+        }
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        for (Node node : startNodes) {</span>
+<span class="nc bnc" id="L46" title="All 4 branches missed.">            if (node != null &amp;&amp; !node.isWall()) {</span>
+<span class="nc" id="L47">                node.setValue(0.5);</span>
+<span class="nc" id="L48">                node.setDirection(NodeDirection.FORWARD);</span>
+<span class="nc" id="L49">                openList.addLast(node);</span>
+            }
+        }
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        while (!openList.isEmpty()) {</span>
+<span class="nc" id="L53">            Node node = openList.removeFirst();</span>
+<span class="nc" id="L54">            Node[] children = node.getChildren();</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">            for (Node child : children) {</span>
+<span class="nc bnc" id="L56" title="All 4 branches missed.">                if (child != null &amp;&amp; !child.isWall()) {</span>
+<span class="nc" id="L57">                    double cost = node.getValue() + maze.getMovementMode().getCost(node, child);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">                    if (child.getValue() &lt; 0) {</span>
+<span class="nc" id="L59">                        child.setValue(cost);</span>
+<span class="nc" id="L60">                        child.setHeuristicValue(cost);</span>
+<span class="nc" id="L61">                        child.setParent(node);</span>
+<span class="nc" id="L62">                        openList.addLast(child);</span>
+<span class="nc" id="L63">                        child.setState(NodeState.OPEN);</span>
+                        try {
+<span class="nc" id="L65">                            Thread.sleep(100);</span>
+<span class="nc" id="L66">                        } catch (InterruptedException ex) {</span>
+<span class="nc" id="L67">                            Logger.getLogger(BreadthFirst.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L68">                        }</span>
+                    }
+                }
+            }
+<span class="nc" id="L72">            node.setState(NodeState.CLOSED);</span>
+
+<span class="nc" id="L74">        }</span>
+<span class="nc" id="L75">    }</span>
+
+    private void init() {
+<span class="fc" id="L78">        openList.clear();</span>
+<span class="fc" id="L79">    }</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
