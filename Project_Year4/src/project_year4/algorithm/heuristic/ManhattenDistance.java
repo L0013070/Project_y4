@@ -30,7 +30,7 @@ public class ManhattenDistance extends Heuristic{
     public double calculate(Node from, Node to) {
         double distance = Math.abs(from.getyPosition() - to.getyPosition());
         distance += Math.abs(from.getxPosition() - to.getxPosition());
-        return distance;
+        return distance * getSquareSize();
     }
     
 }

@@ -31,6 +31,7 @@ import project_year4.algorithm.heuristic.NullHeuristic;
 import project_year4.algorithm.mode.Constant;
 import project_year4.gui.DisplayMaze;
 import project_year4.algorithm.mode.MovementMode;
+import project_year4.robot.Robot;
 
 /**
  *
@@ -40,6 +41,8 @@ public class Maze {
 
     public static final int MAZESIZE = 16;
 
+    private double squareSize = 0.18;
+    private Robot robot = new Robot(1.0,3.5,10.0);
     private Algorithm algorithm = null;
     private MovementMode movementMode = new Constant();
     private Heuristic heuristic = new NullHeuristic(); 
@@ -225,6 +228,22 @@ public class Maze {
 
     public Heuristic getHeuristic() {
         return heuristic;
+    }
+
+    public double getSquareSize() {
+        return squareSize;
+    }
+
+    public void setSquareSize(double squareSize) {
+        this.squareSize = squareSize;
+    }
+
+    public Robot getRobot() {
+        return robot;
+    }
+
+    public void setRobot(Robot robot) {
+        this.robot = robot;
     }
 
 }

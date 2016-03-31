@@ -18,14 +18,22 @@
  */
 package project_year4.gui;
 
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.InputVerifier;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import project_year4.algorithm.AlgorithmA;
 import project_year4.algorithm.BreadthFirst;
 import project_year4.algorithm.Dijkstra;
 import project_year4.algorithm.heuristic.DirectDistance;
+import project_year4.algorithm.heuristic.DirectDistanceTime;
 import project_year4.algorithm.heuristic.ManhattenDistance;
+import project_year4.algorithm.heuristic.ManhattenDistanceTime;
 import project_year4.algorithm.heuristic.NullHeuristic;
 import project_year4.algorithm.mode.Constant;
 import project_year4.algorithm.mode.RealPath;
@@ -37,7 +45,7 @@ import project_year4.maze.Maze;
  * @author L00131070
  */
 public class Simulator extends javax.swing.JFrame {
-    
+
     static final public String TITLE = "Year 4 Algorithm Simulator";
 
     private Maze maze = new Maze();
@@ -50,6 +58,10 @@ public class Simulator extends javax.swing.JFrame {
         initComponents();
         panelDisplayMaze = maze.createDisplayPanel();
         getContentPane().add(panelDisplayMaze, java.awt.BorderLayout.CENTER);
+        textSquareSize.setText(Double.toString(maze.getSquareSize()));
+        textMinVelocity.setText(Double.toString(maze.getRobot().getMinVelocity()));
+        textMaxVelocity.setText(Double.toString(maze.getRobot().getMaxVelocity()));
+        textAcceleration.setText(Double.toString(maze.getRobot().getAcceleration()));
         pack();
 
     }
@@ -64,7 +76,6 @@ public class Simulator extends javax.swing.JFrame {
     private void initComponents() {
 
         panelConfiguration = new javax.swing.JPanel();
-        buttonDoSimulation = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         labelAlgorithm = new javax.swing.JLabel();
         cbAlgorithm = new javax.swing.JComboBox();
@@ -72,12 +83,22 @@ public class Simulator extends javax.swing.JFrame {
         cbHeuristic = new javax.swing.JComboBox();
         labelMovementMode = new javax.swing.JLabel();
         cbMovementMode = new javax.swing.JComboBox();
+        labelSquareSize = new javax.swing.JLabel();
+        textSquareSize = new javax.swing.JTextField();
+        labelMinVelocity = new javax.swing.JLabel();
+        textMinVelocity = new javax.swing.JTextField();
+        labelMaxVelocity = new javax.swing.JLabel();
+        textMaxVelocity = new javax.swing.JTextField();
+        labelAcceleration = new javax.swing.JLabel();
+        textAcceleration = new javax.swing.JTextField();
+        buttonDoSimulation = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         logOutput = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         menuLoad = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         menuExit = new javax.swing.JMenuItem();
 
@@ -85,18 +106,10 @@ public class Simulator extends javax.swing.JFrame {
         setTitle("Year 4 Algorithm Simulator");
         setResizable(false);
 
-        buttonDoSimulation.setText("doSimulation");
-        buttonDoSimulation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonDoSimulationActionPerformed(evt);
-            }
-        });
+        jPanel2.setLayout(new java.awt.GridLayout(10, 1));
 
-        jPanel2.setLayout(new java.awt.GridLayout(8, 1));
-
-        labelAlgorithm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelAlgorithm.setLabelFor(cbAlgorithm);
         labelAlgorithm.setText("Algorithm");
-        labelAlgorithm.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(labelAlgorithm);
 
         cbAlgorithm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "select algorithm", "Breadth First", "Dijkstra", "Algorithm A" }));
@@ -107,12 +120,11 @@ public class Simulator extends javax.swing.JFrame {
         });
         jPanel2.add(cbAlgorithm);
 
-        labelHeuristic.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelHeuristic.setLabelFor(cbHeuristic);
         labelHeuristic.setText("Heuristic");
-        labelHeuristic.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(labelHeuristic);
 
-        cbHeuristic.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "select heuristic", "null distance", "direct distance", "manhatten distance" }));
+        cbHeuristic.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "select heuristic", "null distance", "direct distance", "manhatten distance", "direct distance time", "manhatten distance time" }));
         cbHeuristic.setEnabled(false);
         cbHeuristic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,9 +133,8 @@ public class Simulator extends javax.swing.JFrame {
         });
         jPanel2.add(cbHeuristic);
 
-        labelMovementMode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelMovementMode.setLabelFor(cbMovementMode);
         labelMovementMode.setText("Movement Mode");
-        labelMovementMode.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(labelMovementMode);
 
         cbMovementMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Constant Cost", "Variable Cost (real path length)", "Time Cost", " " }));
@@ -134,19 +145,118 @@ public class Simulator extends javax.swing.JFrame {
         });
         jPanel2.add(cbMovementMode);
 
+        labelSquareSize.setLabelFor(textSquareSize);
+        labelSquareSize.setText("Square Size (m)");
+        jPanel2.add(labelSquareSize);
+
+        textSquareSize.setInputVerifier(new InputVerifier() {
+            public boolean verify(JComponent input) {
+                javax.swing.JTextField tf = (javax.swing.JTextField) input;
+                java.util.regex.Pattern p = java.util.regex.Pattern.compile("(?:(?i)(?:[+-]?)(?:(?=[.]?[0-9])(?:[0-9]*)(?:(?:[.])(?:[0-9]{0,}))?)(?:(?:[E])(?:(?:[+-]?)(?:[0-9]+))|))");
+                java.util.regex.Matcher m = p.matcher(tf.getText());
+                if (m.matches()) {
+                    maze.setSquareSize(Double.parseDouble(tf.getText()));
+                    return true;
+                }
+                else {
+                    return false;
+                }
+
+            }
+        });
+        jPanel2.add(textSquareSize);
+
+        labelMinVelocity.setLabelFor(textMinVelocity);
+        labelMinVelocity.setText("Minimum Velocity (m/s)");
+        jPanel2.add(labelMinVelocity);
+
+        textMinVelocity.setInputVerifier(new InputVerifier() {
+            public boolean verify(JComponent input) {
+                javax.swing.JTextField tf = (javax.swing.JTextField) input;
+                java.util.regex.Pattern p = java.util.regex.Pattern.compile("(?:(?i)(?:[+-]?)(?:(?=[.]?[0-9])(?:[0-9]*)(?:(?:[.])(?:[0-9]{0,}))?)(?:(?:[E])(?:(?:[+-]?)(?:[0-9]+))|))");
+                java.util.regex.Matcher m = p.matcher(tf.getText());
+                if (m.matches()) {
+                    maze.getRobot().setMinVelocity(Double.parseDouble(tf.getText()));
+                    return true;
+                }
+                else {
+                    return false;
+                }
+
+            }
+        });
+        textMinVelocity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textMinVelocityActionPerformed(evt);
+            }
+        });
+        jPanel2.add(textMinVelocity);
+
+        labelMaxVelocity.setLabelFor(textMaxVelocity);
+        labelMaxVelocity.setText("Maximum Velocity (m/s)");
+        jPanel2.add(labelMaxVelocity);
+
+        textMaxVelocity.setInputVerifier(new InputVerifier() {
+            public boolean verify(JComponent input) {
+                javax.swing.JTextField tf = (javax.swing.JTextField) input;
+                java.util.regex.Pattern p = java.util.regex.Pattern.compile("(?:(?i)(?:[+-]?)(?:(?=[.]?[0-9])(?:[0-9]*)(?:(?:[.])(?:[0-9]{0,}))?)(?:(?:[E])(?:(?:[+-]?)(?:[0-9]+))|))");
+                java.util.regex.Matcher m = p.matcher(tf.getText());
+                if (m.matches()) {
+                    maze.getRobot().setMaxVelocity(Double.parseDouble(tf.getText()));
+                    return true;
+                }
+                else {
+                    return false;
+                }
+
+            }
+        });
+        jPanel2.add(textMaxVelocity);
+
+        labelAcceleration.setLabelFor(textAcceleration);
+        labelAcceleration.setText("<html>Acceleration (m/s<sup>2</sup>)</html>");
+        jPanel2.add(labelAcceleration);
+
+        textAcceleration.setInputVerifier(new InputVerifier() {
+            public boolean verify(JComponent input) {
+                javax.swing.JTextField tf = (javax.swing.JTextField) input;
+                java.util.regex.Pattern p = java.util.regex.Pattern.compile("(?:(?i)(?:[+-]?)(?:(?=[.]?[0-9])(?:[0-9]*)(?:(?:[.])(?:[0-9]{0,}))?)(?:(?:[E])(?:(?:[+-]?)(?:[0-9]+))|))");
+                java.util.regex.Matcher m = p.matcher(tf.getText());
+                if (m.matches()) {
+                    maze.getRobot().setAcceleration(Double.parseDouble(tf.getText()));
+                    return true;
+                }
+                else {
+                    return false;
+                }
+
+            }
+        });
+        jPanel2.add(textAcceleration);
+
+        buttonDoSimulation.setText("doSimulation");
+        buttonDoSimulation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDoSimulationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelConfigurationLayout = new javax.swing.GroupLayout(panelConfiguration);
         panelConfiguration.setLayout(panelConfigurationLayout);
         panelConfigurationLayout.setHorizontalGroup(
             panelConfigurationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(buttonDoSimulation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelConfigurationLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(panelConfigurationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonDoSimulation, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
         panelConfigurationLayout.setVerticalGroup(
             panelConfigurationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConfigurationLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonDoSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(buttonDoSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(panelConfiguration, java.awt.BorderLayout.LINE_END);
@@ -161,7 +271,7 @@ public class Simulator extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,6 +293,15 @@ public class Simulator extends javax.swing.JFrame {
             }
         });
         fileMenu.add(menuLoad);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem2.setText("Save Img");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem2);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem1.setText("Reset");
@@ -219,8 +338,8 @@ public class Simulator extends javax.swing.JFrame {
             maze.reset();
             File file = fc.getSelectedFile();
             maze.readMazFile(file);
-            this.setTitle(TITLE+" ("+file.getName()+")");
-            logOutput.append("reading file: "+file.getAbsolutePath()+"\n");
+            this.setTitle(TITLE + " (" + file.getName() + ")");
+            logOutput.append("reading file: " + file.getAbsolutePath() + "\n");
         }
     }//GEN-LAST:event_menuLoadActionPerformed
 
@@ -283,6 +402,16 @@ public class Simulator extends javax.swing.JFrame {
                     logOutput.append("Manhatten Distance Heuristic set\n");
                     break;
                 }
+                case 4: {
+                    maze.setHeuristic(new DirectDistanceTime());
+                    logOutput.append("Direct Distance Time Heuristic set\n");
+                    break;
+                }
+                case 5: {
+                    maze.setHeuristic(new ManhattenDistanceTime());
+                    logOutput.append("Manhatten Distance Time Heuristic set\n");
+                    break;
+                }
             }
             maze.resetNodes();
         }
@@ -315,8 +444,16 @@ public class Simulator extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         maze.reset();
         setTitle(TITLE);
-            logOutput.append("resetting map\n");
+        logOutput.append("resetting map\n");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void textMinVelocityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textMinVelocityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textMinVelocityActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        makeMazeImage();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,6 +491,22 @@ public class Simulator extends javax.swing.JFrame {
         });
     }
 
+    private void makeMazeImage() {
+        Dimension size = panelDisplayMaze.getSize();
+        BufferedImage image = new BufferedImage(
+                size.width, size.height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+        panelDisplayMaze.paint(g2);
+        try {
+            File file = new File("snapshot.png");
+            ImageIO.write(image, "png", file);
+            System.out.println("Panel saved as Image: "+file.getAbsolutePath());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonDoSimulation;
     private javax.swing.JComboBox cbAlgorithm;
@@ -362,15 +515,24 @@ public class Simulator extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelAcceleration;
     private javax.swing.JLabel labelAlgorithm;
     private javax.swing.JLabel labelHeuristic;
+    private javax.swing.JLabel labelMaxVelocity;
+    private javax.swing.JLabel labelMinVelocity;
     private javax.swing.JLabel labelMovementMode;
+    private javax.swing.JLabel labelSquareSize;
     private javax.swing.JTextArea logOutput;
     private javax.swing.JMenuItem menuExit;
     private javax.swing.JMenuItem menuLoad;
     private javax.swing.JPanel panelConfiguration;
+    private javax.swing.JTextField textAcceleration;
+    private javax.swing.JTextField textMaxVelocity;
+    private javax.swing.JTextField textMinVelocity;
+    private javax.swing.JTextField textSquareSize;
     // End of variables declaration//GEN-END:variables
 }

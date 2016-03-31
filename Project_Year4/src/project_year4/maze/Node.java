@@ -39,6 +39,7 @@ public class Node implements Comparable<Node> {
     private Node[] reverseChildren = null;
     private NodeState state = NodeState.NORMAL;
     private int straightCount = 0;
+    private ParentDirection parentDirection = ParentDirection.NONE;
 
     public void setState(NodeState state) {
         this.state = state;
@@ -88,12 +89,10 @@ public class Node implements Comparable<Node> {
         }
     }
 
-    /**
-     *
-     */
     protected void changedValue() {
         for (NodeListener listener : listeners) {
-            listener.updateValue(String.format("<HTML>%.2f<BR>%d/%C<HTML>", getValue(),straightCount,getDirection().toString().charAt(0)));
+            listener.updateValue(String.format("<HTML>%.2f<BR/>%d/%C/%s<HTML>", getValue(), straightCount, getDirection().toString().charAt(0),parentDirection.getArrow()));
+
         }
     }
 
@@ -247,12 +246,24 @@ public class Node implements Comparable<Node> {
      * @param parent the parent to set
      */
     public void setParent(Node parent) {
+        int parentDirectionIndex = -1;
         if (Arrays.asList(forwardChildren).contains(parent)) {
             this.setDirection(NodeDirection.REVERSE);
+            parentDirectionIndex = Arrays.asList(forwardChildren).indexOf(parent);
         }
         if (Arrays.asList(reverseChildren).contains(parent)) {
             this.setDirection(NodeDirection.FORWARD);
+            parentDirectionIndex = Arrays.asList(reverseChildren).indexOf(parent)+3;
         }
+        if (getTyp() == NodeTyp.Y) {
+            parentDirectionIndex = parentDirectionIndex + 6;
+        }
+        if (parentDirectionIndex <0 || parentDirectionIndex > 11 || parent == null) {
+            parentDirection = ParentDirection.NONE;
+        } else {
+            parentDirection = ParentDirection.values()[parentDirectionIndex];
+        }
+//        System.out.println("index: "+parentDirectionIndex+" enum: "+parentDirection);
         if (parent != null && getTyp() == parent.getTyp()) {
             setStraightCount(parent.getStraightCount() + 1);
         } else {
@@ -295,6 +306,9 @@ public class Node implements Comparable<Node> {
 
     @Override
     public int compareTo(Node o) {
+        if (o == null) {
+            return 1;
+        }
         return compare(this, o);
     }
 

@@ -38,7 +38,7 @@ public class DirectDistance extends Heuristic{
             double y = from.getyPosition() - to.getyPosition();
             distance = Math.sqrt(Math.pow(y, 2)+Math.pow(x, 2));
         }
-        return distance;
+        return distance * getSquareSize();
     }
     
 }

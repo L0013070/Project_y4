@@ -18,7 +18,10 @@
  */
 package project_year4.algorithm.mode;
 
+import java.util.Arrays;
+import project_year4.maze.Maze;
 import project_year4.maze.Node;
+import project_year4.robot.Robot;
 
 /**
  *
@@ -26,39 +29,86 @@ import project_year4.maze.Node;
  */
 public class TimeMode extends MovementMode {
 
-    double[] costStraight = {1.0, 1 / 2.0, 1 / 3.0, 1 / 4.0, 1 / 5.0, 1 / 5.0};
-    double costTurn = Math.PI / 4;
-    double[] penaltyTurn = new double[(costStraight.length * 2)-1];
+    double[] costStraight;
+    double lengthFactorTurn = Math.PI / 4;
+    double[] costTurn;
 
     public TimeMode() {
-        double[] accelerationCost = new double[penaltyTurn.length];
-        accelerationCost[0] = 0.0;
-        for (int i = 1; i < accelerationCost.length; i++) {
-            if (i < costStraight.length) {
-                accelerationCost[i] = accelerationCost[i - 1] + costStraight[i];
+        System.out.println("distance for maxVelocity: " + getDistance() / getSquareSize());
+        System.out.println("max index needed: " + (getDistance() / getSquareSize() * 2));
+
+    }
+
+    public void init(double squareSize, Robot robot) {
+        super.init(squareSize, robot);
+        System.out.println("Acc: " + this.getAcceleration());
+        System.out.println("min: " + this.getMinVelocity());
+        System.out.println("max: " + this.getMaxVelocity());
+
+        int indexSize = (int) (getDistance() / getSquareSize());
+        System.out.println("distance for maxVelocity in Squares: " + indexSize);
+        System.out.println("maxVelocity for indexSize: " + getFinalVelocity(indexSize));
+        System.out.println("max index needed: " + (indexSize * 2));
+        double[] velocities = new double[(indexSize * 2) + 1];
+        for (int i = 0; i < (velocities.length); i++) {
+            velocities[i] = getFinalVelocity(i / 2.0);
+        }
+        costStraight = new double[indexSize + 1];
+        for (int i = 0; i < costStraight.length - 1; i++) {
+            costStraight[i] = (velocities[(i + 1) * 2] - velocities[i * 2]) / getAcceleration();
+        }
+        costStraight[costStraight.length - 1] = getSquareSize() / velocities[velocities.length - 1];
+        System.out.println("Velocities: " + Arrays.toString(velocities));
+        System.out.println("cost straight: " + Arrays.toString(costStraight));
+        double[] straightAccumulatedCost = new double[(indexSize*2)];
+        straightAccumulatedCost[0] = costStraight[0];
+        for (int i=1; i < straightAccumulatedCost.length; i++) {
+            if (i < 3) {
+                straightAccumulatedCost[i] = straightAccumulatedCost[i-1]+costStraight[i];
             } else {
-                accelerationCost[i] = accelerationCost[i - 1] + costStraight[costStraight.length - 1];
+                straightAccumulatedCost[i] = straightAccumulatedCost[i-1]+costStraight[costStraight.length-1];
             }
         }
-        penaltyTurn[0] = 0;
-        System.out.println("breaking penalty " + 0 + ": " + penaltyTurn[0]);
-        penaltyTurn[1] = 0.5;
-        System.out.println("breaking penalty " + 1 + ": " + penaltyTurn[1]);
-        for (int i = 2; i < penaltyTurn.length; i = i + 2) {
-            double breakingCost = 2 * accelerationCost[i / 2];
-            penaltyTurn[i] = Math.abs(breakingCost - accelerationCost[i]);
-            System.out.println("breaking penalty " + i + ": " + penaltyTurn[i] + "streight: " + accelerationCost[i] + "breaking: " + breakingCost);
-            if ((i / 2 + 1) < costStraight.length) {
-                breakingCost += costStraight[i / 2 + 1];
-                penaltyTurn[i + 1] = Math.abs(breakingCost - accelerationCost[i + 1]);
-                System.out.println("breaking penalty " + (i + 1) + ": " + penaltyTurn[i + 1] + "streight: " + accelerationCost[i + 1] + "breaking: " + breakingCost);
-            }
+        System.out.println("acc cost straight: " + Arrays.toString(straightAccumulatedCost));
+        costTurn = new double[indexSize * 2];
+        for (int i = 0; i < costTurn.length; i++) {
+            costTurn[i] = getTime(velocities[i+1])*2 - straightAccumulatedCost[i];
         }
+        System.out.println("cost turn: " + Arrays.toString(costTurn));
+    }
+
+    public double getFinalVelocity(double distance) {
+        return Math.sqrt(2 * getAcceleration() * getSquareSize() * distance + getMinVelocity());
+    }
+
+    public double getDistance() {
+        return (Math.pow(getMaxVelocity(), 2) - Math.pow(getMinVelocity(), 2)) / (2 * getAcceleration());
+    }
+    
+    public double getTime(double velocity) {
+        return (velocity - getMinVelocity()) / getAcceleration();
     }
 
     @Override
     public double getCost(Node from, Node to) {
-        return 0.5;
+        double ret = 0.0;
+        if (from.getTyp() == to.getTyp()) {
+            if (from.getStraightCount() < costStraight.length) {
+                ret = costStraight[from.getStraightCount()];
+            } else {
+                ret = costStraight[costStraight.length-1];
+            }
+        } else {
+            ret = ((getSquareSize() * lengthFactorTurn)/getMinVelocity());
+            if (from.getStraightCount() > 0) {
+                if ( from.getStraightCount() < costTurn.length) {
+                    ret += costTurn[from.getStraightCount()-1];
+                } else {
+                    ret += costTurn[costTurn.length-1];
+                }
+            }
+        }
+        return ret;
     }
 
 }

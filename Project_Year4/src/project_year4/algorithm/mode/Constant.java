@@ -28,7 +28,7 @@ public class Constant extends MovementMode{
 
     @Override
     public double getCost(Node from, Node to) {
-        return 1.0;
+        return getSquareSize();
     }
     
 }

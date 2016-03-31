@@ -67,19 +67,14 @@ public class DisplayNode extends DisplayMazeElement implements NodeListener {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         Dimension size = getSize();
+        if (isWall()) {
+            g2d.setColor(Color.BLACK);
+        } else {
+            g2d.setColor(state.getColor());
+        }
         if (getTyp() == NodeTyp.X) {
-            if (isWall()) {
-                g2d.setColor(Color.BLACK);
-            } else {
-                g2d.setColor(state.getColor());
-            }
             g2d.fillRect(size.width / 2 - 1, 1, 2, size.height - 2);
         } else if (getTyp() == NodeTyp.Y) {
-            if (isWall()) {
-                g2d.setColor(Color.BLACK);
-            } else {
-                g2d.setColor(state.getColor());
-            }
             g2d.fillRect(1, size.height / 2 - 1, size.width - 2, 2);
         }
         super.paint(g);

@@ -20,7 +20,6 @@ package project_year4.gui;
 
 import project_year4.maze.Maze;
 import project_year4.maze.MazeCell;
-import project_year4.maze.MazeCellState;
 import project_year4.maze.Node;
 import project_year4.maze.NodeState;
 
@@ -41,6 +40,8 @@ public class SimulatorThread implements Runnable {
         maze.setStart(maze.getMazeCell(0, 0));
         MazeCell goal = maze.getMazeCell(7, 7);
         maze.setGoal(goal);
+        maze.getHeuristic().init(maze.getSquareSize(), maze.getRobot());
+        maze.getMovementMode().init(maze.getSquareSize(), maze.getRobot());
         maze.solve();
         Node goalNode = null;
         double value = 1000.0;
@@ -52,8 +53,6 @@ public class SimulatorThread implements Runnable {
         }
         goalNode.setState(NodeState.PATH);
         Node actNode = goalNode;
-        actNode = actNode.getParent();
-        actNode.setState(NodeState.PATH);
         while (actNode.getValue() > 0.5) {
             actNode.setState(NodeState.PATH);
             actNode = actNode.getParent();

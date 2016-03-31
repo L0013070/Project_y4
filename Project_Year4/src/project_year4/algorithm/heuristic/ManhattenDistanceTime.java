@@ -16,29 +16,21 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package project_year4.maze;
+package project_year4.algorithm.heuristic;
 
-import java.awt.Color;
+import project_year4.maze.Node;
 
 /**
  *
  * @author Dietmar
  */
-public enum NodeState {
-    NORMAL (new Color(0xF0F0F0)),
-    OPEN(Color.RED),
-    CLOSED(Color.GREEN),
-    PATH(Color.BLUE);
-    
-    private Color color;
-    
-    private NodeState(Color color) {
-        this.color = color;
-        
-    }
-    
-    public Color getColor() {
-        return color;
+public class ManhattenDistanceTime extends Heuristic{
+
+    @Override
+    public double calculate(Node from, Node to) {
+        double distance = Math.abs(from.getyPosition() - to.getyPosition());
+        distance += Math.abs(from.getxPosition() - to.getxPosition());
+        return distance * (getSquareSize()/(getMinVelocity()+getMaxVelocity()/2));
     }
     
 }

@@ -25,16 +25,16 @@ import project_year4.maze.Node;
  * @author L00131070
  */
 public class RealPath  extends MovementMode{
-
+    
     @Override
     public double getCost(Node from, Node to) {
         double ret = 0.0;
         if (from.getTyp() == to.getTyp()) {
-            ret = 1.0;
+            ret = getSquareSize();
         } else {
-            ret = Math.PI/4;
+            ret = getSquareSize() * Math.PI/4;
         }
         return ret;
     }
-    
+
 }

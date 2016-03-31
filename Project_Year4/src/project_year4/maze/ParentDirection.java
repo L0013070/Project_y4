@@ -18,27 +18,32 @@
  */
 package project_year4.maze;
 
-import java.awt.Color;
-
 /**
  *
  * @author Dietmar
  */
-public enum NodeState {
-    NORMAL (new Color(0xF0F0F0)),
-    OPEN(Color.RED),
-    CLOSED(Color.GREEN),
-    PATH(Color.BLUE);
+public enum ParentDirection {
+    XR0 ("ru"),
+    XR1 ("rt"),
+    XR2 ("rd"),
+    XF0 ("lu"),
+    XF1 ("lt"),
+    XF2 ("ld"),
+    YR0 ("ul"),
+    YR1 ("up"),
+    YR2 ("ur"),
+    YF0 ("dr"),
+    YF1 ("dn"),
+    YF2 ("dl"),
+    NONE ("");
     
-    private Color color;
+    private final String arrow;
     
-    private NodeState(Color color) {
-        this.color = color;
-        
+    private ParentDirection(String arrow) {
+        this.arrow = arrow;
     }
-    
-    public Color getColor() {
-        return color;
+
+    public String getArrow() {
+        return arrow;
     }
-    
 }
