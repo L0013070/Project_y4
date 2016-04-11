@@ -20,7 +20,6 @@ package project_year4.gui;
 
 import project_year4.maze.Maze;
 import project_year4.maze.MazeCell;
-import project_year4.maze.MazeCellState;
 import project_year4.maze.Node;
 import project_year4.maze.NodeState;
 
@@ -32,31 +31,34 @@ public class SimulatorThread implements Runnable {
 
     private final Maze maze;
 
-<span class="nc" id="L35">    public SimulatorThread(Maze maze) {</span>
-<span class="nc" id="L36">        this.maze = maze;</span>
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L34">    public SimulatorThread(Maze maze) {</span>
+<span class="nc" id="L35">        this.maze = maze;</span>
+<span class="nc" id="L36">    }</span>
 
     @Override
     public void run() {
-<span class="nc" id="L41">        maze.setStart(maze.getMazeCell(0, 0));</span>
-<span class="nc" id="L42">        MazeCell goal = maze.getMazeCell(7, 7);</span>
-<span class="nc" id="L43">        maze.setGoal(goal);</span>
-<span class="nc" id="L44">        maze.solve();</span>
-<span class="nc" id="L45">        Node goalNode = null;</span>
-<span class="nc" id="L46">        double value = 1000.0;</span>
-<span class="nc bnc" id="L47" title="All 2 branches missed.">        for (Node node : goal.getNodes()) {</span>
-<span class="nc bnc" id="L48" title="All 4 branches missed.">            if (!node.isWall() &amp;&amp; node.getValue() &lt; value) {</span>
-<span class="nc" id="L49">                value = node.getValue();</span>
-<span class="nc" id="L50">                goalNode = node;</span>
+<span class="nc" id="L40">        maze.setStart(maze.getMazeCell(0, 0));</span>
+<span class="nc" id="L41">        MazeCell goal = maze.getMazeCell(7, 7);</span>
+<span class="nc" id="L42">        maze.setGoal(goal);</span>
+<span class="nc" id="L43">        maze.getHeuristic().init(maze.getSquareSize(), maze.getRobot());</span>
+<span class="nc" id="L44">        maze.getMovementMode().init(maze.getSquareSize(), maze.getRobot());</span>
+<span class="nc" id="L45">        maze.solve();</span>
+<span class="nc" id="L46">        Node goalNode = null;</span>
+<span class="nc" id="L47">        double value = 1000.0;</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        for (Node node : goal.getNodes()) {</span>
+<span class="nc bnc" id="L49" title="All 4 branches missed.">            if (!node.isWall() &amp;&amp; node.getValue() &lt; value) {</span>
+<span class="nc" id="L50">                value = node.getValue();</span>
+<span class="nc" id="L51">                goalNode = node;</span>
             }
         }
-<span class="nc" id="L53">        Node actNode = goalNode;</span>
-<span class="nc" id="L54">        actNode = actNode.getParent();</span>
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        while (actNode.getValue() &gt;  0.5 ) {</span>
-<span class="nc" id="L56">            actNode.setState(NodeState.PATH);</span>
-<span class="nc" id="L57">            actNode = actNode.getParent();</span>
+<span class="nc" id="L54">        goalNode.setState(NodeState.PATH);</span>
+<span class="nc" id="L55">        Node actNode = goalNode;</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        while (actNode.getValue() &gt; 0.5) {</span>
+<span class="nc" id="L57">            actNode.setState(NodeState.PATH);</span>
+<span class="nc" id="L58">            actNode = actNode.getParent();</span>
         }
-<span class="nc" id="L59">    }</span>
+<span class="nc" id="L60">        actNode.setState(NodeState.PATH);</span>
+<span class="nc" id="L61">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

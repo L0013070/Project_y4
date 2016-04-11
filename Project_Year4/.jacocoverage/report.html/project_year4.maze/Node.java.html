@@ -38,24 +38,26 @@ public class Node implements Comparable&lt;Node&gt; {
 <span class="fc" id="L38">    private Node[] forwardChildren = null;</span>
 <span class="fc" id="L39">    private Node[] reverseChildren = null;</span>
 <span class="fc" id="L40">    private NodeState state = NodeState.NORMAL;</span>
+<span class="fc" id="L41">    private int straightCount = 0;</span>
+<span class="fc" id="L42">    private ParentDirection parentDirection = ParentDirection.NONE;</span>
 
     public void setState(NodeState state) {
-<span class="fc" id="L43">        this.state = state;</span>
-<span class="fc" id="L44">        changedState();</span>
-<span class="fc" id="L45">    }</span>
+<span class="fc" id="L45">        this.state = state;</span>
+<span class="fc" id="L46">        changedState();</span>
+<span class="fc" id="L47">    }</span>
 
     public NodeState getState() {
-<span class="nc" id="L48">        return state;</span>
+<span class="nc" id="L50">        return state;</span>
     }
 
-<span class="fc" id="L51">    ArrayList&lt;NodeListener&gt; listeners = new ArrayList&lt;&gt;(10);</span>
+<span class="fc" id="L53">    ArrayList&lt;NodeListener&gt; listeners = new ArrayList&lt;&gt;(10);</span>
 
-<span class="fc" id="L53">    public Node(NodeTyp typ, int xPosition, int yPosition) {</span>
-<span class="fc" id="L54">        this.typ = typ;</span>
-<span class="fc" id="L55">        this.xPosition = xPosition;</span>
-<span class="fc" id="L56">        this.yPosition = yPosition;</span>
+<span class="fc" id="L55">    public Node(NodeTyp typ, int xPosition, int yPosition) {</span>
+<span class="fc" id="L56">        this.typ = typ;</span>
+<span class="fc" id="L57">        this.xPosition = xPosition;</span>
+<span class="fc" id="L58">        this.yPosition = yPosition;</span>
 
-<span class="fc" id="L58">    }</span>
+<span class="fc" id="L60">    }</span>
 
     /**
      *
@@ -63,10 +65,10 @@ public class Node implements Comparable&lt;Node&gt; {
      * @return
      */
     public boolean addListener(NodeListener listener) {
-<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (!listeners.contains(listener)) {</span>
-<span class="fc" id="L67">            return listeners.add(listener);</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (!listeners.contains(listener)) {</span>
+<span class="fc" id="L69">            return listeners.add(listener);</span>
         }
-<span class="fc" id="L69">        return false;</span>
+<span class="fc" id="L71">        return false;</span>
     }
 
     /**
@@ -75,24 +77,22 @@ public class Node implements Comparable&lt;Node&gt; {
      * @return
      */
     public boolean removeListeners(NodeListener listener) {
-<span class="nc" id="L78">        return listeners.remove(listener);</span>
+<span class="nc" id="L80">        return listeners.remove(listener);</span>
     }
 
     /**
      *
      */
     protected void changedNode() {
-<span class="nc bnc" id="L85" title="All 2 branches missed.">        for (NodeListener listener : listeners) {</span>
-<span class="nc" id="L86">            listener.changedNode(this);</span>
-<span class="nc" id="L87">        }</span>
-<span class="nc" id="L88">    }</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        for (NodeListener listener : listeners) {</span>
+<span class="nc" id="L88">            listener.changedNode(this);</span>
+<span class="nc" id="L89">        }</span>
+<span class="nc" id="L90">    }</span>
 
-    /**
-     *
-     */
     protected void changedValue() {
-<span class="fc bfc" id="L94" title="All 2 branches covered.">        for (NodeListener listener : listeners) {</span>
-<span class="fc" id="L95">            listener.updateValue(String.format(&quot;%.2f&quot;, getValue()));</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        for (NodeListener listener : listeners) {</span>
+<span class="fc" id="L94">            listener.updateValue(String.format(&quot;&lt;HTML&gt;%.2f&lt;BR/&gt;%d/%C/%s&lt;HTML&gt;&quot;, getValue(), straightCount, getDirection().toString().charAt(0),parentDirection.getArrow()));</span>
+
 <span class="fc" id="L96">        }</span>
 <span class="fc" id="L97">    }</span>
 
@@ -246,60 +246,89 @@ public class Node implements Comparable&lt;Node&gt; {
      * @param parent the parent to set
      */
     public void setParent(Node parent) {
-<span class="fc bfc" id="L249" title="All 2 branches covered.">        if (Arrays.asList(forwardChildren).contains(parent)) {</span>
-<span class="fc" id="L250">            this.setDirection(NodeDirection.REVERSE);</span>
+<span class="fc" id="L249">        int parentDirectionIndex = -1;</span>
+<span class="fc bfc" id="L250" title="All 2 branches covered.">        if (Arrays.asList(forwardChildren).contains(parent)) {</span>
+<span class="fc" id="L251">            this.setDirection(NodeDirection.REVERSE);</span>
+<span class="fc" id="L252">            parentDirectionIndex = Arrays.asList(forwardChildren).indexOf(parent);</span>
         }
-<span class="fc bfc" id="L252" title="All 2 branches covered.">        if (Arrays.asList(reverseChildren).contains(parent)) {</span>
-<span class="fc" id="L253">            this.setDirection(NodeDirection.FORWARD);</span>
+<span class="fc bfc" id="L254" title="All 2 branches covered.">        if (Arrays.asList(reverseChildren).contains(parent)) {</span>
+<span class="fc" id="L255">            this.setDirection(NodeDirection.FORWARD);</span>
+<span class="fc" id="L256">            parentDirectionIndex = Arrays.asList(reverseChildren).indexOf(parent)+3;</span>
         }
-<span class="fc" id="L255">        this.parent = parent;</span>
-<span class="fc" id="L256">    }</span>
+<span class="fc bfc" id="L258" title="All 2 branches covered.">        if (getTyp() == NodeTyp.Y) {</span>
+<span class="fc" id="L259">            parentDirectionIndex = parentDirectionIndex + 6;</span>
+        }
+<span class="pc bpc" id="L261" title="2 of 6 branches missed.">        if (parentDirectionIndex &lt;0 || parentDirectionIndex &gt; 11 || parent == null) {</span>
+<span class="fc" id="L262">            parentDirection = ParentDirection.NONE;</span>
+        } else {
+<span class="nc" id="L264">            parentDirection = ParentDirection.values()[parentDirectionIndex];</span>
+        }
+//        System.out.println(&quot;index: &quot;+parentDirectionIndex+&quot; enum: &quot;+parentDirection);
+<span class="pc bpc" id="L267" title="3 of 4 branches missed.">        if (parent != null &amp;&amp; getTyp() == parent.getTyp()) {</span>
+<span class="nc" id="L268">            setStraightCount(parent.getStraightCount() + 1);</span>
+        } else {
+<span class="fc" id="L270">            setStraightCount(0);</span>
+        }
+<span class="fc" id="L272">        this.parent = parent;</span>
+<span class="fc" id="L273">        changedValue();</span>
+<span class="fc" id="L274">    }</span>
 
     public String print() {
-<span class="nc" id="L259">        return this.typ + &quot;:&quot; + this.xPosition + &quot;/&quot; + this.yPosition;</span>
+<span class="nc" id="L277">        return this.typ + &quot;:&quot; + this.xPosition + &quot;/&quot; + this.yPosition;</span>
     }
 
     public String printData() {
-<span class="nc" id="L263">        String ret = print() + &quot;\nForwardChildren\n&quot;;</span>
-<span class="nc bnc" id="L264" title="All 2 branches missed.">        for (Node child : forwardChildren) {</span>
-<span class="nc bnc" id="L265" title="All 2 branches missed.">            if (child != null) {</span>
-<span class="nc" id="L266">                ret += child.print() + &quot;, &quot;;</span>
+<span class="nc" id="L281">        String ret = print() + &quot;\nForwardChildren\n&quot;;</span>
+<span class="nc bnc" id="L282" title="All 2 branches missed.">        for (Node child : forwardChildren) {</span>
+<span class="nc bnc" id="L283" title="All 2 branches missed.">            if (child != null) {</span>
+<span class="nc" id="L284">                ret += child.print() + &quot;, &quot;;</span>
             }
         }
-<span class="nc" id="L269">        ret += &quot;\nReverseChildren\n&quot;;</span>
-<span class="nc bnc" id="L270" title="All 2 branches missed.">        for (Node child : reverseChildren) {</span>
-<span class="nc bnc" id="L271" title="All 2 branches missed.">            if (child != null) {</span>
-<span class="nc" id="L272">                ret += child.print() + &quot;, &quot;;</span>
+<span class="nc" id="L287">        ret += &quot;\nReverseChildren\n&quot;;</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">        for (Node child : reverseChildren) {</span>
+<span class="nc bnc" id="L289" title="All 2 branches missed.">            if (child != null) {</span>
+<span class="nc" id="L290">                ret += child.print() + &quot;, &quot;;</span>
             }
         }
-<span class="nc" id="L275">        ret += &quot;\n&quot;;</span>
-<span class="nc" id="L276">        return ret;</span>
+<span class="nc" id="L293">        ret += &quot;\n&quot;;</span>
+<span class="nc" id="L294">        return ret;</span>
     }
 
     public int compare(Node o1, Node o2) {
-<span class="nc" id="L280">        int ret = 0;</span>
-<span class="nc bnc" id="L281" title="All 2 branches missed.">        if (o1.getHeuristicValue() &lt; o2.getHeuristicValue()) {</span>
-<span class="nc" id="L282">            ret = -1;</span>
-<span class="nc bnc" id="L283" title="All 2 branches missed.">        } else if (o1.getHeuristicValue() &gt; o2.getHeuristicValue()) {</span>
-<span class="nc" id="L284">            ret = 1;</span>
+<span class="nc" id="L298">        int ret = 0;</span>
+<span class="nc bnc" id="L299" title="All 2 branches missed.">        if (o1.getHeuristicValue() &lt; o2.getHeuristicValue()) {</span>
+<span class="nc" id="L300">            ret = -1;</span>
+<span class="nc bnc" id="L301" title="All 2 branches missed.">        } else if (o1.getHeuristicValue() &gt; o2.getHeuristicValue()) {</span>
+<span class="nc" id="L302">            ret = 1;</span>
         }
-<span class="nc" id="L286">        return ret;</span>
+<span class="nc" id="L304">        return ret;</span>
     }
 
     @Override
     public int compareTo(Node o) {
-<span class="nc" id="L291">        return compare(this, o);</span>
+<span class="nc bnc" id="L309" title="All 2 branches missed.">        if (o == null) {</span>
+<span class="nc" id="L310">            return 1;</span>
+        }
+<span class="nc" id="L312">        return compare(this, o);</span>
     }
 
     public double getHeuristicValue() {
-<span class="nc" id="L295">        return heuristicValue;</span>
+<span class="nc" id="L316">        return heuristicValue;</span>
     }
 
     public void setHeuristicValue(double heuristicValue) {
-<span class="nc" id="L299">        this.heuristicValue = heuristicValue;</span>
-<span class="nc" id="L300">        changedValue();</span>
+<span class="nc" id="L320">        this.heuristicValue = heuristicValue;</span>
+<span class="nc" id="L321">        changedValue();</span>
 
-<span class="nc" id="L302">    }</span>
+<span class="nc" id="L323">    }</span>
+
+    public int getStraightCount() {
+<span class="fc" id="L326">        return straightCount;</span>
+    }
+
+    public void setStraightCount(int straightCount) {
+<span class="fc" id="L330">        this.straightCount = straightCount;</span>
+<span class="fc" id="L331">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

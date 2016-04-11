@@ -30,7 +30,7 @@ import project_year4.maze.Node;
     public double calculate(Node from, Node to) {
 <span class="nc" id="L31">        double distance = Math.abs(from.getyPosition() - to.getyPosition());</span>
 <span class="nc" id="L32">        distance += Math.abs(from.getxPosition() - to.getxPosition());</span>
-<span class="nc" id="L33">        return distance;</span>
+<span class="nc" id="L33">        return distance * getSquareSize();</span>
     }
     
 }

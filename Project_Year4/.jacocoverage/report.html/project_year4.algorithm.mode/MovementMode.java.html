@@ -20,14 +20,44 @@ package project_year4.algorithm.mode;
 
 import java.util.Properties;
 import project_year4.maze.Node;
+import project_year4.robot.Robot;
 
 /**
  *
  * @author L00131070
  */
-<span class="fc" id="L28">public abstract class MovementMode {</span>
+<span class="fc" id="L29">public abstract class MovementMode {</span>
     
+<span class="fc" id="L31">    private double squareSize = 1.0;</span>
+<span class="fc" id="L32">    private Robot robot = new Robot(1.0,3.0,1.0);</span>
+
+
     public abstract double getCost(Node from, Node to); 
     
+    public void init(double squareSize, Robot robot) {
+<span class="nc" id="L38">        this.squareSize = squareSize;</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (robot != null) {</span>
+<span class="nc" id="L40">            this.robot = robot;</span>
+        } else {
+<span class="nc" id="L42">            this.robot = new Robot(1.0,1.0,1.0);</span>
+        }
+<span class="nc" id="L44">    }</span>
+
+    public double getSquareSize() {
+<span class="fc" id="L47">        return squareSize;</span>
+    }
+
+    public double getMinVelocity() {
+<span class="fc" id="L51">        return robot.getMinVelocity();</span>
+    }
+    
+    public double getMaxVelocity() {
+<span class="fc" id="L55">        return robot.getMaxVelocity();</span>
+    }
+    
+    public double getAcceleration() {
+<span class="fc" id="L59">        return robot.getAcceleration();</span>
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

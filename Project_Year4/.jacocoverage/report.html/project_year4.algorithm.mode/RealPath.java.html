@@ -25,17 +25,17 @@ import project_year4.maze.Node;
  * @author L00131070
  */
 <span class="fc" id="L27">public class RealPath  extends MovementMode{</span>
-
+    
     @Override
     public double getCost(Node from, Node to) {
 <span class="fc" id="L31">        double ret = 0.0;</span>
 <span class="nc bnc" id="L32" title="All 2 branches missed.">        if (from.getTyp() == to.getTyp()) {</span>
-<span class="nc" id="L33">            ret = 1.0;</span>
+<span class="nc" id="L33">            ret = getSquareSize();</span>
         } else {
-<span class="nc" id="L35">            ret = Math.PI/4;</span>
+<span class="nc" id="L35">            ret = getSquareSize() * Math.PI/4;</span>
         }
 <span class="nc" id="L37">        return ret;</span>
     }
-    
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

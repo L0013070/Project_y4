@@ -20,27 +20,56 @@ package project_year4.algorithm.heuristic;
 
 import project_year4.maze.MazeCell;
 import project_year4.maze.Node;
+import project_year4.robot.Robot;
 
 /**
  *
  * @author L00131070
  */
-<span class="fc" id="L28">public abstract class Heuristic {</span>
-    
-        public double getDistance(Node from, MazeCell goal) {
-<span class="fc" id="L31">           double distance = Double.MAX_VALUE;</span>
-<span class="fc bfc" id="L32" title="All 2 branches covered.">           for (Node node : goal.getNodes()) {</span>
-<span class="pc bpc" id="L33" title="1 of 2 branches missed.">               if (node != null) {</span>
-<span class="fc" id="L34">                   double calcDistance = calculate(from, node);</span>
-<span class="fc bfc" id="L35" title="All 2 branches covered.">                   if (calcDistance &lt; distance) {</span>
-<span class="fc" id="L36">                       distance = calcDistance;</span>
-                   }
-               }
-           }
-<span class="fc" id="L40">           return distance;</span>
+<span class="fc" id="L29">public abstract class Heuristic {</span>
+
+<span class="fc" id="L31">    private double squareSize = 1.0;</span>
+<span class="fc" id="L32">    private Robot robot = new Robot(1.0, 1.0, 1.0);</span>
+
+    public void init(double squareSize, Robot robot) {
+<span class="nc" id="L35">        this.squareSize = squareSize;</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        if (robot != null) {</span>
+<span class="nc" id="L37">            this.robot = robot;</span>
+        } else {
+<span class="nc" id="L39">            this.robot = new Robot(1.0,1.0,1.0);</span>
         }
+<span class="nc" id="L41">    }</span>
+
+    public double getSquareSize() {
+<span class="fc" id="L44">        return squareSize;</span>
+    }
+
+    public double getMinVelocity() {
+<span class="nc" id="L48">        return robot.getMinVelocity();</span>
+    }
     
-	public abstract double calculate(Node from, Node to);
-   
+    public double getMaxVelocity() {
+<span class="nc" id="L52">        return robot.getMaxVelocity();</span>
+    }
+    
+    public double getAcceleration() {
+<span class="nc" id="L56">        return robot.getAcceleration();</span>
+    }
+
+    public double getDistance(Node from, MazeCell goal) {
+<span class="fc" id="L60">        double distance = Double.MAX_VALUE;</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (Node node : goal.getNodes()) {</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">            if (node != null) {</span>
+<span class="fc" id="L63">                double calcDistance = calculate(from, node);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">                if (calcDistance &lt; distance) {</span>
+<span class="fc" id="L65">                    distance = calcDistance;</span>
+                }
+            }
+        }
+<span class="fc" id="L69">        return distance;</span>
+    }
+
+    public abstract double calculate(Node from, Node to);
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

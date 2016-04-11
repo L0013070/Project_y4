@@ -38,7 +38,7 @@ import project_year4.maze.Node;
 <span class="fc" id="L38">            double y = from.getyPosition() - to.getyPosition();</span>
 <span class="fc" id="L39">            distance = Math.sqrt(Math.pow(y, 2)+Math.pow(x, 2));</span>
         }
-<span class="fc" id="L41">        return distance;</span>
+<span class="fc" id="L41">        return distance * getSquareSize();</span>
     }
     
 }

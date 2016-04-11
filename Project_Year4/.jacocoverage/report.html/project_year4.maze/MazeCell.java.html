@@ -86,17 +86,17 @@ public class MazeCell {
     public void setWalls(int walls) {
 <span class="fc" id="L87">        Node[] nodes = Direction.getNodesForCell(xPos, yPos, maze.getNodes());</span>
 <span class="fc bfc" id="L88" title="All 2 branches covered.">        if (walls &gt; 0) {</span>
-<span class="pc bpc" id="L89" title="2 of 4 branches missed.">            if ((walls &amp; 0x01) &gt; 0 &amp;&amp; nodes[Direction.NORTH.ordinal()] != null) {</span>
+<span class="fc bfc" id="L89" title="All 4 branches covered.">            if ((walls &amp; 0x01) &gt; 0 &amp;&amp; nodes[Direction.NORTH.ordinal()] != null) {</span>
 <span class="fc" id="L90">                nodes[Direction.NORTH.ordinal()].setWall(true);</span>
             }
-<span class="pc bpc" id="L92" title="3 of 4 branches missed.">            if ((walls &amp; 0x02) &gt; 0 &amp;&amp; nodes[Direction.EAST.ordinal()] != null) {</span>
-<span class="nc" id="L93">                nodes[Direction.EAST.ordinal()].setWall(true);</span>
+<span class="fc bfc" id="L92" title="All 4 branches covered.">            if ((walls &amp; 0x02) &gt; 0 &amp;&amp; nodes[Direction.EAST.ordinal()] != null) {</span>
+<span class="fc" id="L93">                nodes[Direction.EAST.ordinal()].setWall(true);</span>
             }
-<span class="pc bpc" id="L95" title="3 of 4 branches missed.">            if ((walls &amp; 0x04) &gt; 0 &amp;&amp; nodes[Direction.SOUTH.ordinal()] != null) {</span>
-<span class="nc" id="L96">                nodes[Direction.SOUTH.ordinal()].setWall(true);</span>
+<span class="fc bfc" id="L95" title="All 4 branches covered.">            if ((walls &amp; 0x04) &gt; 0 &amp;&amp; nodes[Direction.SOUTH.ordinal()] != null) {</span>
+<span class="fc" id="L96">                nodes[Direction.SOUTH.ordinal()].setWall(true);</span>
             }
-<span class="pc bpc" id="L98" title="3 of 4 branches missed.">            if ((walls &amp; 0x08) &gt; 0 &amp;&amp; nodes[Direction.WEST.ordinal()] != null) {</span>
-<span class="nc" id="L99">                nodes[Direction.WEST.ordinal()].setWall(true);</span>
+<span class="fc bfc" id="L98" title="All 4 branches covered.">            if ((walls &amp; 0x08) &gt; 0 &amp;&amp; nodes[Direction.WEST.ordinal()] != null) {</span>
+<span class="fc" id="L99">                nodes[Direction.WEST.ordinal()].setWall(true);</span>
             }
         } else {
 <span class="fc bfc" id="L102" title="All 2 branches covered.">            for (Node node : nodes) {</span>
