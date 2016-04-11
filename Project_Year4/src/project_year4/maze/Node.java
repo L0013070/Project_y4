@@ -40,6 +40,27 @@ public class Node implements Comparable<Node> {
     private NodeState state = NodeState.NORMAL;
     private int straightCount = 0;
     private ParentDirection parentDirection = ParentDirection.NONE;
+    ArrayList<NodeListener> listeners = new ArrayList<>(10);
+
+    public Node(NodeTyp typ, int xPosition, int yPosition) {
+        this.typ = typ;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+
+    }
+
+    public void reset() {
+        setStraightCount(0);
+        setValue(-1.0);
+        setDirection(NodeDirection.FORWARD);
+        setState(NodeState.NORMAL);
+        setParent(null);
+    }
+
+    public void init() {
+        reset();
+        setWall(false);
+    }
 
     public void setState(NodeState state) {
         this.state = state;
@@ -48,15 +69,6 @@ public class Node implements Comparable<Node> {
 
     public NodeState getState() {
         return state;
-    }
-
-    ArrayList<NodeListener> listeners = new ArrayList<>(10);
-
-    public Node(NodeTyp typ, int xPosition, int yPosition) {
-        this.typ = typ;
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
-
     }
 
     /**
@@ -91,7 +103,7 @@ public class Node implements Comparable<Node> {
 
     protected void changedValue() {
         for (NodeListener listener : listeners) {
-            listener.updateValue(String.format("<HTML>%.2f<BR/>%d/%C/%s<HTML>", getValue(), straightCount, getDirection().toString().charAt(0),parentDirection.getArrow()));
+            listener.updateValue(String.format("<HTML>%.2f<BR/>%d/%C/%s<HTML>", getValue(), straightCount, getDirection().toString().charAt(0), parentDirection.getArrow()));
 
         }
     }
@@ -124,6 +136,14 @@ public class Node implements Comparable<Node> {
      * @param direction the direction to set
      */
     public void setDirection(NodeDirection direction) {
+        if (direction != null && getDirection() != direction) {
+            Node[] children = getChildren();
+            for (Node child : Arrays.asList(children)) {
+                if (child != null && child.getParent() == this) {
+                    child.reset();
+                }
+            }
+        }
         this.direction = direction;
         changedDirection();
     }
@@ -253,12 +273,12 @@ public class Node implements Comparable<Node> {
         }
         if (Arrays.asList(reverseChildren).contains(parent)) {
             this.setDirection(NodeDirection.FORWARD);
-            parentDirectionIndex = Arrays.asList(reverseChildren).indexOf(parent)+3;
+            parentDirectionIndex = Arrays.asList(reverseChildren).indexOf(parent) + 3;
         }
         if (getTyp() == NodeTyp.Y) {
             parentDirectionIndex = parentDirectionIndex + 6;
         }
-        if (parentDirectionIndex <0 || parentDirectionIndex > 11 || parent == null) {
+        if (parentDirectionIndex < 0 || parentDirectionIndex > 11 || parent == null) {
             parentDirection = ParentDirection.NONE;
         } else {
             parentDirection = ParentDirection.values()[parentDirectionIndex];

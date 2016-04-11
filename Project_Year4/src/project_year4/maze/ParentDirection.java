@@ -24,16 +24,16 @@ package project_year4.maze;
  */
 public enum ParentDirection {
     XR0 ("ru"),
-    XR1 ("rt"),
+    XR1 ("r"),
     XR2 ("rd"),
     XF0 ("lu"),
-    XF1 ("lt"),
+    XF1 ("l"),
     XF2 ("ld"),
     YR0 ("ul"),
-    YR1 ("up"),
+    YR1 ("u"),
     YR2 ("ur"),
     YF0 ("dr"),
-    YF1 ("dn"),
+    YF1 ("d"),
     YF2 ("dl"),
     NONE ("");
     

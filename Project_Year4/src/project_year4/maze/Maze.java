@@ -68,11 +68,7 @@ public class Maze {
                 mazeCells[x][y].setState(MazeCellState.NORMAL);
                 for (Node node : mazeCells[x][y].getNodes()) {
                     if (null != node) {
-                        node.setState(NodeState.NORMAL);
-                        node.setStraightCount(0);
-                        node.setWall(false);
-                        node.setValue(-1.0);
-                        node.setParent(null);
+                        node.init();
                     }
                 }
             }
@@ -84,11 +80,7 @@ public class Maze {
             for (int y = 0; y < Maze.MAZESIZE; y++) {
                 for (Node node : mazeCells[x][y].getNodes()) {
                     if (null != node && !node.isWall()) {
-                        node.setStraightCount(0);
-                        node.setValue(-1.0);
-                        node.setDirection(NodeDirection.FORWARD);
-                        node.setState(NodeState.NORMAL);
-                        node.setParent(null);
+                        node.reset();
                     }
                 }
                 mazeCells[x][y].setState(MazeCellState.NORMAL);
