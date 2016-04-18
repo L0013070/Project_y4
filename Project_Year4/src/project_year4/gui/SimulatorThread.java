@@ -43,6 +43,8 @@ public class SimulatorThread implements Runnable {
         maze.getHeuristic().init(maze.getSquareSize(), maze.getRobot());
         maze.getMovementMode().init(maze.getSquareSize(), maze.getRobot());
         maze.solve();
+        System.out.println("Statistic: " + maze.getAlgorithm().getStatistic().toString());
+
         Node goalNode = null;
         double value = 1000.0;
         for (Node node : goal.getNodes()) {
@@ -51,6 +53,7 @@ public class SimulatorThread implements Runnable {
                 goalNode = node;
             }
         }
+        System.out.println("Path length: "+goalNode.getValue());
         goalNode.setState(NodeState.PATH);
         Node actNode = goalNode;
         while (actNode.getValue() > 0.5) {

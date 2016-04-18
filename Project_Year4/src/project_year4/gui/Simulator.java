@@ -22,6 +22,9 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
@@ -492,18 +495,36 @@ public class Simulator extends javax.swing.JFrame {
     }
 
     private void makeMazeImage() {
-        Dimension size = panelDisplayMaze.getSize();
-        BufferedImage image = new BufferedImage(
-                size.width, size.height, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2 = image.createGraphics();
-        panelDisplayMaze.paint(g2);
-        try {
-            File file = new File("snapshot.png");
-            ImageIO.write(image, "png", file);
-            System.out.println("Panel saved as Image: "+file.getAbsolutePath());
-        } catch (Exception e) {
-            e.printStackTrace();
+        JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "PNG files", "png");
+        fc.setFileFilter(filter);
+        int returnVal = fc.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            String fname = file.getAbsolutePath();
+            if (!fname.endsWith(".png")) {
+                file = new File(fname + ".png");
+                try {
+                    if (!file.createNewFile()) {
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            Dimension size = panelDisplayMaze.getSize();
+            BufferedImage image = new BufferedImage(
+                    size.width, size.height, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2 = image.createGraphics();
+            panelDisplayMaze.paint(g2);
+            try {
+                ImageIO.write(image, "png", file);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            logOutput.append("wrote graphic: " + file.getAbsolutePath() + "\n");
         }
+
     }
 
 

@@ -49,6 +49,7 @@ public class Dijkstra extends Algorithm {
                 node.setValue(0.5);
                 node.setDirection(NodeDirection.FORWARD);
                 openList.add(node);
+                getStatistic().incrementOpenedNodes();
             }
         }
         Node node = null;
@@ -60,16 +61,21 @@ public class Dijkstra extends Algorithm {
         Node[] goalNodes = maze.getGoal().getNodes();
         while (!openList.isEmpty()&& !Arrays.asList(goalNodes).contains(node)) {
             node = openList.poll();
+            getStatistic().incrementClosedNodes();
             Node[] children = node.getChildren();
             for (Node child : children) {
                 if (child != null && !child.isWall() && (node.getValue() + maze.getMovementMode().getCost(node, child) < child.getValue() || child.getValue() < 0)) {
+                    if (child.getValue() != -1.0) {
+                        getStatistic().incrementReopenedNodes();
+                    }
                     child.setValue(node.getValue() + maze.getMovementMode().getCost(node, child));
                     child.setHeuristicValue(child.getValue());
                     child.setParent(node);
                     openList.add(child);
                     child.setState(NodeState.OPEN);
+                    getStatistic().incrementOpenedNodes();
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(10);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Dijkstra.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -83,6 +89,7 @@ public class Dijkstra extends Algorithm {
 
     private void init() {
         openList.clear();
+        getStatistic().reset();
     }
 
 }

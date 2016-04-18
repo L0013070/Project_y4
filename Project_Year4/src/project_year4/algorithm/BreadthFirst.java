@@ -33,7 +33,7 @@ import project_year4.maze.NodeState;
  */
 public class BreadthFirst extends Algorithm {
 
-    LinkedList<Node> openList = new LinkedList();
+    private LinkedList<Node> openList = new LinkedList();
 
     @Override
     public void run(Maze maze) {
@@ -47,6 +47,7 @@ public class BreadthFirst extends Algorithm {
                 node.setValue(0.5);
                 node.setDirection(NodeDirection.FORWARD);
                 openList.addLast(node);
+                getStatistic().incrementOpenedNodes();
             }
         }
         while (!openList.isEmpty()) {
@@ -61,8 +62,9 @@ public class BreadthFirst extends Algorithm {
                         child.setParent(node);
                         openList.addLast(child);
                         child.setState(NodeState.OPEN);
+                        getStatistic().incrementOpenedNodes();
                         try {
-                            Thread.sleep(100);
+                            Thread.sleep(10);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(BreadthFirst.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -70,11 +72,13 @@ public class BreadthFirst extends Algorithm {
                 }
             }
             node.setState(NodeState.CLOSED);
+            getStatistic().incrementClosedNodes();
 
         }
     }
 
     private void init() {
+        getStatistic().reset();
         openList.clear();
     }
 

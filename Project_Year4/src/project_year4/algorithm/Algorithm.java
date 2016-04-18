@@ -30,6 +30,15 @@ import project_year4.maze.Maze;
  */
 public abstract class Algorithm {
     
+    private AlgorithmStatistics statistic = new AlgorithmStatistics();
+
+        /**
+     * @return the statistic
+     */
+    public AlgorithmStatistics getStatistic() {
+        return statistic;
+    }
+
     public abstract void run(Maze maze);
 
 }

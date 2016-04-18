@@ -68,7 +68,7 @@ public class AlgorithmA extends Algorithm {
                     openList.add(child);
                     child.setState(NodeState.OPEN);
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(10);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(AlgorithmA.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -82,6 +82,7 @@ public class AlgorithmA extends Algorithm {
 
     private void init() {
         openList.clear();
+        getStatistic().reset();
     }
 
 }

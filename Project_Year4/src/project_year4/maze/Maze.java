@@ -96,6 +96,10 @@ public class Maze {
         this.algorithm = algorithm;
     }
 
+    public Algorithm getAlgorithm() {
+        return this.algorithm;
+    }
+
     public void setHeuristic(Heuristic heuristic) {
         this.heuristic = heuristic;
     }
