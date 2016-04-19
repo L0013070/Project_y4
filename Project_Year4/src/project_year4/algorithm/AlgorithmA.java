@@ -59,13 +59,18 @@ public class AlgorithmA extends Algorithm {
         System.out.println(node.print());
         while (!openList.isEmpty() && !Arrays.asList(goalNodes).contains(node)) {
             node = openList.poll();
+            getStatistic().incrementClosedNodes();
             Node[] children = node.getChildren();
             for (Node child : children) {
                 if (child != null && !child.isWall() && (node.getValue() + maze.getMovementMode().getCost(node, child) < child.getValue() || child.getValue() < 0)) {
                     child.setValue(node.getValue() + maze.getMovementMode().getCost(node, child));
                     child.setHeuristicValue(child.getValue()+maze.getHeuristic().getDistance(child, maze.getGoal()));
                     child.setParent(node);
+                    if (node.getState() == NodeState.CLOSED) {
+                        getStatistic().incrementReopenedNodes();
+                    }
                     openList.add(child);
+                    getStatistic().incrementOpenedNodes();
                     child.setState(NodeState.OPEN);
                     try {
                         Thread.sleep(10);

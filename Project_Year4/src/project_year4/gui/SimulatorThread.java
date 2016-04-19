@@ -18,6 +18,7 @@
  */
 package project_year4.gui;
 
+import project_year4.algorithm.AlgorithmStatistics;
 import project_year4.maze.Maze;
 import project_year4.maze.MazeCell;
 import project_year4.maze.Node;
@@ -53,7 +54,9 @@ public class SimulatorThread implements Runnable {
                 goalNode = node;
             }
         }
-        System.out.println("Path length: "+goalNode.getValue());
+        AlgorithmStatistics statistic = maze.getAlgorithm().getStatistic();
+        statistic.setPathLength(goalNode.getValue());
+        System.out.println("Statistics: "+statistic.toString());
         goalNode.setState(NodeState.PATH);
         Node actNode = goalNode;
         while (actNode.getValue() > 0.5) {

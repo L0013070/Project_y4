@@ -27,11 +27,13 @@ public class AlgorithmStatistics {
     private int openedNodes;
     private int closedNodes;
     private int reopenedNodes;
+    private double pathLength;
 
     public void reset() {
         openedNodes = 0;
         closedNodes = 0;
         reopenedNodes = 0;
+        setPathLength(0.0);
     }
     
     /**
@@ -90,7 +92,21 @@ public class AlgorithmStatistics {
 
     @Override
     public String toString() {
-        return "opened: "+openedNodes+" closed: "+closedNodes+" reopened: "+reopenedNodes;
+        return "opened: "+openedNodes+" closed: "+closedNodes+" reopened: "+reopenedNodes+" Path length: "+pathLength;
+    }
+
+    /**
+     * @return the pathLength
+     */
+    public double getPathLength() {
+        return pathLength;
+    }
+
+    /**
+     * @param pathLength the pathLength to set
+     */
+    public void setPathLength(double pathLength) {
+        this.pathLength = pathLength;
     }
     
 }

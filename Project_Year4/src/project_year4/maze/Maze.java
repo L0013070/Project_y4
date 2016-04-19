@@ -52,6 +52,9 @@ public class Maze {
     private final Nodes nodes = new Nodes();
     private MazeCell start = null;
     private MazeCell goal = null;
+    
+    private boolean simulatorRunning = false;
+
 
     public Maze() {
         for (int x = 0; x < Maze.MAZESIZE; x++) {
@@ -109,9 +112,20 @@ public class Maze {
     }
 
     public void solve() {
+        setSimulatorRunning(true);
         if (algorithm != null) {
             algorithm.run(this);
         }
+        double value = 1000.0;
+        Node goalNode = null;
+        for (Node node : goal.getNodes()) {
+            if (!node.isWall() && node.getValue() < value) {
+                value = node.getValue();
+                goalNode = node;
+            }
+        }
+        getAlgorithm().getStatistic().setPathLength(goalNode.getValue());
+        setSimulatorRunning(false);
     }
 
     public boolean load(File file) {
@@ -132,6 +146,12 @@ public class Maze {
     protected void changedMaze() {
         for (MazeListener listener : listeners) {
             listener.changedMaze(this);
+        }
+    }
+
+    protected void changedSimulation(){
+        for (MazeListener listener : listeners) {
+            listener.simulationEnded();
         }
     }
 
@@ -240,6 +260,23 @@ public class Maze {
 
     public void setRobot(Robot robot) {
         this.robot = robot;
+    }
+
+    /**
+     * @return the simulatorRunning
+     */
+    public boolean isSimulatorRunning() {
+        return simulatorRunning;
+    }
+
+    /**
+     * @param simulatorRunning the simulatorRunning to set
+     */
+    public void setSimulatorRunning(boolean simulatorRunning) {
+        this.simulatorRunning = simulatorRunning;
+        if (simulatorRunning == false) {
+            this.changedSimulation();
+        }
     }
 
 }

@@ -42,12 +42,13 @@ import project_year4.algorithm.mode.Constant;
 import project_year4.algorithm.mode.RealPath;
 import project_year4.algorithm.mode.TimeMode;
 import project_year4.maze.Maze;
+import project_year4.maze.MazeListener;
 
 /**
  *
  * @author L00131070
  */
-public class Simulator extends javax.swing.JFrame {
+public class Simulator extends javax.swing.JFrame implements MazeListener {
 
     static final public String TITLE = "Year 4 Algorithm Simulator";
 
@@ -60,6 +61,7 @@ public class Simulator extends javax.swing.JFrame {
     public Simulator() {
         initComponents();
         panelDisplayMaze = maze.createDisplayPanel();
+        maze.addListener(this);
         getContentPane().add(panelDisplayMaze, java.awt.BorderLayout.CENTER);
         textSquareSize.setText(Double.toString(maze.getSquareSize()));
         textMinVelocity.setText(Double.toString(maze.getRobot().getMinVelocity()));
@@ -556,4 +558,13 @@ public class Simulator extends javax.swing.JFrame {
     private javax.swing.JTextField textMinVelocity;
     private javax.swing.JTextField textSquareSize;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void changedMaze(Maze maze) {
+    }
+
+    @Override
+    public void simulationEnded() {
+        logOutput.append("Statistic: "+maze.getAlgorithm().getStatistic().toString()+"\n");
+    }
 }
