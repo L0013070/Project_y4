@@ -40,5 +40,10 @@ public class DirectDistance extends Heuristic{
         }
         return distance * getSquareSize();
     }
+
+    @Override
+    public String getName() {
+        return "Direct Distance";
+    }
     
 }

@@ -40,5 +40,10 @@ public class DirectDistanceTime extends Heuristic{
         }
         return distance * (getSquareSize()/(getMinVelocity()+getMaxVelocity()/2));
     }
+
+    @Override
+    public String getName() {
+        return "Direct Distance Time";
+    }
     
 }

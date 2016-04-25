@@ -34,6 +34,8 @@ public abstract class MovementMode {
 
     public abstract double getCost(Node from, Node to); 
     
+    public abstract String getName();
+    
     public void init(double squareSize, Robot robot) {
         this.squareSize = squareSize;
         if (robot != null) {

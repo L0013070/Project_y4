@@ -37,4 +37,9 @@ public class RealPath  extends MovementMode{
         return ret;
     }
 
+    @Override
+    public String getName() {
+        return "Real Path";
+    }
+
 }

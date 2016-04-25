@@ -82,4 +82,9 @@ public class BreadthFirst extends Algorithm {
         openList.clear();
     }
 
+    @Override
+    public String getName() {
+        return "Breadth-First";
+    }
+
 }

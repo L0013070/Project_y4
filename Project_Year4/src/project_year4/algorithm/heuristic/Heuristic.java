@@ -70,5 +70,7 @@ public abstract class Heuristic {
     }
 
     public abstract double calculate(Node from, Node to);
+    
+    public abstract String getName();
 
 }

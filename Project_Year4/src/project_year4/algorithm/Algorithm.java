@@ -40,5 +40,7 @@ public abstract class Algorithm {
     }
 
     public abstract void run(Maze maze);
+    
+    public abstract String getName();
 
 }

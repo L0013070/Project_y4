@@ -64,12 +64,19 @@ public class AlgorithmA extends Algorithm {
             for (Node child : children) {
                 if (child != null && !child.isWall() && (node.getValue() + maze.getMovementMode().getCost(node, child) < child.getValue() || child.getValue() < 0)) {
                     child.setValue(node.getValue() + maze.getMovementMode().getCost(node, child));
-                    child.setHeuristicValue(child.getValue()+maze.getHeuristic().getDistance(child, maze.getGoal()));
+                    child.setHeuristicValue(child.getValue() + maze.getHeuristic().getDistance(child, maze.getGoal()));
                     child.setParent(node);
-                    if (node.getState() == NodeState.CLOSED) {
+                    if (child.getState() == NodeState.CLOSED) {
+                        System.out.println("reopen node: " + child.print());
                         getStatistic().incrementReopenedNodes();
                     }
-                    openList.add(child);
+                    if (openList.contains(child)) {
+                        System.out.println("child allready in openList");
+                        openList.add(child);
+                    } else {
+                        openList.add(child);
+                    }
+
                     getStatistic().incrementOpenedNodes();
                     child.setState(NodeState.OPEN);
                     try {
@@ -88,6 +95,11 @@ public class AlgorithmA extends Algorithm {
     private void init() {
         openList.clear();
         getStatistic().reset();
+    }
+
+    @Override
+    public String getName() {
+        return "Algorithm A";
     }
 
 }

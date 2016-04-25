@@ -32,5 +32,10 @@ public class ManhattenDistanceTime extends Heuristic{
         distance += Math.abs(from.getxPosition() - to.getxPosition());
         return distance * (getSquareSize()/(getMinVelocity()+getMaxVelocity()/2));
     }
+
+    @Override
+    public String getName() {
+        return "Manhattan Distance time";
+    }
     
 }

@@ -30,5 +30,10 @@ public class Constant extends MovementMode{
     public double getCost(Node from, Node to) {
         return getSquareSize();
     }
+
+    @Override
+    public String getName() {
+        return "Constant Cost";
+    }
     
 }

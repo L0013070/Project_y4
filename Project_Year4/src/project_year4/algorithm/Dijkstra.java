@@ -65,7 +65,8 @@ public class Dijkstra extends Algorithm {
             Node[] children = node.getChildren();
             for (Node child : children) {
                 if (child != null && !child.isWall() && (node.getValue() + maze.getMovementMode().getCost(node, child) < child.getValue() || child.getValue() < 0)) {
-                    if (child.getValue() != -1.0) {
+                    if (child.getState() == NodeState.CLOSED) {
+                        System.out.println("reopen node: "+child.print());
                         getStatistic().incrementReopenedNodes();
                     }
                     child.setValue(node.getValue() + maze.getMovementMode().getCost(node, child));
@@ -90,6 +91,11 @@ public class Dijkstra extends Algorithm {
     private void init() {
         openList.clear();
         getStatistic().reset();
+    }
+
+    @Override
+    public String getName() {
+        return "Dijkstra";
     }
 
 }

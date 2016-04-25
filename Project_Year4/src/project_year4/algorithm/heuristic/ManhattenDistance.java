@@ -32,5 +32,10 @@ public class ManhattenDistance extends Heuristic{
         distance += Math.abs(from.getxPosition() - to.getxPosition());
         return distance * getSquareSize();
     }
+
+    @Override
+    public String getName() {
+        return "Manhattan Distance";
+    }
     
 }

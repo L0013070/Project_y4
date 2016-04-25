@@ -111,4 +111,9 @@ public class TimeMode extends MovementMode {
         return ret;
     }
 
+    @Override
+    public String getName() {
+        return "Time Cost";
+    }
+
 }

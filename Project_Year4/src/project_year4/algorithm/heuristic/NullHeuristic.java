@@ -30,5 +30,10 @@ public class NullHeuristic extends Heuristic{
     public double calculate(Node from, Node to) {
         return 0.0;
     }
+
+    @Override
+    public String getName() {
+        return "Null Heuristic";
+    }
     
 }

@@ -21,8 +21,12 @@ package project_year4.gui;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -30,6 +34,7 @@ import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.DefaultCaret;
 import project_year4.algorithm.AlgorithmA;
 import project_year4.algorithm.BreadthFirst;
 import project_year4.algorithm.Dijkstra;
@@ -62,6 +67,7 @@ public class Simulator extends javax.swing.JFrame implements MazeListener {
         initComponents();
         panelDisplayMaze = maze.createDisplayPanel();
         maze.addListener(this);
+        ((DefaultCaret) logOutput.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         getContentPane().add(panelDisplayMaze, java.awt.BorderLayout.CENTER);
         textSquareSize.setText(Double.toString(maze.getSquareSize()));
         textMinVelocity.setText(Double.toString(maze.getRobot().getMinVelocity()));
@@ -300,7 +306,7 @@ public class Simulator extends javax.swing.JFrame implements MazeListener {
         fileMenu.add(menuLoad);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItem2.setText("Save Img");
+        jMenuItem2.setText("Save Simulation Data");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -457,6 +463,51 @@ public class Simulator extends javax.swing.JFrame implements MazeListener {
     }//GEN-LAST:event_textMinVelocityActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        StringBuilder builder = new StringBuilder();
+        builder.append(this.getTitle());
+        builder.append(',');
+        builder.append(LocalDateTime.now());
+        builder.append(',');
+        builder.append(maze.getAlgorithm().getName());
+        builder.append(',');
+        if (maze.getHeuristic() != null) {
+            builder.append(maze.getHeuristic().getName());
+        }
+        builder.append(',');
+        builder.append(maze.getMovementMode().getName());
+        builder.append(',');
+        builder.append(maze.getAlgorithm().getStatistic().getPathLength());
+        builder.append(',');
+        builder.append(maze.getAlgorithm().getStatistic().getOpenedNodes());
+        builder.append(',');
+        builder.append(maze.getAlgorithm().getStatistic().getClosedNodes());
+        builder.append(',');
+        builder.append(maze.getAlgorithm().getStatistic().getReopenedNodes());
+        builder.append("\n");
+        System.out.println(builder);
+        JFileChooser fc = new JFileChooser(new File("Simulation"));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "CSV Files", "csv");
+        fc.setFileFilter(filter);
+        int returnVal = fc.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            String fname = file.getAbsolutePath();
+            if (!fname.endsWith(".csv")) {
+                file = new File(fname + ".csv");
+            }
+            try {
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+                writer.println(builder);
+                writer.close();
+                logOutput.append("wrote simulation data to: " + file.getAbsolutePath() + "\n");
+            } catch (IOException ex) {
+                Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         makeMazeImage();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -474,16 +525,24 @@ public class Simulator extends javax.swing.JFrame implements MazeListener {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Simulator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Simulator.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Simulator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Simulator.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Simulator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Simulator.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Simulator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Simulator.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -497,7 +556,10 @@ public class Simulator extends javax.swing.JFrame implements MazeListener {
     }
 
     private void makeMazeImage() {
+        String filename = new String(LocalDateTime.now() + "-Simulation");
+        filename = filename.replace(':', '-');
         JFileChooser fc = new JFileChooser();
+        fc.setSelectedFile(new File(filename));
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "PNG files", "png");
         fc.setFileFilter(filter);
@@ -507,11 +569,13 @@ public class Simulator extends javax.swing.JFrame implements MazeListener {
             String fname = file.getAbsolutePath();
             if (!fname.endsWith(".png")) {
                 file = new File(fname + ".png");
+
                 try {
                     if (!file.createNewFile()) {
                     }
                 } catch (IOException ex) {
-                    Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Simulator.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
             Dimension size = panelDisplayMaze.getSize();
@@ -565,6 +629,6 @@ public class Simulator extends javax.swing.JFrame implements MazeListener {
 
     @Override
     public void simulationEnded() {
-        logOutput.append("Statistic: "+maze.getAlgorithm().getStatistic().toString()+"\n");
+        logOutput.append("Statistic: " + maze.getAlgorithm().getStatistic().toString() + "\n");
     }
 }
