@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Dietmar.
+ * Copyright (C) 2016 L00131070@student.lyit.ie.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +20,7 @@ package project_year4.robot;
 
 /**
  *
- * @author Dietmar
+ * @author L00131070@student.lyit.ie
  */
 public class Robot {
 

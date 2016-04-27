@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 L00131070.
+ * Copyright (C) L00131070@student.lyit.ie.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public

@@ -7,7 +7,7 @@ package project_year4;
 
 /**
  *
- * @author Dietmar Steiner <open.source [at] d-steiner.com>
+ * @author L00131070@student.lyit.ie Steiner <open.source [at] d-steiner.com>
  */
 public class Project_Year4 {
 
