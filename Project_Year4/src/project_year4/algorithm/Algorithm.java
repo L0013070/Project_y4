@@ -30,6 +30,7 @@ import project_year4.maze.Maze;
  */
 public abstract class Algorithm {
     
+    public static final int DELAY = 100;
     private AlgorithmStatistics statistic = new AlgorithmStatistics();
 
         /**

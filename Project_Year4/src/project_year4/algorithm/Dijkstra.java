@@ -76,7 +76,7 @@ public class Dijkstra extends Algorithm {
                     child.setState(NodeState.OPEN);
                     getStatistic().incrementOpenedNodes();
                     try {
-                        Thread.sleep(10);
+                        Thread.sleep(Algorithm.DELAY);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Dijkstra.class.getName()).log(Level.SEVERE, null, ex);
                     }

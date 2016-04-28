@@ -80,7 +80,7 @@ public class AlgorithmA extends Algorithm {
                     getStatistic().incrementOpenedNodes();
                     child.setState(NodeState.OPEN);
                     try {
-                        Thread.sleep(10);
+                        Thread.sleep(Algorithm.DELAY);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(AlgorithmA.class.getName()).log(Level.SEVERE, null, ex);
                     }

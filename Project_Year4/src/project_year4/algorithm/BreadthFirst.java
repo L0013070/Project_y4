@@ -64,7 +64,7 @@ public class BreadthFirst extends Algorithm {
                         child.setState(NodeState.OPEN);
                         getStatistic().incrementOpenedNodes();
                         try {
-                            Thread.sleep(10);
+                            Thread.sleep(Algorithm.DELAY);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(BreadthFirst.class.getName()).log(Level.SEVERE, null, ex);
                         }
